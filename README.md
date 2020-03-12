@@ -1,6 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+<!-- badges: start -->
+
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![R build
+status](https://github.com/bcgov/dipr/workflows/R-CMD-check/badge.svg)](https://github.com/bcgov/dipr)
+<a id="devex-badge" rel="Exploration" href="https://github.com/BCDevExchange/assets/blob/master/README.md"><img alt="Being designed and built, but in the lab. May change, disappear, or be buggy." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/exploration.svg" title="Being designed and built, but in the lab. May change, disappear, or be buggy." /></a>
+<!-- badges: end -->
+
 # dipr
 
 The `dipr` package is an R package that loads and provides means of
@@ -8,6 +16,14 @@ caching of `.dat.gz` files. Functions are also provided to convert from
 `.dat.gz` files to Apache Arrow formats.
 
 ## Installation
+
+While this package is intended for us within the SRE you can install the
+package from GitHub:
+
+``` r
+if(!requireNamespace("remotes")) install.packages("remotes")
+remotes::install_github("bcgov/dipr")
+```
 
 ## Installation inside the SRE
 
