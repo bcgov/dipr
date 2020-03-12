@@ -1,0 +1,9 @@
+Name: Insert Apache License Header
+Description: Inserts boilerplate Apache license header in the top of the current file.
+Binding: apache_header_addin
+Interactive: false
+
+Name: Insert CC-BY 4.0 License Header
+Description: Inserts boilerplate CC-By 4.0 license header in the top of the current file.
+Binding: ccby_header_addin
+Interactive: false

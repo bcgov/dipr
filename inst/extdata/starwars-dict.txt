@@ -1,0 +1,5 @@
+"name" "start" "stop" "col_type"
+"1" "name" 1 21 "c"
+"2" "height" 22 24 "i"
+"3" "mass" 25 30 "d"
+"4" "has_hair" 31 35 "l"
