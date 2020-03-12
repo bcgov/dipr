@@ -14,7 +14,7 @@ Description: Provides functions that aid in working with SRE data. Caching is pr
     several means and enables more efficient reading of data into memory. Functions are also provided
     to convert to Apache Arrow formats.
 License: Apache License (== 2.0) | file LICENSE
-URL: https://projectsc.popdata.bc.ca/shares/dipr
+URL: https://github.com/bcgov/dipr, https://projectsc.popdata.bc.ca/shares/dipr
 Imports:
     arrow,
     beepr,
@@ -34,4 +34,4 @@ Suggests:
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2

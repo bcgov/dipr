@@ -4,9 +4,17 @@
 \alias{read_dat}
 \title{Read compressed files in R}
 \usage{
-read_dat(data_path, data_dict, use_cache = FALSE, cache_type = "fst",
-  cache_dir = NULL, as.data.table = TRUE, col_select = NULL,
-  col_types = NULL, ...)
+read_dat(
+  data_path,
+  data_dict,
+  use_cache = FALSE,
+  cache_type = "fst",
+  cache_dir = NULL,
+  as.data.table = TRUE,
+  col_select = NULL,
+  col_types = NULL,
+  ...
+)
 }
 \arguments{
 \item{data_path}{A path to a \code{.dat.gz} file}
