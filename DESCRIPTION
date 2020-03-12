@@ -26,6 +26,7 @@ Imports:
     glue,
     janitor,
     readxl,
+    readr,
     rstudioapi,
     vroom
 Suggests:

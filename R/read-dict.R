@@ -13,6 +13,8 @@
 #' A function to extract the data name from a path
 #'
 #' This function depends on the path being a .dat.gz file
+#'
+#' @param path file path
 
 extract_path_name <- function(path) {
 
@@ -35,7 +37,7 @@ extract_path_name <- function(path) {
 
 #' This function will be quite fragile to changes in the data format. It assumes four columns
 #'
-#' @inheritParams readr::read_delim
+#' @param path Either a path to a file, a connection, or literal data (either a single string or a raw vector).
 #' @export
 read_nflt <- function(path) {
 

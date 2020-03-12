@@ -13,6 +13,7 @@ Provides functions that aid in working with SRE data. Caching is provided throug
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://github.com/bcgov/dipr}
   \item \url{https://projectsc.popdata.bc.ca/shares/dipr}
 }
 

@@ -15,7 +15,6 @@
 #' @param file Path to the file
 #' @param year The year the licence should apply (Default current year)
 #' @export
-#' @seealso [use_bcgov_licence()] [insert_bcgov_cc_header()]
 #' @return NULL
 #'
 #' @author Andy Teucher
@@ -35,8 +34,9 @@ insert_bcgov_apache_header <- function(file, year = format(Sys.Date(), "%Y")) {
 #'
 #' @inheritParams insert_bcgov_apache_header
 #' @export
-#' @seealso [use_bcgov_licence()] [insert_bcgov_cc_header()]
 #' @return NULL
+#'
+#' @author Andy Teucher
 insert_bcgov_cc_header <- function(file, year = format(Sys.Date(), "%Y")) {
 
   licence_text <- make_licence_header_text(year, "cc-by")

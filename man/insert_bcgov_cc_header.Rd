@@ -16,6 +16,6 @@ insert_bcgov_cc_header(file, year = format(Sys.Date(), "\%Y"))
 Add the boilerplate Creative Commons Attribution 4.0 (CC-BY) header to the
 top of a source code file
 }
-\seealso{
-\code{\link[=use_bcgov_licence]{use_bcgov_licence()}} \code{\link[=insert_bcgov_cc_header]{insert_bcgov_cc_header()}}
+\author{
+Andy Teucher
 }

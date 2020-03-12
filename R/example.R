@@ -15,7 +15,7 @@
 #' dipr_examples()
 #'
 #' ## Use that to find the path to a file
-#' dipr_example("dummy-data-dict.txt")
+#' dipr_example("starwars-dict.txt")
 dipr_examples <- function () {
   list.files(system.file("extdata", package = "dipr"))
 }

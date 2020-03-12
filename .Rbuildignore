@@ -8,4 +8,7 @@
 
 scratch/
 .dipr/
+data-raw/
 ^\.github/workflows/R-CMD-check\.yaml$
+
+

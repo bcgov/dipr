@@ -6,6 +6,9 @@
 \usage{
 extract_path_name(path)
 }
+\arguments{
+\item{path}{file path}
+}
 \description{
 This function depends on the path being a .dat.gz file
 }

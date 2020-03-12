@@ -14,9 +14,6 @@ insert_bcgov_apache_header(file, year = format(Sys.Date(), "\%Y"))
 \description{
 Add the boilerplate Apache header to the top of a source code file
 }
-\seealso{
-\code{\link[=use_bcgov_licence]{use_bcgov_licence()}} \code{\link[=insert_bcgov_cc_header]{insert_bcgov_cc_header()}}
-}
 \author{
 Andy Teucher
 }

@@ -7,6 +7,9 @@ This function will be quite fragile to changes in the data format. It assumes fo
 \usage{
 read_nflt(path)
 }
+\arguments{
+\item{path}{Either a path to a file, a connection, or literal data (either a single string or a raw vector).}
+}
 \description{
 Read data dictionaries in nflt format
 This function will be quite fragile to changes in the data format. It assumes four columns
