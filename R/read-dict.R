@@ -79,15 +79,15 @@ read_health_dict <- function(path, sheet, ...) {
     .name_repair = 'minimal'
   ) %>% ## TODO: deconstruct pipe
     janitor::clean_names() %>%
-    dplyr::mutate(name = janitor::make_clean_names(name_abbrev)) %>%
-    dplyr::select(start:name, data_type, data_format, -name_abbrev) %>%
-    dplyr::mutate(data_type = tolower(data_type)) %>% ## makes conditional safer
+    dplyr::mutate(name = janitor::make_clean_names(.data$name_abbrev)) %>%
+    dplyr::select(.data$start:.data$name, .data$data_type, .data$data_format, -.data$name_abbrev) %>%
+    dplyr::mutate(data_type = tolower(.data$data_type)) %>% ## makes conditional safer
     dplyr::mutate(
       col_type = dplyr::case_when(
         ## separate out into a function
-        data_type %in% c("number", "num") ~ "d",
-        data_type == "date" ~ "c",
-        data_type == "char" ~ "c",
+        .data$data_type %in% c("number", "num") ~ "d",
+        .data$data_type == "date" ~ "c",
+        .data$data_type == "char" ~ "c",
         TRUE ~ "c"
       )
     )

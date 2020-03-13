@@ -26,5 +26,10 @@ Authors:
   \item Steph Hazlitt \email{stephanie.hazlitt@gov.bc.ca}
 }
 
+Other contributors:
+\itemize{
+  \item Province of British Columbia [copyright holder]
+}
+
 }
 \keyword{internal}

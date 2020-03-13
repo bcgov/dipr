@@ -9,7 +9,6 @@ Authors@R:
       person(given = "Steph",
              family = "Hazlitt",
              role = "aut",
-             email = "stephanie.hazlitt@gov.bc.ca"))
              email = "stephanie.hazlitt@gov.bc.ca"),
       person(given = "Province of British Columbia",
              role = "cph"))
@@ -20,7 +19,6 @@ License: Apache License (== 2.0) | file LICENSE
 URL: https://github.com/bcgov/dipr, https://projectsc.popdata.bc.ca/shares/dipr
 Imports:
     arrow,
-    beepr,
     data.table,
     devtools,
     dplyr,
@@ -28,6 +26,7 @@ Imports:
     fst,
     glue,
     janitor,
+    rlang, 
     readxl,
     readr,
     rstudioapi,
