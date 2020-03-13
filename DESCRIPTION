@@ -10,6 +10,9 @@ Authors@R:
              family = "Hazlitt",
              role = "aut",
              email = "stephanie.hazlitt@gov.bc.ca"))
+             email = "stephanie.hazlitt@gov.bc.ca"),
+      person(given = "Province of British Columbia",
+             role = "cph"))
 Description: Provides functions that aid in working with SRE data. Caching is provided through 
     several means and enables more efficient reading of data into memory. Functions are also provided
     to convert to Apache Arrow formats.
