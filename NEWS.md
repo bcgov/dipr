@@ -1,3 +1,7 @@
+# dipr 0.0.5.9000
+* setup of github actions
+* make package pass r cmd check
+
 # dipr 0.0.5
 * Rename packge to `dipr`
 

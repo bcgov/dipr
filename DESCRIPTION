@@ -1,6 +1,6 @@
 Package: dipr
 Title: Provide functions to efficiently import SRE data
-Version: 0.0.5
+Version: 0.0.5.9000
 Authors@R: 
     c(person(given = "Sam",
              family = "Albers",
