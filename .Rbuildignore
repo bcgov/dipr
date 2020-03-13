@@ -5,10 +5,13 @@
 ^CODE_OF_CONDUCT\.md$
 ^CONTRIBUTING\.md$
 ^LICENSE.md$
+^COMPLIANCE.yaml$
 
 scratch/
 .dipr/
 data-raw/
 ^\.github/workflows/R-CMD-check\.yaml$
+
+
 
 
