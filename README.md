@@ -1,12 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
 <!-- badges: start -->
 
+[![img](https://img.shields.io/badge/Lifecycle-Experimental-339999)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![R build
 status](https://github.com/bcgov/dipr/workflows/R-CMD-check/badge.svg)](https://github.com/bcgov/dipr)
-<a id="devex-badge" rel="Exploration" href="https://github.com/BCDevExchange/assets/blob/master/README.md"><img alt="Being designed and built, but in the lab. May change, disappear, or be buggy." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/exploration.svg" title="Being designed and built, but in the lab. May change, disappear, or be buggy." /></a>
 <!-- badges: end -->
 
 # dipr
@@ -20,10 +19,8 @@ caching of `.dat.gz` files. Functions are also provided to convert from
 While this package is intended for us within the SRE you can install the
 package from GitHub:
 
-``` r
-if(!requireNamespace("remotes")) install.packages("remotes")
-remotes::install_github("bcgov/dipr")
-```
+    if(!requireNamespace("remotes")) install.packages("remotes")
+    remotes::install_github("bcgov/dipr")
 
 ## Installation inside the SRE
 
@@ -36,9 +33,7 @@ this you need access to the SRE instance of GitLab.
 Inside the repo will be an `dipr.Rproj`. Double clicking on that will
 open RStudio. Next run the following code:
 
-``` r
-devtools::install()
-```
+    devtools::install()
 
 Once you have the package installed you can use `dipr::dipr_update` to
 update.
@@ -50,55 +45,47 @@ usage of the package and facilitate unit tests. Specifically, the
 package provides a fake data dictionary and a compressed data file.
 Example fake data can be seen like this:
 
-``` r
-library(dipr)
-dipr_examples()
-#> [1] "starwars-dict.nflt"  "starwars-dict.txt"   "starwars-fwf.dat"   
-#> [4] "starwars-fwf.dat.gz"
-```
+    library(dipr)
+    dipr_examples()
+    #> [1] "starwars-dict.nflt"  "starwars-dict.txt"   "starwars-fwf.dat"   
+    #> [4] "starwars-fwf.dat.gz"
 
 Individual paths can be extracted like this:
 
-``` r
-data_dict_path <- dipr_example("starwars-dict.txt")
-dict <- read.table(data_dict_path)
-dict
-#>       name start stop col_type
-#> 1     name     1   21        c
-#> 2   height    22   24        i
-#> 3     mass    25   30        d
-#> 4 has_hair    31   35        l
-dat_path <- dipr_example("starwars-fwf.dat.gz")
-```
+    data_dict_path <- dipr_example("starwars-dict.txt")
+    dict <- read.table(data_dict_path)
+    dict
+    #>       name start stop col_type
+    #> 1     name     1   21        c
+    #> 2   height    22   24        i
+    #> 3     mass    25   30        d
+    #> 4 has_hair    31   35        l
+    dat_path <- dipr_example("starwars-fwf.dat.gz")
 
 The main function in the package is `read_dat()`:
 
-``` r
-raw <- read_dat(data_path = dat_path,
-                data_dict = dict,
-                use_cache = FALSE)
-#> Reading starwars-fwf
-head(raw)
-#>              name height mass has_hair
-#> 1: Luke Skywalker    172   77    FALSE
-#> 2:          C-3PO    167   75     TRUE
-#> 3:          R2-D2     96   32     TRUE
-#> 4:    Darth Vader    202  136    FALSE
-#> 5:    Leia Organa    150   49    FALSE
-#> 6:      Owen Lars    178  120    FALSE
-```
+    raw <- read_dat(data_path = dat_path,
+                    data_dict = dict,
+                    use_cache = FALSE)
+    #> Reading starwars-fwf
+    head(raw)
+    #>              name height mass has_hair
+    #> 1: Luke Skywalker    172   77    FALSE
+    #> 2:          C-3PO    167   75     TRUE
+    #> 3:          R2-D2     96   32     TRUE
+    #> 4:    Darth Vader    202  136    FALSE
+    #> 5:    Leia Organa    150   49    FALSE
+    #> 6:      Owen Lars    178  120    FALSE
 
 ### Data Dictionary
 
 Data Dictionaries need to be in a data frame format that includes
 ‘name\`, ’start’, ‘stop’, and ‘length’ columns (in any order):
 
-``` r
-> dict
-# A tibble: 64 x 4
-   start  stop length name                      
-   <dbl> <dbl>  <dbl> <chr>   
-```
+    > dict
+    # A tibble: 64 x 4
+       start  stop length name                      
+       <dbl> <dbl>  <dbl> <chr>   
 
 ### Caching
 
@@ -125,13 +112,13 @@ Under development
 ## License
 
     Copyright 2019 Province of British Columbia
-    
+
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
     You may obtain a copy of the License at 
-    
+
        http://www.apache.org/licenses/LICENSE-2.0
-    
+
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
