@@ -47,6 +47,7 @@ read_dat <- function(data_path,
                      col_select = NULL,
                      col_types = NULL, ...) {
 
+
   ## Check if data dictionary is in a valid format
   is_valid_data_dict(data_dict)
 
@@ -76,7 +77,7 @@ read_dat <- function(data_path,
     return(read_cache(cache_path, cache_type, col_select, as.data.table))
   } else {
     message(glue::glue('Reading {data_name}'))
-    d <- vroom_reader(data_path, data_dict, col_types, col_select)
+    d <- vroom_reader(data_path, data_dict, col_types, col_select, ...)
   }
 
   if (use_cache) {

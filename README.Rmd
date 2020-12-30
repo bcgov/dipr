@@ -14,9 +14,9 @@ knitr::opts_chunk$set(
 ```
 
 <!-- badges: start -->
-[![img](https://img.shields.io/badge/Lifecycle-Experimental-339999)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![R build status](https://github.com/bcgov/dipr/workflows/R-CMD-check/badge.svg)](https://github.com/bcgov/dipr)
+<!-- [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) -->
+<!-- [![R build status](https://github.com/bcgov/dipr/workflows/R-CMD-check/badge.svg)](https://github.com/bcgov/dipr) -->
+<!-- <a id="devex-badge" rel="Exploration" href="https://github.com/BCDevExchange/assets/blob/master/README.md"><img alt="Being designed and built, but in the lab. May change, disappear, or be buggy." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/exploration.svg" title="Being designed and built, but in the lab. May change, disappear, or be buggy." /></a> -->
 <!-- badges: end -->
 
 # dipr
@@ -36,11 +36,37 @@ remotes::install_github("bcgov/dipr")
 ## Installation inside the SRE
 Installation of `dipr` is slightly different than typical R package installation. To begin with you will need to clone the dipr repo. To do this you need access to the SRE instance of GitLab. 
 
+Go to this website: https://projectsc.popdata.bc.ca/
+
+Scroll down and click on "Sign in with Pop Data Sso"
+
+You will need to do this step everytime you log into the SRE.
+
+Next go to this site: https://projectsc.popdata.bc.ca/profile/personal_access_tokens
+
+Create a new Personal Access Token enabling each scope and typing in your username. This should create a new personal access token. Those are your "git credentials". Save those on your "U" drive along with your user name. 
+
+### Clone from RStudio
+
+Open RStudio and go to 
+File -> New Project -> Version Control -> Git
+
+In the field `Repository URL` section type:
+https://projectsc.popdata.bc.ca/shares/dipr
+
+In the field `Create project as subdirectory of` browse to where you want to clone this repo. I'd recommend putting this in a personal but open to other team members folder.
+
+
+### Clone from bash
+
+Navigate to where you would like to clone the repo.
+
 ```
 git clone https://projectsc.popdata.bc.ca/shares/dipr
 ```
 
-Inside the repo will be an `dipr.Rproj`. Double clicking on that will open RStudio. Next run the following code:
+### Installation using devtools
+This will clone the repo and you can install from there. Inside the repo will be an `dipr.Rproj`. Double clicking on that will open RStudio. Next run the following code:
 
 ```r
 devtools::install()
