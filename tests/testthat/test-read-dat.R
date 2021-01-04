@@ -118,6 +118,14 @@ test_that("use cache env variable", {
 
 })
 
+test_that("one can specify which values are NA.",{
+  ls <- read_dat(data_path = dat_path,
+                  data_dict = dict,
+                  use_cache = FALSE,
+                  na = c("", "Luke Skywalker"))
+  expect_equal(nrow(ls[ls$name == "Luke Skywalker",]), 0)
+})
+
 
 
 

@@ -7,9 +7,9 @@
 dipr_write_parquet(x, sink, overwrite = TRUE, ...)
 }
 \arguments{
-\item{x}{An \link[arrow:Table]{arrow::Table}, or an object convertible to it.}
+\item{x}{An \link[=Table]{arrow::Table}, or an object convertible to it.}
 
-\item{sink}{an \link[arrow:OutputStream]{arrow::io::OutputStream} or a string which is interpreted as a file path}
+\item{sink}{an \link[=OutputStream]{arrow::io::OutputStream} or a string which is interpreted as a file path}
 
 \item{overwrite}{logical; should existing destination files be overwritten?}
 

@@ -1,4 +1,9 @@
-# dipr 0.0.5.9000
+# dipr 0.0.6.9000
+* Fix bug in `read_dat` where `...` weren't actually passed to `vroom` and test
+* Add a add_linked_status_col function and test
+
+
+# dipr 0.0.6
 * setup of github actions
 * make package pass r cmd check
 

@@ -7,16 +7,8 @@
 \alias{dat_to_feather}
 \title{Convert .dat.gz files into arrow formats}
 \usage{
-dat_to_arrow_formats(
-  data_path,
-  data_dict,
-  output_dir,
-  arrow_format,
-  col_types = NULL,
-  col_select = NULL,
-  overwrite = TRUE,
-  ...
-)
+dat_to_arrow_formats(data_path, data_dict, output_dir, arrow_format,
+  col_types = NULL, col_select = NULL, overwrite = TRUE, ...)
 
 dat_to_parquet(...)
 
