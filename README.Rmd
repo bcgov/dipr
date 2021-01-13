@@ -42,9 +42,11 @@ Scroll down and click on "Sign in with Pop Data Sso"
 
 You will need to do this step everytime you log into the SRE.
 
-Next go to this site: https://projectsc.popdata.bc.ca/profile/personal_access_tokens
+Next go to this url: https://projectsc.popdata.bc.ca/profile/personal_access_tokens
 
 Create a new Personal Access Token enabling each scope and typing in your username. This should create a new personal access token. Those are your "git credentials". Save those on your "U" drive along with your user name. 
+
+You next need to "Join" the repo for each particular project. Navigate to this url: https://projectsc.popdata.bc.ca/v1/selfserve/main and click the "Join Repo" tab. Click the radio button next to the repo labeled "dipr". You have now joined that repo for the project you are in.  
 
 ### Clone from RStudio
 
