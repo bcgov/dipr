@@ -1,14 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
 <!-- badges: start -->
-
 <!-- [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) -->
-
 <!-- [![R build status](https://github.com/bcgov/dipr/workflows/R-CMD-check/badge.svg)](https://github.com/bcgov/dipr) -->
-
 <!-- <a id="devex-badge" rel="Exploration" href="https://github.com/BCDevExchange/assets/blob/master/README.md"><img alt="Being designed and built, but in the lab. May change, disappear, or be buggy." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/exploration.svg" title="Being designed and built, but in the lab. May change, disappear, or be buggy." /></a> -->
-
 <!-- badges: end -->
 
 # dipr
@@ -49,7 +44,8 @@ user name.
 
 ### Clone from RStudio
 
-Open RStudio and go to File -\> New Project -\> Version Control -\> Git
+Open RStudio and go to File -&gt; New Project -&gt; Version Control
+-&gt; Git
 
 In the field `Repository URL` section type:
 <https://projectsc.popdata.bc.ca/shares/dipr>
@@ -112,6 +108,15 @@ raw <- read_dat(data_path = dat_path,
                 data_dict = dict,
                 use_cache = FALSE)
 #> Reading starwars-fwf
+#> Rows: 59 Columns: 4
+#> -- Column specification --------------------------------------------------------
+#> 
+#> chr (1): name
+#> dbl (2): height, mass
+#> lgl (1): has_hair
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
 head(raw)
 #>              name height mass has_hair
 #> 1: Luke Skywalker    172   77    FALSE
@@ -159,13 +164,13 @@ Under development
 ## License
 
     Copyright 2019 Province of British Columbia
-    
+
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
     You may obtain a copy of the License at 
-    
+
        http://www.apache.org/licenses/LICENSE-2.0
-    
+
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
