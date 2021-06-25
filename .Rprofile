@@ -1,7 +1,17 @@
+
+
+if (Sys.getenv("USERDOMAIN") != "POPDATA") {
+  ## Choose cran mirror
+  local({
+    r = getOption("repos")
+    r["CRAN"] = "https://cran.rstudio.com/"
+    options(repos = r)
+  })
+}
+
 ## Re-jig the internal digest:::check_file function to use
 ## R.utils::fileAccess instead. See the _targets.R for how
 ## we re-assign the function in the package.
-
 if (Sys.getenv("USERDOMAIN") == "POPDATA") {
   library(digest, warn.conflicts = FALSE)
   suppressPackageStartupMessages(library(R.utils, warn.conflicts = FALSE))
@@ -20,8 +30,6 @@ if (Sys.getenv("USERDOMAIN") == "POPDATA") {
                            object, mode = errormode))
     }
   }
-
-
 
   reassignInPackage("check_file", "digest", .custom_check_file)
 }
