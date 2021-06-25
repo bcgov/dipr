@@ -5,7 +5,7 @@ test_that("reads in file with no cache",{
                       data_dict = dict,
                       use_cache = FALSE)
 
-  expect_is(raw, "data.table")
+  expect_is(raw, "data.frame")
 })
 
 
@@ -15,6 +15,22 @@ test_that("returns a tibble when as.data.table=FALSE",{
                   as.data.table = FALSE,
                   use_cache = FALSE)
   expect_is(raw, "tbl_df")
+})
+
+
+test_that("returns a message when as.data.table=TRUE",{
+  expect_message(read_dat(data_path = dat_path,
+                  data_dict = dict,
+                  as.data.table = TRUE,
+                  use_cache = FALSE),
+                 'read_dat now only returns tibbles. To return a data.table object see read_dat_dt')
+})
+
+test_that('read_dat_dt returns a data.table',{
+  dt <- read_dat_dt(data_path = dat_path,
+                    data_dict = dict,
+                    use_cache = FALSE)
+  expect_is(dt, "data.table")
 })
 
 
@@ -32,7 +48,7 @@ test_that("writes fst to cache then read fst from cache",{
                 data_dict = dict,
                 cache_dir = cache_dir,
                 use_cache = TRUE)
-  expect_is(d, "data.table")
+  expect_is(d, "data.frame")
   expect_equal(unlink(temp_cache_file), 0L)
 })
 
@@ -111,7 +127,7 @@ test_that("use cache env variable", {
                 data_dict = dict,
                 cache_dir = cache_dir,
                 use_cache = TRUE)
-  expect_is(d, "data.table")
+  expect_is(d, "data.frame")
   expect_equal(unlink(temp_cache_file), 0L)
 
   Sys.unsetenv("DIPR_CACHE_PATH")

@@ -7,9 +7,10 @@
 dipr_write_parquet(x, sink, overwrite = TRUE, ...)
 }
 \arguments{
-\item{x}{An \link[=Table]{arrow::Table}, or an object convertible to it.}
+\item{x}{\code{data.frame}, \link[arrow]{RecordBatch}, or \link[arrow]{Table}}
 
-\item{sink}{an \link[=OutputStream]{arrow::io::OutputStream} or a string which is interpreted as a file path}
+\item{sink}{A string file path, URI, or \link[arrow]{OutputStream}, or path in a file
+system (\code{SubTreeFileSystem})}
 
 \item{overwrite}{logical; should existing destination files be overwritten?}
 

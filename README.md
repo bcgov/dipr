@@ -1,10 +1,10 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![R build
-status](https://github.com/bcgov/dipr/workflows/R-CMD-check/badge.svg)](https://github.com/bcgov/dipr)
-[![img](https://img.shields.io/badge/Lifecycle-Maturing-007EC6)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md)
+<!-- badges: start -->
+<!-- [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) -->
+<!-- [![R build status](https://github.com/bcgov/dipr/workflows/R-CMD-check/badge.svg)](https://github.com/bcgov/dipr) -->
+<!-- <a id="devex-badge" rel="Exploration" href="https://github.com/BCDevExchange/assets/blob/master/README.md"><img alt="Being designed and built, but in the lab. May change, disappear, or be buggy." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/exploration.svg" title="Being designed and built, but in the lab. May change, disappear, or be buggy." /></a> -->
+<!-- badges: end -->
 
 # dipr
 
@@ -34,19 +34,13 @@ Scroll down and click on “Sign in with Pop Data Sso”
 
 You will need to do this step everytime you log into the SRE.
 
-Next go to this url:
+Next go to this site:
 <https://projectsc.popdata.bc.ca/profile/personal_access_tokens>
 
 Create a new Personal Access Token enabling each scope and typing in
 your username. This should create a new personal access token. Those are
 your “git credentials”. Save those on your “U” drive along with your
 user name.
-
-You next need to “Join” the repo for each particular project. Navigate
-to this url: <https://projectsc.popdata.bc.ca/v1/selfserve/main> and
-click the “Join Repo” tab. Click the radio button next to the repo
-labeled “dipr”. You have now joined that repo for the project you are
-in.
 
 ### Clone from RStudio
 
@@ -114,6 +108,15 @@ raw <- read_dat(data_path = dat_path,
                 data_dict = dict,
                 use_cache = FALSE)
 #> Reading starwars-fwf
+#> Rows: 59 Columns: 4
+#> -- Column specification --------------------------------------------------------
+#> 
+#> chr (1): name
+#> dbl (2): height, mass
+#> lgl (1): has_hair
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
 head(raw)
 #>              name height mass has_hair
 #> 1: Luke Skywalker    172   77    FALSE

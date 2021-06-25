@@ -1,59 +1,10 @@
-Luke Skywalker       172  77.0FALSE
-C-3PO                167  75.0 TRUE
-R2-D2                 96  32.0 TRUE
-Darth Vader          202 136.0FALSE
-Leia Organa          150  49.0FALSE
-Owen Lars            178 120.0FALSE
-Beru Whitesun lars   165  75.0FALSE
-R5-D4                 97  32.0 TRUE
-Biggs Darklighter    183  84.0FALSE
-Obi-Wan Kenobi       182  77.0FALSE
-Anakin Skywalker     188  84.0FALSE
-Chewbacca            228 112.0FALSE
-Han Solo             180  80.0FALSE
-Greedo               173  74.0 TRUE
-Jabba Desilijic Tiure1751358.0 TRUE
-Wedge Antilles       170  77.0FALSE
-Jek Tono Porkins     180 110.0FALSE
-Yoda                  66  17.0FALSE
-Palpatine            170  75.0FALSE
-Boba Fett            183  78.2FALSE
-IG-88                200 140.0FALSE
-Bossk                190 113.0FALSE
-Lando Calrissian     177  79.0FALSE
-Lobot                175  79.0FALSE
-Ackbar               180  83.0FALSE
-Wicket Systri Warrick 88  20.0FALSE
-Nien Nunb            160  68.0FALSE
-Qui-Gon Jinn         193  89.0FALSE
-Nute Gunray          191  90.0FALSE
-Jar Jar Binks        196  66.0FALSE
-Roos Tarpals         224  82.0FALSE
-Sebulba              112  40.0FALSE
-Darth Maul           175  80.0FALSE
-Ayla Secura          178  55.0FALSE
-Dud Bolt              94  45.0FALSE
-Ben Quadinaros       163  65.0FALSE
-Mace Windu           188  84.0FALSE
-Ki-Adi-Mundi         198  82.0FALSE
-Kit Fisto            196  87.0FALSE
-Adi Gallia           184  50.0FALSE
-Plo Koon             188  80.0FALSE
-Gregar Typho         185  85.0FALSE
-Poggle the Lesser    183  80.0FALSE
-Luminara Unduli      170  56.2FALSE
-Barriss Offee        166  50.0FALSE
-Dooku                193  80.0FALSE
-Jango Fett           183  79.0FALSE
-Zam Wesell           168  55.0FALSE
-Dexter Jettster      198 102.0FALSE
-Lama Su              229  88.0FALSE
-Ratts Tyerell         79  15.0FALSE
-Wat Tambor           193  48.0FALSE
-Shaak Ti             178  57.0FALSE
-Grievous             216 159.0FALSE
-Tarfful              234 136.0FALSE
-Raymus Antilles      188  79.0FALSE
-Sly Moore            178  48.0FALSE
-Tion Medon           206  80.0FALSE
-Padmé Amidala        165  45.0FALSE
+Luke Skywalker    172 77FALSE
+C-3PO             167 75 TRUE
+R2-D2              96 32 TRUE
+Darth Vader       202136FALSE
+Leia Organa       150 49FALSE
+Owen Lars         178120FALSE
+Beru Whitesun lars165 75FALSE
+R5-D4              97 32 TRUE
+Biggs Darklighter 183 84FALSE
+Obi-Wan Kenobi    182 77FALSE

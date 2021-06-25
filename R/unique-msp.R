@@ -6,11 +6,13 @@
 #' msp.c format with those column heading.
 #'
 #' @param msp_c A data.table object of msc.c status.
+#' @param primary_icd Default FALSE. Set to TRUE is memory issues are occuring. This feature
+#' returns only the primary ICD 9 code
 #' @author Jenny Sutherland, Sam Albers
 #'
 #' @export
 
-msp_unique <- function(msp_c){
+msp_unique <- function(msp_c, primary_icd = FALSE){
 
   if (!inherits(msp_c, "data.table")) {
     stop("The 'msp_c' object must of class 'data.table'")
@@ -21,9 +23,9 @@ msp_unique <- function(msp_c){
 
   rm(msp_c); gc()
 
-  ffs_paid <- process_fss_records(msp_rules)
+  ffs_paid <- process_fss_records(msp_rules, primary_icd)
 
-  encounter_raw <- process_encounter_records(msp_rules)
+  encounter_raw <- process_encounter_records(msp_rules, primary_icd)
 
   msp_aro <-  bind_ffs_encounter(ffs_paid, encounter_raw)
 
@@ -65,15 +67,27 @@ create_unique_flags <- function(msp_raw) {
 
 ## Apply sum-group-by method
 
-process_fss_records <- function(msp_rules) {
+process_fss_records <- function(msp_rules, primary_icd) {
 
-  ffs_sum <- msp_rules[record_type == "FFS" &
-                       refusal == 0, .(servunits = sum(servunits),
-                                       expdamt = sum(expdamt)),
-                     by = .(studyid, servdate, pracnum, feeitem,
-                       servcode, clmtype, paynum, icd9, icd9_1,
-                       icd9_2, icd9_3, icd9_4, icd9_5, refusal
-                     )]
+  if (primary_icd) {
+    ffs_sum <- msp_rules[record_type == "FFS" &
+                           refusal == 0, .(servunits = sum(servunits),
+                                           expdamt = sum(expdamt)),
+                         by = .(studyid, servdate, pracnum, feeitem,
+                                servcode, clmtype, paynum, icd9, refusal
+                         )]
+  } else {
+    ffs_sum <- msp_rules[record_type == "FFS" &
+                           refusal == 0, .(servunits = sum(servunits),
+                                           expdamt = sum(expdamt)),
+                         by = .(studyid, servdate, pracnum, feeitem,
+                                servcode, clmtype, paynum, icd9, icd9_1,
+                                icd9_2, icd9_3, icd9_4, icd9_5, refusal
+                         )]
+  }
+
+
+
 
 
 
@@ -108,7 +122,7 @@ process_fss_records <- function(msp_rules) {
   return(ffs_paid)
 }
 
-process_encounter_records <- function(msp_rules){
+process_encounter_records <- function(msp_rules, primary_icd) {
 
 
   msp_rules <- msp_rules[record_type == 'Encounter']
@@ -139,8 +153,13 @@ process_encounter_records <- function(msp_rules){
 
 
   ## Note .. in front of the cols_to_keep. This evaluates this variable.
-  cols_to_keep <- c("studyid", "servdate", "pracnum", "feeitem", "servcode", "clmtype", "paynum", "icd9", "icd9_1", "icd9_2", "icd9_3",
-  "icd9_4", "icd9_5", "servunits", "expdamt", "sub_type")
+  if (primary_icd) {
+    cols_to_keep <- c("studyid", "servdate", "pracnum", "feeitem", "servcode", "clmtype", "paynum", "icd9", "servunits", "expdamt", "sub_type")
+  } else {
+    cols_to_keep <- c("studyid", "servdate", "pracnum", "feeitem", "servcode", "clmtype", "paynum", "icd9", "icd9_1", "icd9_2", "icd9_3",
+                      "icd9_4", "icd9_5", "servunits", "expdamt", "sub_type")
+  }
+
   ## Create encounter dataset
   encounter_rec <- msp_rules[sub_type == "Encounter", ..cols_to_keep]
 

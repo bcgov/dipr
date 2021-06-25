@@ -1,6 +1,22 @@
-# dipr 0.0.6.9000
+# dipr 0.0.9
+* Add `age_at_date`
+* Add `dipr_icd9_categories` and `dipr_icd10_categories` functions to process icd codes. Thanks to Craig Hutton for this contribution.
+* Add argument to `msp_unique` to only use primary icd9 code. This is primarily been done to work around memory bottle necks.
+
+
+# dipr 0.0.8
+* Add `get_core_dat_path` and `get_core_dict_path` functions.
+* Fix tests to avoid UTF issue. starwars data is now much smaller.
+* Add digest shim to work around remote drive issue.
+* Add `dipr_use_export_doc` function
+
+# dipr 0.0.7
+* Add `read_dat_dt` function which will return a data.table object.
+* Soft deprecate `as_data_table` argument from read_dat
 * Fix bug in `read_dat` where `...` weren't actually passed to `vroom` and test
-* Add a add_linked_status_col function and test
+* Add a `add_linked_status_col` function and test
+* Add a `group_ages()` function
+* Add internal function `is_emptyish` 
 
 
 # dipr 0.0.6
@@ -8,7 +24,7 @@
 * make package pass r cmd check
 
 # dipr 0.0.5
-* Rename packge to `dipr`
+* Rename package to `dipr`
 
 # dipdata 0.0.4
 * `use_cache` is now off by default

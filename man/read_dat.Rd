@@ -2,11 +2,22 @@
 % Please edit documentation in R/read-dat.R
 \name{read_dat}
 \alias{read_dat}
+\alias{read_dat_dt}
 \title{Read compressed files in R}
 \usage{
-read_dat(data_path, data_dict, use_cache = FALSE, cache_type = "fst",
-  cache_dir = NULL, as.data.table = TRUE, col_select = NULL,
-  col_types = NULL, ...)
+read_dat(
+  data_path,
+  data_dict,
+  use_cache = FALSE,
+  cache_type = "fst",
+  cache_dir = NULL,
+  as.data.table = FALSE,
+  col_select = NULL,
+  col_types = NULL,
+  ...
+)
+
+read_dat_dt(...)
 }
 \arguments{
 \item{data_path}{A path to a \code{.dat.gz} file}
@@ -22,7 +33,7 @@ are "fst", "csv", or "parquet"}
 \item{cache_dir}{Directory where you want you to store your cache. Defaults to \code{NULL} which results in
 a \code{.dipr} directory in your project. This can also be set by the environment variable \code{DIPR_CACHE_PATH}}
 
-\item{as.data.table}{A logical value if you want a data.table object returned.}
+\item{as.data.table}{Deprecated. See \code{read_dat_dt}}
 
 \item{col_select}{A vector of column names}
 
@@ -31,27 +42,49 @@ a string. See \code{vignette("readr")} for more details.
 
 If \code{NULL}, all column types will be imputed from the first 1000 rows
 on the input. This is convenient (and fast), but not robust. If the
-imputation fails, you'll need to supply the correct types yourself.
+imputation fails, you'll need to increase the \code{guess_max} or supply the
+correct types yourself.
 
-If a column specification created by \code{\link[readr:cols]{cols()}}, it must contain
+Column specifications created by \code{\link[=list]{list()}} or \code{\link[readr:cols]{cols()}} must contain
 one column specification for each column. If you only want to read a
-subset of the columns, use \code{\link[readr:cols_only]{cols_only()}}.
+subset of the columns, use \code{\link[readr:cols]{cols_only()}}.
 
 Alternatively, you can use a compact string representation where each
 character represents one column:
-c = character, i = integer, n = number, d = double,
-l = logical, f = factor, D = date, T = date time, t = time, ? = guess, or
-\code{_}/\code{-} to skip the column.}
+\itemize{
+\item c = character
+\item i = integer
+\item n = number
+\item d = double
+\item l = logical
+\item f = factor
+\item D = date
+\item T = date time
+\item t = time
+\item ? = guess
+\item _ or - = skip
+
+By default, reading a file without a column specification will print a
+message showing what \code{readr} guessed they were. To remove this message,
+set \code{show_col_types = FALSE} or set `options(readr.show_col_types = FALSE).
+}}
 
 \item{...}{arguments passed to \code{vroom::vroom_fwf}}
 }
 \description{
-Unzip and read into memory (using vroom). The first time you call this function, the data
-is cached in a folder called \code{.dipr} in a format specified by the cache_type argument.
-This function expects a data dictionary with the following columns:
+Unzip and read into memory (using vroom). The \code{read_dat_dt} function will return a data.table
+object, replacing the previous \code{as.data.table} argument which is now deprecated. You can
+use the same arguments as the\code{read_dat} function. If cache = TRUE, the first time you call
+this function, the data is cached in a folder called \code{.dipr} in a format specified by
+the cache_type argument. This function expects a data dictionary with the following columns:
 \itemize{
 \item start
 \item stop
 \item name
 }
 }
+\section{Functions}{
+\itemize{
+\item \code{read_dat_dt}: 
+}}
+

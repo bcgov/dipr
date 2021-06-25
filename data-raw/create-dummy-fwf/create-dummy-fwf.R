@@ -8,6 +8,7 @@ small_sw <- starwars %>%
   filter(!is.na(name), !is.na(height), !is.na(mass)) %>%
   mutate(has_hair = is.na(hair_color)) %>%
   select(name:mass, has_hair) %>%
+  head(10) %>%
   as.data.frame()
 
 ## Create .dat file
