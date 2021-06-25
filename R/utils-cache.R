@@ -3,7 +3,7 @@ read_cache <- function(cache_path, cache_type, col_select = NULL, as.data.table)
 
   switch(cache_type,
          fst = fst::read_fst(cache_path, columns = col_select, as.data.table = as.data.table),
-         csv = vroom::vroom(cache_path, col_select = col_select),
+         csv = arrow::read_csv_arrow(cache_path),
          parquet = if(is.null(col_select)) {
            arrow::read_parquet(cache_path)
          } else {
@@ -24,7 +24,7 @@ write_cache <- function(data, cache_path, cache_type) {
 
   switch(cache_type,
          fst = fst::write_fst(data, temp_local_cache),
-         csv = vroom::vroom_write(data, temp_local_cache),
+         csv = readr::write_csv(data, temp_local_cache),
          parquet = arrow::write_parquet(data, temp_local_cache)
   )
 

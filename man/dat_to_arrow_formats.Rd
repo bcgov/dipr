@@ -7,8 +7,16 @@
 \alias{dat_to_feather}
 \title{Convert .dat.gz files into arrow formats}
 \usage{
-dat_to_arrow_formats(data_path, data_dict, output_dir, arrow_format,
-  col_types = NULL, col_select = NULL, overwrite = TRUE, ...)
+dat_to_arrow_formats(
+  data_path,
+  data_dict,
+  output_dir,
+  arrow_format,
+  col_types = NULL,
+  col_select = NULL,
+  overwrite = TRUE,
+  ...
+)
 
 dat_to_parquet(...)
 
@@ -34,7 +42,7 @@ imputation fails, you'll need to supply the correct types yourself.
 
 If a column specification created by \code{\link[readr:cols]{cols()}}, it must contain
 one column specification for each column. If you only want to read a
-subset of the columns, use \code{\link[readr:cols_only]{cols_only()}}.
+subset of the columns, use \code{\link[readr:cols]{cols_only()}}.
 
 Alternatively, you can use a compact string representation where each
 character represents one column:

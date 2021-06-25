@@ -40,7 +40,7 @@ dat_to_arrow_formats <- function(data_path,
   ## Check if data dictionary is in a valid format
   is_valid_data_dict(data_dict)
 
-  if(!dir.exists(output_dir)) dir.create(output_dir)
+  if(!dir.exists(output_dir)) dir.create(output_dir, recursive = TRUE)
 
   data_name <- gsub(".dat.gz", "", basename(data_path))
 

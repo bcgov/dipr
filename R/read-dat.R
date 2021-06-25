@@ -14,12 +14,15 @@
 
 #' Read compressed files in R
 #'
-#' Unzip and read into memory (using vroom). The first time you call this function, the data
-#' is cached in a folder called \code{.dipr} in a format specified by the cache_type argument.
-#' This function expects a data dictionary with the following columns:
+#' Unzip and read into memory (using vroom). The `read_dat_dt` function will return a data.table
+#' object, replacing the previous `as.data.table` argument which is now deprecated. You can
+#' use the same arguments as the`read_dat` function. If cache = TRUE, the first time you call
+#' this function, the data is cached in a folder called \code{.dipr} in a format specified by
+#' the cache_type argument. This function expects a data dictionary with the following columns:
 #'  - start
 #'  - stop
 #'  - name
+#'
 #'
 #'
 #' @param data_path A path to a `.dat.gz` file
@@ -30,7 +33,7 @@
 #' are "fst", "csv", or "parquet"
 #' @param cache_dir Directory where you want you to store your cache. Defaults to `NULL` which results in
 #' a `.dipr` directory in your project. This can also be set by the environment variable `DIPR_CACHE_PATH`
-#' @param as.data.table A logical value if you want a data.table object returned.
+#' @param as.data.table Deprecated. See `read_dat_dt`
 #' @param col_select A vector of column names
 #' @inheritParams vroom::vroom_fwf
 #' @param ... arguments passed to `vroom::vroom_fwf`
@@ -43,7 +46,7 @@ read_dat <- function(data_path,
                      use_cache = FALSE,
                      cache_type = "fst",
                      cache_dir = NULL,
-                     as.data.table = TRUE,
+                     as.data.table = FALSE,
                      col_select = NULL,
                      col_types = NULL, ...) {
 
@@ -87,11 +90,22 @@ read_dat <- function(data_path,
     write_cache(d, cache_path, cache_type)
   }
 
-  if (as.data.table) data.table::setDT(d)
+  if (as.data.table) return(message('read_dat now only returns tibbles. To return a data.table object see read_dat_dt'))
 
   gc()
 
   d
+}
+
+
+#' @export
+#' @describeIn read_dat
+
+#'
+read_dat_dt <- function(...) {
+  d <- read_dat(...)
+
+  data.table::setDT(d)
 }
 
 #' Delete all content from any temp directory

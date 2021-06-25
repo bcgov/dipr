@@ -18,3 +18,8 @@ is_valid_data_dict <- function(x) {
 
   invisible(TRUE)
 }
+
+
+is_emptyish <- function(x) {
+  length(x) == 0 || !nzchar(x)
+}
