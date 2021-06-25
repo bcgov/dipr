@@ -24,7 +24,9 @@
 #'
 #' @export
 #' @examples
+#' \dontrun{
 #' dipr_use_export_doc()
+#' }
 
 dipr_use_export_doc <- function(template = "export-doc.md", ...) {
 

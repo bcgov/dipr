@@ -33,7 +33,9 @@ dipr_icd10_categories(...)
 
 \item{print_defs_long}{print a long definition}
 
-\item{export_defs}{}
+\item{export_defs}{write out a csv. Defaults to FALSE.}
+
+\item{...}{arguments passed to \code{dipr_cid_categories}}
 }
 \description{
 Vectorized function that assigns categories to icd codes. Thin wrappers are provided for

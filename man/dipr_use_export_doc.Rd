@@ -21,5 +21,7 @@ automatically output to "out/export" and number sequentially
 the export folders.
 }
 \examples{
+\dontrun{
 dipr_use_export_doc()
+}
 }

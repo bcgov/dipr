@@ -25,7 +25,7 @@
 #' @param mortality default is FALSE. Set to TRUE if working with mortality data
 #' @param print_defs_short print a short definition
 #' @param print_defs_long print a long definition
-#' @param export_defs
+#' @param export_defs write out a csv. Defaults to FALSE.
 #'
 #' @details
 #'  - ICD-10 categories were defined according to the official 2019 WHO ICD-10 website: https://icd.who.int/browse10/2019/en
@@ -81,12 +81,14 @@ dipr_icd_categories <- function(icd_codes = NULL, icd_version = 10, include_code
 
 
 #' @describeIn dipr_icd_categories Thin wrapper around dipr_icd_categories for only ICD-9 codes
+#' @param ... arguments passed to `dipr_cid_categories`
 #' @export
 dipr_icd9_categories <- function(...) {
   dipr_icd_categories(icd_version = 9, ...)
 }
 
 #' @describeIn dipr_icd_categories Thin wrapper around dipr_icd_categories for only ICD-10 codes
+#' @param ... arguments passed to `dipr_cid_categories`
 #' @export
 dipr_icd10_categories <- function(...) {
   dipr_icd_categories(icd_version = 10, ...)

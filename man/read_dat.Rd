@@ -42,17 +42,32 @@ a string. See \code{vignette("readr")} for more details.
 
 If \code{NULL}, all column types will be imputed from the first 1000 rows
 on the input. This is convenient (and fast), but not robust. If the
-imputation fails, you'll need to supply the correct types yourself.
+imputation fails, you'll need to increase the \code{guess_max} or supply the
+correct types yourself.
 
-If a column specification created by \code{\link[readr:cols]{cols()}}, it must contain
+Column specifications created by \code{\link[=list]{list()}} or \code{\link[readr:cols]{cols()}} must contain
 one column specification for each column. If you only want to read a
 subset of the columns, use \code{\link[readr:cols]{cols_only()}}.
 
 Alternatively, you can use a compact string representation where each
 character represents one column:
-c = character, i = integer, n = number, d = double,
-l = logical, f = factor, D = date, T = date time, t = time, ? = guess, or
-\code{_}/\code{-} to skip the column.}
+\itemize{
+\item c = character
+\item i = integer
+\item n = number
+\item d = double
+\item l = logical
+\item f = factor
+\item D = date
+\item T = date time
+\item t = time
+\item ? = guess
+\item _ or - = skip
+
+By default, reading a file without a column specification will print a
+message showing what \code{readr} guessed they were. To remove this message,
+set \code{show_col_types = FALSE} or set `options(readr.show_col_types = FALSE).
+}}
 
 \item{...}{arguments passed to \code{vroom::vroom_fwf}}
 }

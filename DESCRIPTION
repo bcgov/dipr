@@ -12,11 +12,13 @@ Authors@R:
              email = "stephanie.hazlitt@gov.bc.ca"),
       person(given = "Province of British Columbia",
              role = "cph"))
-Description: Provides functions that aid in working with SRE data. Caching is provided through 
-    several means and enables more efficient reading of data into memory. Functions are also provided
-    to convert to Apache Arrow formats.
+Description: Provides functions that aid in working with SRE data. Caching
+    is provided through several means and enables more efficient reading
+    of data into memory. Functions are also provided to convert to Apache
+    Arrow formats.
 License: Apache License (== 2.0) | file LICENSE
-URL: https://github.com/bcgov/dipr, https://projectsc.popdata.bc.ca/shares/dipr
+URL: https://github.com/bcgov/dipr,
+    https://projectsc.popdata.bc.ca/shares/dipr
 Imports:
     arrow,
     data.table,
@@ -26,12 +28,15 @@ Imports:
     fst,
     glue,
     janitor,
-    rlang, 
-    readxl,
+    lubridate,
     readr,
+    readxl,
+    rlang,
     rstudioapi,
-    vroom,
-    usethis
+    stringr,
+    tibble,
+    usethis,
+    vroom
 Suggests:
     bench,
     testthat (>= 2.1.0)
