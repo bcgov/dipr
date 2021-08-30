@@ -1,3 +1,16 @@
+# dipr 1.0.0
+
+## Breaking Change
+* Caching has been removed from dipr (via `read_dat`) as it was not being used. Removing caching removed significant code complexity
+
+## Improvements
+* Add convenience function `set_gitlab_credentials()` to pull up the Git Credential Manager proactively (#6)
+* Directly use readr now that it use vroom under the hood. Dropping vroom as a direct dependency
+* Through readr 2.0, `read_dat` can now directly read two files supplied as a vector of `.dat.gz`. We have added a second dipr example data set to test this behaviour.
+* Experimental `dat_to_datasets` function that is a low memory method to create partitioned Arrow Datasets. 
+* Add species column to internal data
+* Improved documentation all around
+
 # dipr 0.0.9
 * Add `age_at_date`
 * Add `dipr_icd9_categories` and `dipr_icd10_categories` functions to process icd codes. Thanks to Craig Hutton for this contribution.

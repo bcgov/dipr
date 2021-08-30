@@ -28,6 +28,7 @@
 #' dipr_use_export_doc()
 #' }
 
+
 dipr_use_export_doc <- function(template = "export-doc.md", ...) {
 
   export_dir <- file.path("out/export")

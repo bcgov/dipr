@@ -1,5 +1,3 @@
-
-
 if (Sys.getenv("USERDOMAIN") != "POPDATA") {
   ## Choose cran mirror
   local({
@@ -33,4 +31,3 @@ if (Sys.getenv("USERDOMAIN") == "POPDATA") {
 
   reassignInPackage("check_file", "digest", .custom_check_file)
 }
-

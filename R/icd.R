@@ -81,14 +81,15 @@ dipr_icd_categories <- function(icd_codes = NULL, icd_version = 10, include_code
 
 
 #' @describeIn dipr_icd_categories Thin wrapper around dipr_icd_categories for only ICD-9 codes
-#' @param ... arguments passed to `dipr_cid_categories`
+#' @param ... arguments passed to `dipr_icd_categories`
 #' @export
 dipr_icd9_categories <- function(...) {
   dipr_icd_categories(icd_version = 9, ...)
 }
 
 #' @describeIn dipr_icd_categories Thin wrapper around dipr_icd_categories for only ICD-10 codes
-#' @param ... arguments passed to `dipr_cid_categories`
+#' @param ... arguments passed to `dipr_icd_categories`
+
 #' @export
 dipr_icd10_categories <- function(...) {
   dipr_icd_categories(icd_version = 10, ...)

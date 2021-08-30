@@ -31,3 +31,20 @@ test_that('output_dir is created',{
   expect_true(dir.exists(outd))
   #delete_rtmp_dirs()
 })
+
+
+test_that('dat_to_datasets creates a partioned dataset',{
+
+  in_mem <- read_dat(data_path = dat_path,
+           data_dict = dict)
+
+  outd <- file.path(tempdir(), "test_arrow")
+  dat_to_datasets(
+    data_path = dat_path,
+    data_dict = dict,
+    path = outd,
+    partitioning = "species",
+    chunk_size = 2)
+  expect_is(arrow::open_dataset(outd), "FileSystemDataset")
+  expect_equal(nrow(in_mem), nrow(arrow::open_dataset(outd)))
+})
