@@ -1,9 +1,43 @@
-# dipr 0.0.5.9000
+# dipr 1.0.0
+
+## Breaking Change
+* Caching has been removed from dipr (via `read_dat`) as it was not being used. Removing caching removed significant code complexity
+
+## Improvements
+* Add convenience function `set_gitlab_credentials()` to pull up the Git Credential Manager proactively (#6)
+* Directly use readr now that it use vroom under the hood. Dropping vroom as a direct dependency
+* Through readr 2.0, `read_dat` can now directly read two files supplied as a vector of `.dat.gz`. We have added a second dipr example data set to test this behaviour.
+* Experimental `dat_to_datasets` function that is a low memory method to create partitioned Arrow Datasets. 
+* Add species column to internal data
+* Improved documentation all around
+
+# dipr 0.0.9
+* Add `age_at_date`
+* Add `dipr_icd9_categories` and `dipr_icd10_categories` functions to process icd codes. Thanks to Craig Hutton for this contribution.
+* Add argument to `msp_unique` to only use primary icd9 code. This is primarily been done to work around memory bottle necks.
+
+
+# dipr 0.0.8
+* Add `get_core_dat_path` and `get_core_dict_path` functions.
+* Fix tests to avoid UTF issue. starwars data is now much smaller.
+* Add digest shim to work around remote drive issue.
+* Add `dipr_use_export_doc` function
+
+# dipr 0.0.7
+* Add `read_dat_dt` function which will return a data.table object.
+* Soft deprecate `as_data_table` argument from read_dat
+* Fix bug in `read_dat` where `...` weren't actually passed to `vroom` and test
+* Add a `add_linked_status_col` function and test
+* Add a `group_ages()` function
+* Add internal function `is_emptyish` 
+
+
+# dipr 0.0.6
 * setup of github actions
 * make package pass r cmd check
 
 # dipr 0.0.5
-* Rename packge to `dipr`
+* Rename package to `dipr`
 
 # dipdata 0.0.4
 * `use_cache` is now off by default

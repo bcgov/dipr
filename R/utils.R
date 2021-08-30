@@ -13,27 +13,12 @@
 ## limitations under the License.
 
 ## a function to handle the initial READ of data
-vroom_reader <- function(data_path, data_dict, col_types, col_select, ...) {
+dipr_reader <- function(data_path, data_dict, col_types, col_select, ...) {
 
-  ## a bit of hack because vroom doesn't seem to like NULLs
-  ## in the col_select
-  if(is.null(col_select)) {
-    d <- vroom::vroom_fwf(
+    readr::read_fwf(
       data_path,
       col_positions =
-        vroom::fwf_positions(
-          start = data_dict$start,
-          end = data_dict$stop,
-          col_names = data_dict$name
-          ),
-      col_types = col_types,
-      ...
-      )
-  } else {
-    d <- vroom::vroom_fwf(
-      data_path,
-      col_positions =
-        vroom::fwf_positions(
+        readr::fwf_positions(
           start = data_dict$start,
           end = data_dict$stop,
           col_names = data_dict$name
@@ -42,9 +27,7 @@ vroom_reader <- function(data_path, data_dict, col_types, col_select, ...) {
       col_select = !!col_select,
       ...
     )
-  }
 
-  d
 }
 
 

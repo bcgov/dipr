@@ -6,15 +6,16 @@
 \alias{dipr-package}
 \title{dipr: Provide functions to efficiently import SRE data}
 \description{
-Provides functions that aid in working with SRE data. Caching is provided through 
-    several means and enables more efficient reading of data into memory. Functions are also provided
-    to convert to Apache Arrow formats.
+Provides functions that aid in working with SRE data. Caching
+    is provided through several means and enables more efficient reading
+    of data into memory. Functions are also provided to convert to Apache
+    Arrow formats.
 }
 \seealso{
 Useful links:
 \itemize{
   \item \url{https://github.com/bcgov/dipr}
-  \item \url{https://projectsc.popdata.bc.ca/shares/dipr}
+  \item \url{https://projectsc.popdata.bc.ca/shares/dipr2}
 }
 
 }

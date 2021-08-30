@@ -40,14 +40,14 @@ dat_to_arrow_formats <- function(data_path,
   ## Check if data dictionary is in a valid format
   is_valid_data_dict(data_dict)
 
-  if(!dir.exists(output_dir)) dir.create(output_dir)
+  if(!dir.exists(output_dir)) dir.create(output_dir, recursive = TRUE)
 
   data_name <- gsub(".dat.gz", "", basename(data_path))
 
   ## Columns
   if(!is.null(col_select))  col_select <- col_selector(data_dict, col_select)
 
-  d <- vroom_reader(data_path, data_dict, col_types, col_select)
+  d <- dipr_reader(data_path, data_dict, col_types, col_select)
 
   tf <- file.path(tempdir(), paste0(data_name, ".", arrow_format))
 
@@ -99,6 +99,68 @@ dat_to_feather <- function(...) {
 
 }
 
+#' Convert dat.gz file to Apache Arrow Datasets using partitioned folder structures
+#'
+#' Some large files in the SRE are too large to fit into memory. `dat_to_datasets`
+#' reads files into memory in smaller chunks (controlled by the `chunk_size` argument)
+#' and converts them into Arrow Datasets. All `...` argument are passed to `dipr::read_dat`
+#' which is where column types can be specified.
+#'
+#' @param chunk_size The number of rows to include in each chunk. The value of this
+#' parameter you choose will depend on both the number of rows in the data you are
+#' trying to process _and_ the RAM available. You can check the RAM available using
+#' `memory.size(max = TRUE)`. The default for this values is currently 10 million.
+#'
+#' @inheritParams read_dat
+#' @inheritParams arrow::write_dataset
+#' @inheritDotParams readr::read_fwf
+#' @export
+#'
+#' @examples
+#'
+#' data_dict_path <- dipr_example("starwars-dict.txt")
+#' dict <- read.table(data_dict_path)
+#' dat_path <- dipr_example("starwars-fwf.dat.gz")
+#'
+#' ## Create a partitioned datasets in the "bar" folder
+#' dat_to_datasets(
+#'     data_path = dat_path,
+#'     data_dict = dict,
+#'     path = "starwars_arrow",
+#'     partitioning = "species",
+#'     chunk_size = 2)
+#'
+dat_to_datasets <- function(data_path, data_dict, chunk_size = 1000000, path, partitioning, ...) {
+  tdir <- file.path(tempdir(), gsub(".dat.gz", "", basename(data_path)), "arrow-tmp")
+  dir.create(tdir, showWarnings = FALSE, recursive = TRUE)
+  f <- function(x, pos) {
+    d <- readr::read_fwf(
+      paste0(x, "\n"), ## required for readr to recognize as a string of data
+      col_positions =
+        readr::fwf_positions(
+          start = data_dict$start,
+          end = data_dict$stop,
+          col_names = data_dict$name
+        ),
+      progress = TRUE,
+      lazy = FALSE,
+      locale = readr::locale(encoding = "latin1"), ...
+    )
+
+    num_files <- length(list.files(tdir, pattern = ".parquet"))
+    arrow::write_parquet(d, file.path(tdir, paste0("data-", num_files + 1,".parquet")))
+
+    #print(readr::problems(d))
+  }
+  readr::read_lines_chunked(file = data_path, readr::SideEffectChunkCallback$new(f), chunk_size = chunk_size)
+
+  arrow::open_dataset(tdir) %>%
+    arrow::write_dataset(path = path, partitioning = partitioning)
+
+  ## clean up
+  unlink(list.files(tdir, pattern = "*.parquet", full.names = TRUE))
+}
+
 
 #' Write a parquet file in the SRE
 #'
@@ -128,4 +190,6 @@ dipr_write_parquet <- function (x, sink, overwrite = TRUE, ...) {
 
   invisible(arrow_ret)
 }
+
+
 
