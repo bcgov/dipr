@@ -10,6 +10,10 @@ Authors@R:
              family = "Hazlitt",
              role = "aut",
              email = "stephanie.hazlitt@gov.bc.ca"),
+      person(given = "Craig", 
+             family = "Hutton", 
+             role = "ctb",
+             email = "craig.hutton@gov.bc.ca"), 
       person(given = "Province of British Columbia",
              role = "cph"))
 Description: Provides functions that aid in working with SRE data. Caching
