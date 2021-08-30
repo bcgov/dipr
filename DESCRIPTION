@@ -1,6 +1,6 @@
 Package: dipr
 Title: Provide functions to efficiently import SRE data
-Version: 0.0.9
+Version: 1.0.0
 Authors@R: 
     c(person(given = "Sam",
              family = "Albers",
@@ -17,10 +17,11 @@ Description: Provides functions that aid in working with SRE data. Caching
     of data into memory. Functions are also provided to convert to Apache
     Arrow formats.
 License: Apache License (== 2.0) | file LICENSE
-URL: https://github.com/bcgov/dipr,
-    https://projectsc.popdata.bc.ca/shares/dipr
+URL: https://github.com/bcgov/dipr, https://projectsc.popdata.bc.ca/shares/dipr2
 Imports:
     arrow,
+    credentials,
+    cli,
     data.table,
     devtools,
     dplyr,
@@ -29,17 +30,17 @@ Imports:
     glue,
     janitor,
     lubridate,
-    readr,
+    readr (>= 2.0.0),
     readxl,
-    rlang,
+    rlang (>= 0.1.2),
     rstudioapi,
     stringr,
     tibble,
-    usethis,
-    vroom
+    usethis
 Suggests:
     bench,
-    testthat (>= 2.1.0)
+    testthat (>= 2.1.0),
+    roxygen2
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)

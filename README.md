@@ -1,9 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 <!-- badges: start -->
+
 <!-- [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) -->
+
 <!-- [![R build status](https://github.com/bcgov/dipr/workflows/R-CMD-check/badge.svg)](https://github.com/bcgov/dipr) -->
+
 <!-- <a id="devex-badge" rel="Exploration" href="https://github.com/BCDevExchange/assets/blob/master/README.md"><img alt="Being designed and built, but in the lab. May change, disappear, or be buggy." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/exploration.svg" title="Being designed and built, but in the lab. May change, disappear, or be buggy." /></a> -->
+
 <!-- badges: end -->
 
 # dipr
@@ -44,8 +49,7 @@ user name.
 
 ### Clone from RStudio
 
-Open RStudio and go to File -&gt; New Project -&gt; Version Control
--&gt; Git
+Open RStudio and go to File -\> New Project -\> Version Control -\> Git
 
 In the field `Repository URL` section type:
 <https://projectsc.popdata.bc.ca/shares/dipr>
@@ -83,8 +87,8 @@ Example fake data can be seen like this:
 ``` r
 library(dipr)
 dipr_examples()
-#> [1] "starwars-dict.nflt"  "starwars-dict.txt"   "starwars-fwf.dat"   
-#> [4] "starwars-fwf.dat.gz"
+#> [1] "starwars-dict.nflt"   "starwars-dict.txt"    "starwars-fwf.dat"    
+#> [4] "starwars-fwf.dat.gz"  "starwars-fwf2.dat"    "starwars-fwf2.dat.gz"
 ```
 
 Individual paths can be extracted like this:
@@ -98,33 +102,79 @@ dict
 #> 2   height    22   24        i
 #> 3     mass    25   30        d
 #> 4 has_hair    31   35        l
+#> 5  species    36   50        c
 dat_path <- dipr_example("starwars-fwf.dat.gz")
 ```
 
-The main function in the package is `read_dat()`:
+The main function in the package is `read_dat()` which allows you to
+directly read \`.dat.gz files:
 
 ``` r
 raw <- read_dat(data_path = dat_path,
-                data_dict = dict,
-                use_cache = FALSE)
-#> Reading starwars-fwf
-#> Rows: 59 Columns: 4
+                data_dict = dict)
+#> v Reading starwars-fwf
+#> Rows: 15 Columns: 5
 #> -- Column specification --------------------------------------------------------
 #> 
-#> chr (1): name
+#> chr (2): name, species
 #> dbl (2): height, mass
 #> lgl (1): has_hair
 #> 
 #> i Use `spec()` to retrieve the full column specification for this data.
 #> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
 head(raw)
-#>              name height mass has_hair
-#> 1: Luke Skywalker    172   77    FALSE
-#> 2:          C-3PO    167   75     TRUE
-#> 3:          R2-D2     96   32     TRUE
-#> 4:    Darth Vader    202  136    FALSE
-#> 5:    Leia Organa    150   49    FALSE
-#> 6:      Owen Lars    178  120    FALSE
+#> # A tibble: 6 x 5
+#>   name           height  mass has_hair species
+#>   <chr>           <dbl> <dbl> <lgl>    <chr>  
+#> 1 Luke Skywalker    172    77 FALSE    Human  
+#> 2 C-3PO             167    75 TRUE     Droid  
+#> 3 R2-D2              96    32 TRUE     Droid  
+#> 4 Darth Vader       202   136 FALSE    Human  
+#> 5 Leia Organa       150    49 FALSE    Human  
+#> 6 Owen Lars         178   120 FALSE    Human
+```
+
+If two files share a common data dictionary you can supply a vector of
+filenames to the `data_path` argument and `read_dat` will combine them
+for you into one dataframe:
+
+``` r
+dat_path2 <- dipr_example("starwars-fwf2.dat.gz")
+raw_two_files <- read_dat(
+    data_path = c(dat_path, dat_path2),
+    data_dict = dict,
+    id = "file"
+  )
+#> v Reading starwars-fwf and starwars-fwf2
+#> Rows: 30 Columns: 6
+#> -- Column specification --------------------------------------------------------
+#> 
+#> chr (2): name, species
+#> dbl (2): height, mass
+#> lgl (1): has_hair
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+```
+
+Working with the data.table package for data manipulation is also
+possible in dipr using the `read_dat_dt` function:
+
+``` r
+raw_dt <- read_dat_dt(
+    data_path = dat_path,
+    data_dict = dict
+  )
+#> v Reading starwars-fwf
+#> Rows: 15 Columns: 5
+#> -- Column specification --------------------------------------------------------
+#> 
+#> chr (2): name, species
+#> dbl (2): height, mass
+#> lgl (1): has_hair
+#> 
+#> i Use `spec()` to retrieve the full column specification for this data.
+#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
 
 ### Data Dictionary
@@ -139,24 +189,6 @@ Data Dictionaries need to be in a data frame format that includes
    <dbl> <dbl>  <dbl> <chr>   
 ```
 
-### Caching
-
-The approach to caching is for `read_dat` to create a `.dipr` folder in
-your project directory and store all cached files there. This works well
-if you are working primarily alone. If, however, you are working
-collaboratively, you can also set the cache data directory using the
-`DIPR_CACHE_PATH` environment variable. You can set this environment
-variable in your .Renviron file. Other users can do the same and then
-you are will be drawing cached data from the same source.
-
-### cache\_type
-
-Users can specify the format of the cached files via the `cache_type`
-argument in `read_dat`. The default option is currently the `fst` format
-from the `fst` package because it is the fastest option in R. Support
-for `parquet` is still very developmental and is not recommended for
-widespread usage.
-
 ## Project Status
 
 Under development
@@ -164,13 +196,13 @@ Under development
 ## License
 
     Copyright 2019 Province of British Columbia
-
+    
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
     You may obtain a copy of the License at 
-
+    
        http://www.apache.org/licenses/LICENSE-2.0
-
+    
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.

@@ -1,10 +1,15 @@
-Luke Skywalker    172 77FALSE
-C-3PO             167 75 TRUE
-R2-D2              96 32 TRUE
-Darth Vader       202136FALSE
-Leia Organa       150 49FALSE
-Owen Lars         178120FALSE
-Beru Whitesun lars165 75FALSE
-R5-D4              97 32 TRUE
-Biggs Darklighter 183 84FALSE
-Obi-Wan Kenobi    182 77FALSE
+Luke Skywalker       172  77.0FALSEHuman         
+C-3PO                167  75.0 TRUEDroid         
+R2-D2                 96  32.0 TRUEDroid         
+Darth Vader          202 136.0FALSEHuman         
+Leia Organa          150  49.0FALSEHuman         
+Owen Lars            178 120.0FALSEHuman         
+Beru Whitesun lars   165  75.0FALSEHuman         
+R5-D4                 97  32.0 TRUEDroid         
+Biggs Darklighter    183  84.0FALSEHuman         
+Obi-Wan Kenobi       182  77.0FALSEHuman         
+Anakin Skywalker     188  84.0FALSEHuman         
+Chewbacca            228 112.0FALSEWookiee       
+Han Solo             180  80.0FALSEHuman         
+Greedo               173  74.0 TRUERodian        
+Jabba Desilijic Tiure1751358.0 TRUEHutt          

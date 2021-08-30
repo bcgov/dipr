@@ -14,9 +14,9 @@
 
 #' Read compressed files in R
 #'
-#' Unzip and read into memory (using vroom). The `read_dat_dt` function will return a data.table
+#' Unzip and read into memory. The `read_dat_dt` function will return a data.table
 #' object, replacing the previous `as.data.table` argument which is now deprecated. You can
-#' use the same arguments as the`read_dat` function. If cache = TRUE, the first time you call
+#' use the same arguments as the `read_dat` function. If cache = TRUE, the first time you call
 #' this function, the data is cached in a folder called \code{.dipr} in a format specified by
 #' the cache_type argument. This function expects a data dictionary with the following columns:
 #'  - start
@@ -25,70 +25,44 @@
 #'
 #'
 #'
-#' @param data_path A path to a `.dat.gz` file
+#' @param data_path A path or a vector of paths to a `.dat.gz` file. If supplying a vector of paths,
+#' they must share a common data dictionary.
 #' @param data_dict A data.frame with `start`, `stop` and `name` columns
-#' @param use_cache A logical value if you want to use a cache. This create a `.dipr` directory
-#' in your project and stores data there. Defaults to FALSE.
-#' @param cache_type A string of the file type you want to store as your cache. Possible values
-#' are "fst", "csv", or "parquet"
-#' @param cache_dir Directory where you want you to store your cache. Defaults to `NULL` which results in
-#' a `.dipr` directory in your project. This can also be set by the environment variable `DIPR_CACHE_PATH`
 #' @param as.data.table Deprecated. See `read_dat_dt`
 #' @param col_select A vector of column names
-#' @inheritParams vroom::vroom_fwf
-#' @param ... arguments passed to `vroom::vroom_fwf`
+#' @param use_cache deprecated
+#' @inheritParams readr::read_fwf
+#' @inheritDotParams readr::read_fwf
 #'
 #' @export
+#'
+#' @examples
+#' data_dict_path <- dipr_example("starwars-dict.txt")
+#' dict <- read.table(data_dict_path)
+#' dat_path <- dipr_example("starwars-fwf.dat.gz")
+#' read_dat(data_path = dat_path,
+#'          data_dict = dict)
 
 
 read_dat <- function(data_path,
                      data_dict,
-                     use_cache = FALSE,
-                     cache_type = "fst",
-                     cache_dir = NULL,
                      as.data.table = FALSE,
+                     use_cache = FALSE,
                      col_select = NULL,
                      col_types = NULL, ...) {
 
 
   ## Check if data dictionary is in a valid format
   is_valid_data_dict(data_dict)
+  data_name <- gsub(".dat.gz", "", basename(data_path))
+
+  if(use_cache) stop("Caching directly in dipr is deprecated", call. = FALSE)
 
   ## Columns
   if(!is.null(col_select))  col_select <- col_selector(data_dict, col_select)
 
-  ## Caching
-  data_name <- gsub(".dat.gz", "", basename(data_path))
-
-  cache_path <- NULL
-  if (is.null(cache_dir) && nzchar(Sys.getenv('DIPR_CACHE_PATH')) && use_cache) {
-
-    message(glue::glue("Using cache at {Sys.getenv('DIPR_CACHE_PATH')} set by the DIPR_CACHE_PATH env variable"))
-    cache_path <- glue::glue("{Sys.getenv('DIPR_CACHE_PATH')}/{data_name}.{cache_type}")
-  }
-
-  if (is.null(cache_dir) && !nzchar(Sys.getenv('DIPR_CACHE_PATH')) && use_cache) {
-    cache_path <- glue::glue(".dipr/{data_name}.{cache_type}")
-  }
-
-  if (!is.null(cache_dir)) {
-    cache_path <- glue::glue("{cache_dir}/{data_name}.{cache_type}")
-  }
-
-
-  if (dip.file.exists(cache_path) && use_cache) {
-    return(read_cache(cache_path, cache_type, col_select, as.data.table))
-  } else {
-    message(glue::glue('Reading {data_name}'))
-    d <- vroom_reader(data_path, data_dict, col_types, col_select, ...)
-  }
-
-  if (use_cache) {
-    message(glue::glue('Creating a {cache_type} cache_type for the first time in this project.
-    Go get a coffee. This could take awhile'))
-    create_cache_dir(cache_path)
-    write_cache(d, cache_path, cache_type)
-  }
+  cli::cli_alert_success("Reading {data_name}")
+  d <- dipr_reader(data_path, data_dict, col_types, col_select, ...)
 
   if (as.data.table) return(message('read_dat now only returns tibbles. To return a data.table object see read_dat_dt'))
 
@@ -110,7 +84,7 @@ read_dat_dt <- function(...) {
 
 #' Delete all content from any temp directory
 #'
-#' This function helps clean up after vroom and other functions that use the temp directory
+#' This function helps clean up after readr and other functions that use the temp directory
 #' to store transient files. Sometimes this can balloon in size and it is useful run this command to
 #' clean things up.
 #'

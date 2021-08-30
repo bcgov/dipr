@@ -35,7 +35,7 @@ dipr_icd10_categories(...)
 
 \item{export_defs}{write out a csv. Defaults to FALSE.}
 
-\item{...}{arguments passed to \code{dipr_cid_categories}}
+\item{...}{arguments passed to \code{dipr_icd_categories}}
 }
 \description{
 Vectorized function that assigns categories to icd codes. Thin wrappers are provided for

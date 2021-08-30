@@ -17,7 +17,6 @@ knitr::opts_chunk$set(
 <!-- [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) -->
 <!-- [![R build status](https://github.com/bcgov/dipr/workflows/R-CMD-check/badge.svg)](https://github.com/bcgov/dipr) -->
 <!-- <a id="devex-badge" rel="Exploration" href="https://github.com/BCDevExchange/assets/blob/master/README.md"><img alt="Being designed and built, but in the lab. May change, disappear, or be buggy." style="border-width:0" src="https://assets.bcdevexchange.org/images/badges/exploration.svg" title="Being designed and built, but in the lab. May change, disappear, or be buggy." /></a> -->
-
 <!-- badges: end -->
 
 # dipr
@@ -92,13 +91,32 @@ dict
 dat_path <- dipr_example("starwars-fwf.dat.gz")
 ```
 
-The main function in the package is `read_dat()`:
+The main function in the package is `read_dat()` which allows you to directly read `.dat.gz files:
 ```{r}
 raw <- read_dat(data_path = dat_path,
-                data_dict = dict,
-                use_cache = FALSE)
+                data_dict = dict)
 head(raw)
 ```
+
+If two files share a common data dictionary you can supply a vector of filenames to the `data_path` argument and `read_dat` will combine them for you into one dataframe:
+
+```{r}
+dat_path2 <- dipr_example("starwars-fwf2.dat.gz")
+raw_two_files <- read_dat(
+    data_path = c(dat_path, dat_path2),
+    data_dict = dict,
+    id = "file"
+  )
+```
+
+Working with the data.table package for data manipulation is also possible in dipr using the `read_dat_dt` function:
+```{r}
+raw_dt <- read_dat_dt(
+    data_path = dat_path,
+    data_dict = dict
+  )
+```
+
 
 ### Data Dictionary
 Data Dictionaries need to be in a data frame format that includes 'name`, 'start', 'stop', and 'length' columns (in any order):
@@ -109,13 +127,6 @@ Data Dictionaries need to be in a data frame format that includes 'name`, 'start
    start  stop length name                      
    <dbl> <dbl>  <dbl> <chr>   
 ```
-
-
-### Caching
-The approach to caching is for `read_dat` to create a `.dipr` folder in your project directory and store all cached files there. This works well if you are working primarily alone. If, however, you are working collaboratively, you can also set the cache data directory using the `DIPR_CACHE_PATH` environment variable. You can set this environment variable in your .Renviron file. Other users can do the same and then you are will be drawing cached data from the same source. 
-
-### cache_type
-Users can specify the format of the cached files via the `cache_type` argument in `read_dat`. The default option is currently the `fst` format from the `fst` package because it is the fastest option in R. Support for `parquet` is still very developmental and is not recommended for widespread usage. 
 
 
 ## Project Status

@@ -25,7 +25,8 @@ dat_to_arrow(...)
 dat_to_feather(...)
 }
 \arguments{
-\item{data_path}{A path to a \code{.dat.gz} file}
+\item{data_path}{A path or a vector of paths to a \code{.dat.gz} file. If supplying a vector of paths,
+they must share a common data dictionary.}
 
 \item{data_dict}{A data.frame with \code{start}, \code{stop} and \code{name} columns}
 

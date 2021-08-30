@@ -7,17 +7,30 @@ library(R.utils)
 small_sw <- starwars %>%
   filter(!is.na(name), !is.na(height), !is.na(mass)) %>%
   mutate(has_hair = is.na(hair_color)) %>%
-  select(name:mass, has_hair) %>%
-  head(10) %>%
+  select(name:mass, has_hair, species) %>%
+  head(30) %>%
   as.data.frame()
 
-## Create .dat file
-write.fwf(small_sw, "inst/extdata/starwars-fwf.dat", colnames = FALSE, sep = "")
+## Write all data to one fwf file then split it to ensure
+## character positions are the same across both files
+tmpfile <- tmpfile("temp.dat")
+write.fwf(small_sw, tmpfile, colnames = FALSE, sep = "")
 
-## Compress data file
+## Create .dat file
+writeLines(readLines(tmpfile)[1:15], con = "inst/extdata/starwars-fwf.dat")
+writeLines(readLines(tmpfile)[16:30], con = "inst/extdata/starwars-fwf2.dat")
+
+## Compress data files
 gzip(
   filename = "inst/extdata/starwars-fwf.dat",
   destname = "inst/extdata/starwars-fwf.dat.gz",
+  remove = FALSE,
+  overwrite = TRUE
+)
+
+gzip(
+  filename = "inst/extdata/starwars-fwf2.dat",
+  destname = "inst/extdata/starwars-fwf2.dat.gz",
   remove = FALSE,
   overwrite = TRUE
 )
@@ -28,21 +41,17 @@ data_dict <- tribble(
   "name", 1, 21, "c",
   "height", 22, 24, "i",
   "mass", 25, 30, "d",
-  "has_hair", 31, 35, "l"
+  "has_hair", 31, 35, "l",
+  "species", 36, 50, "c"
 )
 
 write.table(data_dict, "inst/extdata/starwars-dict.txt")
 
-
 ## Create Data Dictionary
-data_dict_nlft <- tribble(
-  ~name, ~start, ~length, ~type,
-  "name", 1, 20, "c",
-  "height", 22, 2, "i",
-  "mass", 25, 5, "d",
-  "has_hair", 31, 4, "l"
-) %>%
-  select(start, length, type, name)
+data_dict_nlft <- data_dict %>%
+  mutate(length = stop-start) %>%
+  select(start, length, col_type, name)
+
 
 write.table(
   data_dict_nlft,
@@ -53,9 +62,5 @@ write.table(
 )
 
 
-## manual step of adding this line to the top of the file:
-## foo foo
-
-read_nflt(dipr_example('starwars-dict.nflt'))
 
 

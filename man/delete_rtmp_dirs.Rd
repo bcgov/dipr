@@ -10,7 +10,7 @@ delete_rtmp_dirs(are_you_sure = FALSE)
 \item{are_you_sure}{logical Defaults to FALSE so that a user does not do this by accident.}
 }
 \description{
-This function helps clean up after vroom and other functions that use the temp directory
+This function helps clean up after readr and other functions that use the temp directory
 to store transient files. Sometimes this can balloon in size and it is useful run this command to
 clean things up.
 }
