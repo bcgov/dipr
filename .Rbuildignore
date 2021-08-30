@@ -10,12 +10,17 @@
 scratch/
 .dipr/
 data-raw/
+
+^\.github$
 ^\.github/workflows/R-CMD-check\.yaml$
 .Rprofile
 
 
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
 
 
-^\.github$
+
 
 
