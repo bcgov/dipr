@@ -24,11 +24,12 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Steph Hazlitt \email{stephanie.hazlitt@gov.bc.ca}
+  \item Stephanie Hazlitt \email{stephanie.hazlitt@gov.bc.ca}
 }
 
 Other contributors:
 \itemize{
+  \item Craig Hutton \email{craig.hutton@gov.bc.ca} [contributor]
   \item Province of British Columbia [copyright holder]
 }
 
