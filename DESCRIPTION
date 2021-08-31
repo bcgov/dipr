@@ -6,7 +6,7 @@ Authors@R:
              family = "Albers",
              role = c("aut", "cre"),
              email = "sam.albers@gov.bc.ca"),
-      person(given = "Steph",
+      person(given = "Stephanie",
              family = "Hazlitt",
              role = "aut",
              email = "stephanie.hazlitt@gov.bc.ca"),
