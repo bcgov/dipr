@@ -2,8 +2,7 @@
 % Please edit documentation in R/read-dict.R
 \name{read_nflt}
 \alias{read_nflt}
-\title{Read data dictionaries in nflt format
-This function will be quite fragile to changes in the data format. It assumes four columns}
+\title{Read data dictionaries in nflt format}
 \usage{
 read_nflt(path)
 }
@@ -11,6 +10,5 @@ read_nflt(path)
 \item{path}{Either a path to a file, a connection, or literal data (either a single string or a raw vector).}
 }
 \description{
-Read data dictionaries in nflt format
 This function will be quite fragile to changes in the data format. It assumes four columns
 }

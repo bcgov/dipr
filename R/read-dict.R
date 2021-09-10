@@ -34,7 +34,7 @@ extract_path_name <- function(path) {
 
 
 #' Read data dictionaries in nflt format
-
+#'
 #' This function will be quite fragile to changes in the data format. It assumes four columns
 #'
 #' @param path Either a path to a file, a connection, or literal data (either a single string or a raw vector).
