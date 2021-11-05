@@ -13,16 +13,12 @@ ratio <- dim(img_data)[2] / dim(img_data)[3]
 height <- 1.2
 width <- height * ratio
 
-font_path <- switch (Sys.info()['sysname'],
-                     Darwin = "/Library/Fonts/BCSans-Regular.ttf",
-                     Windows = "C:/WINDOWS/FONTS/GOTHIC.TTF"
-)
-
-sysfonts::font_add("BC Sans", font_path)
+# Path for Mac - need path for Windows
+sysfonts::font_add("Academy Engraved LET", "/System/Library/Fonts/Supplemental/Academy Engraved LET Fonts.ttf")
 
 sticker(filename, package="dipr",
         s_x=1, s_y=0.75, s_height = height, s_width = width,
-        p_size=24, p_color = "#605B55", p_family = "BC Sans",
+        p_size=24, p_color = "#60574E", p_family = "Academy Engraved LET",
         h_color = "#9A7F64", h_size = 1.3,
         white_around_sticker = TRUE,
         filename="inst/sticker/sticker.png")
