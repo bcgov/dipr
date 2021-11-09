@@ -13,13 +13,14 @@ knitr::opts_chunk$set(
 )
 ```
 
+# dipr <img src='inst/sticker/sticker.png' align="right" height="139" />
+
 <!-- badges: start -->
 <!-- [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) -->
 <!-- [![R build status](https://github.com/bcgov/dipr/workflows/R-CMD-check/badge.svg)](https://github.com/bcgov/dipr) -->
 <!-- [![img](https://img.shields.io/badge/Lifecycle-Experimental-339999)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md) -->
 <!-- badges: end -->
 
-# dipr
 
 The `dipr` package is an R package that loads and provides means of caching of `.dat.gz` files. Functions are also provided to convert from `.dat.gz` files to Apache Arrow formats.
 
