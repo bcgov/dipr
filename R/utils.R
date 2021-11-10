@@ -48,4 +48,55 @@ dip.file.exists <- function(x) {
   }
 }
 
+prepare_readme_for_ocwa <- function(readme = "README.md") {
+  readme_txt <- readme_txt_orig <- readLines(readme)
 
+  badges_lines <- which(grepl("badges: (start|end)", readme_txt))
+
+  badges_to_comment <- seq(badges_lines[1] + 1, max(badges_lines) - 1)
+  # Only do if not already commented
+  badges_to_comment <- badges_to_comment[!grepl("<\\!--", readme_txt[badges_to_comment])]
+  if (length(badges_to_comment)) {
+    readme_txt[badges_to_comment] <- gsub("(.*)", "<!-- \\1 -->", readme_txt[badges_to_comment])
+  }
+
+  img_lines <- !grepl("(?=<!--).*<img", readme_txt, perl = TRUE)
+
+  if (length(img_lines)) {
+    readme_txt[img_lines] <- gsub("(.*)(<img.+?/>)(.*)", "\\1 <!-- \\2 --> \\3",
+                                  readme_txt[img_lines])
+  }
+
+  changed <- !all.equal(readme_txt, readme_txt_orig)
+  if (changed) writeLines(readme_txt, readme)
+  changed
+}
+
+process_ocwaignore <- function() {
+  file_globs <- readLines("_ocwaignore")
+  files <- Sys.glob(file_globs)
+  unlink(files)
+  files
+}
+
+ocwa_branch_export <- function(branch = "ocwa_import") {
+  if (gert::git_branch_exists(branch)) {
+    gert::git_branch_checkout(branch)
+  } else {
+    gert::git_branch_create(branch)
+  }
+
+  ocwa_ignored_files <- process_ocwaignore()
+  readme_changed <- prepare_readme_for_ocwa()
+
+  if (length(ocwa_ignored_files)) {
+    gert::git_add(ocwa_ignored_files)
+  }
+  if (readme_changed) {
+    gert::git_add("README.md")
+  }
+
+  if (nrow(gert::git_status())) {
+    gert::git_commit("remove files for ocwa import")
+  }
+}
