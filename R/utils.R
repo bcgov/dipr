@@ -114,9 +114,9 @@ ocwa_branch_export <- function(branch = "ocwa-import") {
 
   curr_branch <- gert::git_branch()
 
-  proceed <- askYesNo("This will prepare a branch named ", branch,
+  proceed <- askYesNo(paste0("This will prepare a branch named ", branch,
                       " with the current changes in ", curr_branch,
-                      ". Would you like to proceed?")
+                      ". Would you like to proceed?"))
   stopifnot(isTRUE(proceed))
 
   if (gert::git_branch_exists(branch)) {
