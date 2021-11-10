@@ -67,7 +67,7 @@ prepare_readme_for_ocwa <- function(readme = "README.md") {
                                   readme_txt[img_lines])
   }
 
-  changed <- !all.equal(readme_txt, readme_txt_orig)
+  changed <- !isTRUE(all.equal(readme_txt, readme_txt_orig))
   if (changed) writeLines(readme_txt, readme)
   changed
 }
