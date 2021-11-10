@@ -85,7 +85,7 @@ prepare_readme_for_ocwa <- function(readme = "README.md") {
 process_ocwaignore <- function() {
   file_globs <- readLines("_ocwaignore")
   files <- Sys.glob(file_globs)
-  go <- askYesNo(paste0("The following files will be deleted. Is that ok?\n",
+  go <- utils::askYesNo(paste0("The following files will be deleted. Is that ok?\n",
                   paste(files, collapse = "\n"), "\n"))
   if (isTRUE(go)) {
     unlink(files)
@@ -114,7 +114,7 @@ ocwa_branch_export <- function(branch = "ocwa-import") {
 
   curr_branch <- gert::git_branch()
 
-  proceed <- askYesNo(paste0("This will prepare a branch named ", branch,
+  proceed <- utils::askYesNo(paste0("This will prepare a branch named ", branch,
                       "\nwith the current changes in ", curr_branch,
                       ".\nWould you like to proceed?\n"))
   stopifnot(isTRUE(proceed))
