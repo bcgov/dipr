@@ -22,3 +22,5 @@ sticker(filename, package="dipr",
         h_color = "#9A7F64", h_size = 1.3,
         white_around_sticker = TRUE,
         filename="inst/sticker/sticker.png")
+
+usethis::use_logo("inst/sticker/sticker.png")
