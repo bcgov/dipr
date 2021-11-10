@@ -54,6 +54,7 @@ dip.file.exists <- function(x) {
 #' @param readme path to README file. Default `"README.md"`
 #'
 #' @return logical value if README was changed.
+#' @noRd
 prepare_readme_for_ocwa <- function(readme = "README.md") {
   readme_txt <- readme_txt_orig <- readLines(readme)
 
@@ -82,6 +83,7 @@ prepare_readme_for_ocwa <- function(readme = "README.md") {
 #' Remove files from repo that are listed in `_ocwaignore` file.
 #'
 #' @return files that were removed
+#' @noRd
 process_ocwaignore <- function() {
   file_globs <- readLines("_ocwaignore")
   files <- Sys.glob(file_globs)

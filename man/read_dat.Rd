@@ -32,10 +32,10 @@ they must share a common data dictionary.}
 \item{col_types}{One of \code{NULL}, a \code{\link[readr:cols]{cols()}} specification, or
 a string. See \code{vignette("readr")} for more details.
 
-If \code{NULL}, all column types will be imputed from the first 1000 rows
-on the input. This is convenient (and fast), but not robust. If the
-imputation fails, you'll need to increase the \code{guess_max} or supply the
-correct types yourself.
+If \code{NULL}, all column types will be imputed from \code{guess_max} rows
+on the input interspersed throughout the file. This is convenient (and
+fast), but not robust. If the imputation fails, you'll need to increase
+the \code{guess_max} or supply the correct types yourself.
 
 Column specifications created by \code{\link[=list]{list()}} or \code{\link[readr:cols]{cols()}} must contain
 one column specification for each column. If you only want to read a
@@ -131,9 +131,9 @@ by the \code{col_types} argument.}
     \item{\code{lazy}}{Read values lazily? By default the file is initially only
 indexed and the values are read lazily when accessed. Lazy reading is
 useful interactively, particularly if you are only interested in a subset
-of the full dataset. Note, lazy reading on windows will lock the file
-until all the data has been read from it, if you run into this issue set
-\code{lazy = FALSE}.}
+of the full dataset. \emph{Note}, if you later write to the same file you read
+from you need to set \code{lazy = FALSE}. On Windows the file will be locked
+and on other systems the memory map will become invalid.}
     \item{\code{skip_empty_rows}}{Should blank rows be ignored altogether? i.e. If this
 option is \code{TRUE} then blank rows will not be represented at all.  If it is
 \code{FALSE} then they will be represented by \code{NA} values in all the columns.}
