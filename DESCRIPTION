@@ -44,7 +44,8 @@ Imports:
 Suggests:
     bench,
     testthat (>= 2.1.0),
-    roxygen2
+    roxygen2,
+    gert
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
