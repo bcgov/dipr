@@ -115,8 +115,8 @@ ocwa_branch_export <- function(branch = "ocwa-import") {
   curr_branch <- gert::git_branch()
 
   proceed <- askYesNo(paste0("This will prepare a branch named ", branch,
-                      " with the current changes in ", curr_branch,
-                      ". Would you like to proceed?"))
+                      "\nwith the current changes in ", curr_branch,
+                      ".\nWould you like to proceed?\n"))
   stopifnot(isTRUE(proceed))
 
   if (gert::git_branch_exists(branch)) {
@@ -148,5 +148,5 @@ ocwa_branch_export <- function(branch = "ocwa-import") {
   gert::git_push()
 
   message("Switching your local branch back to ", curr_branch)
-  gert::gert_checkout(curr_branch)
+  gert::git_checkout(curr_branch)
 }
