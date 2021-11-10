@@ -111,13 +111,24 @@ ocwa_branch_export <- function(branch = "ocwa-import") {
       "The gert package is required for this function"
     )
   }
+
+  curr_branch <- gert::git_branch()
+
+  proceed <- askYesNo("This will prepare a branch named ", branch,
+                      " with the current changes in ", curr_branch,
+                      ". Would you like to proceed?")
+  stopifnot(isTRUE(proceed))
+
   if (gert::git_branch_exists(branch)) {
+    # Checkout the branch and merge the changes from the branch you want to export.
     gert::git_branch_checkout(branch)
+    gert::git_merge(curr_branch)
   } else {
     gert::git_branch_create(branch)
   }
 
   ocwa_ignored_files <- process_ocwaignore()
+
   readme_changed <- prepare_readme_for_ocwa()
 
   if (length(ocwa_ignored_files)) {
@@ -127,7 +138,15 @@ ocwa_branch_export <- function(branch = "ocwa-import") {
     gert::git_add("README.md")
   }
 
-  if (nrow(gert::git_status())) {
-    gert::git_commit("remove files for ocwa import")
+  if (!nrow(gert::git_status())) {
+    message("No changes made")
+  } else {
+    gert::git_commit("prepare files for ocwa import")
   }
+
+  message("pushing to branch: ", branch, ". Use this branch to prepare your OCWA import.")
+  gert::git_push()
+
+  message("Switching your local branch back to ", curr_branch)
+  gert::gert_checkout(curr_branch)
 }
