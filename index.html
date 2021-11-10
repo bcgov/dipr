@@ -72,9 +72,12 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="dipr" class="section level1">
+<div id="dipr-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#dipr" class="anchor"></a>dipr</h1></div>
+<a href="#dipr-" class="anchor"></a>dipr <img src="inst/sticker/sticker.png" align="right" height="139">
+</h1></div>
+<!-- badges: start -->
+
 <p>The <code>dipr</code> package is an R package that loads and provides means of caching of <code>.dat.gz</code> files. Functions are also provided to convert from <code>.dat.gz</code> files to Apache Arrow formats.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -140,18 +143,18 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_dat.html">read_dat</a></span><span class="op">(</span>data_path <span class="op">=</span> <span class="va">dat_path</span>,
                 data_dict <span class="op">=</span> <span class="va">dict</span><span class="op">)</span>
-<span class="co">#&gt; v Reading starwars-fwf</span>
+<span class="co">#&gt; ✓ Reading starwars-fwf</span>
 <span class="co">#&gt; Rows: 15 Columns: 5</span>
-<span class="co">#&gt; -- Column specification --------------------------------------------------------</span>
+<span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; chr (2): name, species</span>
 <span class="co">#&gt; dbl (2): height, mass</span>
 <span class="co">#&gt; lgl (1): has_hair</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; i Use `spec()` to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; i Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
+<span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">raw</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 x 5</span>
+<span class="co">#&gt; # A tibble: 6 × 5</span>
 <span class="co">#&gt;   name           height  mass has_hair species</span>
 <span class="co">#&gt;   &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;    &lt;chr&gt;  </span>
 <span class="co">#&gt; 1 Luke Skywalker    172    77 FALSE    Human  </span>
@@ -168,32 +171,32 @@
     data_dict <span class="op">=</span> <span class="va">dict</span>,
     id <span class="op">=</span> <span class="st">"file"</span>
   <span class="op">)</span>
-<span class="co">#&gt; v Reading starwars-fwf and starwars-fwf2</span>
+<span class="co">#&gt; ✓ Reading starwars-fwf and starwars-fwf2</span>
 <span class="co">#&gt; Rows: 30 Columns: 6</span>
-<span class="co">#&gt; -- Column specification --------------------------------------------------------</span>
+<span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; chr (2): name, species</span>
 <span class="co">#&gt; dbl (2): height, mass</span>
 <span class="co">#&gt; lgl (1): has_hair</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; i Use `spec()` to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; i Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></code></pre></div>
+<span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></code></pre></div>
 <p>Working with the data.table package for data manipulation is also possible in dipr using the <code>read_dat_dt</code> function:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">raw_dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_dat.html">read_dat_dt</a></span><span class="op">(</span>
     data_path <span class="op">=</span> <span class="va">dat_path</span>,
     data_dict <span class="op">=</span> <span class="va">dict</span>
   <span class="op">)</span>
-<span class="co">#&gt; v Reading starwars-fwf</span>
+<span class="co">#&gt; ✓ Reading starwars-fwf</span>
 <span class="co">#&gt; Rows: 15 Columns: 5</span>
-<span class="co">#&gt; -- Column specification --------------------------------------------------------</span>
+<span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; chr (2): name, species</span>
 <span class="co">#&gt; dbl (2): height, mass</span>
 <span class="co">#&gt; lgl (1): has_hair</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; i Use `spec()` to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; i Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></code></pre></div>
+<span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></code></pre></div>
 <div id="data-dictionary" class="section level3">
 <h3 class="hasAnchor">
 <a href="#data-dictionary" class="anchor"></a>Data Dictionary</h3>
@@ -260,7 +263,15 @@
 </ul>
 </div>
 
-  </div>
+  <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a></li>
+<li><a href="https://github.com/bcgov/dipr"><img src="https://github.com/bcgov/dipr/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md"><img src="https://img.shields.io/badge/Lifecycle-Experimental-339999" alt="img"></a></li>
+</ul>
+</div>
+</div>
 </div>
 
 
