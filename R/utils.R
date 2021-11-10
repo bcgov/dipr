@@ -148,5 +148,5 @@ ocwa_branch_export <- function(branch = "ocwa-import") {
   gert::git_push()
 
   message("Switching your local branch back to ", curr_branch)
-  gert::git_checkout(curr_branch)
+  gert::git_branch_checkout(curr_branch)
 }
