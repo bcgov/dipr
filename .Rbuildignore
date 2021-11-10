@@ -20,7 +20,7 @@ data-raw/
 ^docs$
 ^pkgdown$
 
-^ocwaignore$
+^_ocwaignore$
 
 
 
