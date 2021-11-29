@@ -119,7 +119,7 @@ ocwa_branch_export <- function(branch = "ocwa-import") {
   proceed <- utils::askYesNo(paste0("This will prepare a branch named ", branch,
                       "\nwith the current changes in ", curr_branch,
                       ".\nWould you like to proceed?\n"))
-  stopifnot(isTRUE(proceed))
+  if(!isTRUE(proceed)) stop("export branch not created", call. = FALSE)
 
   if (gert::git_branch_exists(branch)) {
     # Checkout the branch and merge the changes from the branch you want to export.
