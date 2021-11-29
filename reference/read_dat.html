@@ -89,7 +89,7 @@ name
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dipr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
       </span>
     </div>
 
@@ -219,9 +219,10 @@ set <code>show_col_types = FALSE</code> or set `options(readr.show_col_types = F
 be automatically uncompressed. Files starting with <code>http://</code>,
 <code>https://</code>, <code>ftp://</code>, or <code>ftps://</code> will be automatically
 downloaded. Remote gz files can also be automatically downloaded and
-decompressed.Literal data is most useful for examples and tests. To be recognised as a
-path, it must be wrapped with <code><a href='https://rdrr.io/r/base/AsIs.html'>I()</a></code>, be a string containing at least one
-new line, or be a vector containing at least one string with a new line.Using a value of <code><a href='https://readr.tidyverse.org/reference/clipboard.html'>clipboard()</a></code> will read from the system clipboard.</p></dd>
+decompressed.Literal data is most useful for examples and tests. To be recognised as
+literal data, the input must be either wrapped with <code><a href='https://rdrr.io/r/base/AsIs.html'>I()</a></code>, be a string
+containing at least one new line, or be a vector containing at least one
+string with a new line.Using a value of <code><a href='https://readr.tidyverse.org/reference/clipboard.html'>clipboard()</a></code> will read from the system clipboard.</p></dd>
     <dt><code>col_positions</code></dt><dd><p>Column positions, as created by <code><a href='https://readr.tidyverse.org/reference/read_fwf.html'>fwf_empty()</a></code>,
 <code><a href='https://readr.tidyverse.org/reference/read_fwf.html'>fwf_widths()</a></code> or <code><a href='https://readr.tidyverse.org/reference/read_fwf.html'>fwf_positions()</a></code>. To read in only selected fields,
 use <code><a href='https://readr.tidyverse.org/reference/read_fwf.html'>fwf_positions()</a></code>. If the width of the last column is variable (a

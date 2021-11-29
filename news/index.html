@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dipr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
       </span>
     </div>
 
@@ -122,6 +122,20 @@
       <small>Source: <a href='https://github.com/bcgov/dipr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="dipr-development-version" class="section level1">
+<h1 class="page-header" data-toc-text="development version">
+<a href="#dipr-development-version" class="anchor"></a>dipr (development version)</h1>
+<ul>
+<li>Added function <code><a href="../reference/ocwa_branch_export.html">ocwa_branch_export()</a></code> (<a href='https://github.com/bcgov/dipr/issues/26'>#26</a>) to create a clean branch to prepare the repo for import into OCWA by:
+<ol>
+<li>Creating a new branch</li>
+<li>Removing files that can’t be imported - these are listed in the <code>_ocwaignore</code> file in the root of the repo</li>
+<li>Cleaning <code>README.md</code> to comment out references to images and links that won’t be available in the SRE.</li>
+<li>Committing the changes from 2 and 3 to the new branch and pushing that to GitHub. This branch can then be used as the basis for an import into OCWA.</li>
+</ol>
+</li>
+</ul>
+</div>
     <div id="dipr-100" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.0">
 <a href="#dipr-100" class="anchor"></a>dipr 1.0.0</h1>
