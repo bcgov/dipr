@@ -107,7 +107,7 @@ process_ocwaignore <- function() {
 #'
 #' @return hash of commit
 #' @export
-ocwa_branch_export <- function(branch = "ocwa-import") {
+ocwa_branch_export <- function(branch = "ocwa-import", ask = TRUE) {
   if (!requireNamespace("gert", quietly = TRUE)) {
     stop(
       "The gert package is required for this function"
@@ -116,9 +116,13 @@ ocwa_branch_export <- function(branch = "ocwa-import") {
 
   curr_branch <- gert::git_branch()
 
-  proceed <- utils::askYesNo(paste0("This will prepare a branch named ", branch,
+  proceed <- TRUE
+  if (ask) {
+    proceed <- utils::askYesNo(paste0("This will prepare a branch named ", branch,
                       "\nwith the current changes in ", curr_branch,
                       ".\nWould you like to proceed?\n"))
+  }
+
   if(!isTRUE(proceed)) stop("export branch not created", call. = FALSE)
 
   if (gert::git_branch_exists(branch)) {
@@ -127,6 +131,7 @@ ocwa_branch_export <- function(branch = "ocwa-import") {
     gert::git_merge(curr_branch)
   } else {
     gert::git_branch_create(branch)
+    cat(cli::col_green(cli::symbol$tick), " Created branch ", branch, "\n")
   }
 
   ocwa_ignored_files <- process_ocwaignore()
@@ -135,9 +140,15 @@ ocwa_branch_export <- function(branch = "ocwa-import") {
 
   if (length(ocwa_ignored_files)) {
     gert::git_add(ocwa_ignored_files)
+    cat("The following files were removed for export:\n ",
+        paste(cli::col_green(cli::symbol$tick), ocwa_ignored_files, collapse = "\n  "),
+        "\n")
   }
   if (readme_changed) {
+    cat(cli::col_green(cli::symbol$tick), " Cleaned README\n")
     gert::git_add("README.md")
+  } else {
+    cat(cli::col_green(cli::symbol$tick), " No changes made to README\n")
   }
 
   if (!nrow(gert::git_status())) {
