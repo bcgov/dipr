@@ -19,6 +19,11 @@ Removes files listed in \verb{_ocwaignore} and processes \code{README.md}
 so that it is not using images or URLs that can't be accessed in the SRE.
 }
 \details{
-Then checks out a branch in \code{{dipr}} and commits those changes to that branch.
-Then use that branch to import into OCWA.
+This function:
+\enumerate{
+\item Creates a new branch
+\item Removes files that can't be imported - these are listed in the \verb{_ocwaignore} file in the root of the repo
+\item Cleans \code{README.md} to comment out references to images and links that won't be available in the SRE.
+\item Commits the changes from 2 and 3 to the new branch and pushing that to GitHub. This branch can then be used as the basis for an import into OCWA.
+}
 }

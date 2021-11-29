@@ -100,8 +100,11 @@ process_ocwaignore <- function() {
 #' Removes files listed in `_ocwaignore` and processes `README.md`
 #' so that it is not using images or URLs that can't be accessed in the SRE.
 #'
-#' Then checks out a branch in `{dipr}` and commits those changes to that branch.
-#' Then use that branch to import into OCWA.
+#' This function:
+#' 1. Creates a new branch
+#' 2. Removes files that can't be imported - these are listed in the `_ocwaignore` file in the root of the repo
+#' 3. Cleans `README.md` to comment out references to images and links that won't be available in the SRE.
+#' 4. Commits the changes from 2 and 3 to the new branch and pushing that to GitHub. This branch can then be used as the basis for an import into OCWA.
 #'
 #' @param branch branch name to prepare for OCWA. Default `"ocwa-import"`
 #' @param ask should the function stop and ask for verification to proceed? Default `TRUE`
