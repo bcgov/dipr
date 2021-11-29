@@ -1,3 +1,11 @@
+# dipr (development version)
+
+* Added function `ocwa_branch_export()` (#26) to create a clean branch to prepare the repo for import into OCWA by:
+  1. Creating a new branch
+  2. Removing files that can't be imported - these are listed in the `_ocwaignore` file in the root of the repo
+  3. Cleaning `README.md` to comment out references to images and links that won't be available in the SRE.
+  4. Committing the changes from 2 and 3 to the new branch and pushing that to GitHub. This branch can then be used as the basis for an import into OCWA.
+
 # dipr 1.0.0
 
 ## Breaking Change

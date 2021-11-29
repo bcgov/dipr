@@ -1,6 +1,6 @@
 Package: dipr
 Title: Provide functions to efficiently import SRE data
-Version: 1.0.0
+Version: 1.0.0.9000
 Authors@R: 
     c(person(given = "Sam",
              family = "Albers",
@@ -13,9 +13,15 @@ Authors@R:
       person(given = "Craig", 
              family = "Hutton", 
              role = "ctb",
-             email = "craig.hutton@gov.bc.ca"), 
+             email = "craig.hutton@gov.bc.ca"),
+      person(given = "Andy", 
+             family = "Teucher",
+             email = "andy.teucher@gov.bc.ca",
+             role  = "ctb",
+             comment = c(ORCID = "0000-0002-7840-692X")),
       person(given = "Province of British Columbia",
-             role = "cph"))
+             role = "cph")
+          )
 Description: Provides functions that aid in working with SRE data. Caching
     is provided through several means and enables more efficient reading
     of data into memory. Functions are also provided to convert to Apache
@@ -44,7 +50,8 @@ Imports:
 Suggests:
     bench,
     testthat (>= 2.1.0),
-    roxygen2
+    roxygen2,
+    gert
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
