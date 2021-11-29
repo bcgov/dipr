@@ -4,10 +4,12 @@
 \alias{ocwa_branch_export}
 \title{Prepare repo for import into the SRE through OCWA}
 \usage{
-ocwa_branch_export(branch = "ocwa-import")
+ocwa_branch_export(branch = "ocwa-import", ask = TRUE)
 }
 \arguments{
 \item{branch}{branch name to prepare for OCWA. Default \code{"ocwa-import"}}
+
+\item{ask}{should the function stop and ask for verification to proceed? Default \code{TRUE}}
 }
 \value{
 hash of commit

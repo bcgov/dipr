@@ -104,6 +104,7 @@ process_ocwaignore <- function() {
 #' Then use that branch to import into OCWA.
 #'
 #' @param branch branch name to prepare for OCWA. Default `"ocwa-import"`
+#' @param ask should the function stop and ask for verification to proceed? Default `TRUE`
 #'
 #' @return hash of commit
 #' @export

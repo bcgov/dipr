@@ -29,6 +29,7 @@ Authors:
 Other contributors:
 \itemize{
   \item Craig Hutton \email{craig.hutton@gov.bc.ca} [contributor]
+  \item Andy Teucher \email{andy.teucher@gov.bc.ca} (\href{https://orcid.org/0000-0002-7840-692X}{ORCID}) [contributor]
   \item Province of British Columbia [copyright holder]
 }
 
