@@ -46,3 +46,32 @@ dipr_use_export_doc <- function(template = "export-doc.md", ...) {
     ...
   )
 }
+
+#' An opinionated template for package-like targets project
+#'
+#' This function will create a DESCRIPTION file, a `_targets.R` template and an `R`
+#' directory to store function files.
+#'
+#' @inheritDotParams usethis::use_description
+#'
+#' @export
+dipr_create_targets_project <- function(...) {
+  dipr_use_description(...)
+  usethis::use_template("_targets.R", open = TRUE, package = "dipr")
+  dir.create("./R", showWarnings = FALSE)
+
+  if (file.exists(".gitignore")) usethis::use_git_ignore("_targets", directory = ".")
+
+
+}
+
+dipr_use_description <- function(...) {
+  bcgovr_desc <- list("License" = "Apache License (== 2.0) | file LICENSE",
+                      "Authors@R" = paste0('c(person("First", "Last", email = "first.last@example.com", role = c("aut", "cre")),
+                                          person("Province of British Columbia", role = "cph"))')
+  )
+
+  usethis::use_description(fields = bcgovr_desc, check_name = FALSE, ...)
+  usethis::use_package("desc")
+  usethis::use_package("dipr")
+}
