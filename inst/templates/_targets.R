@@ -23,7 +23,7 @@ suppressPackageStartupMessages(library(R.utils, warn.conflicts = FALSE))
 }
 
 reassignInPackage("check_file", "digest", .custom_check_file)
-
+if (.Platform$OS.type == "windows") options("arrow.use_threads" = FALSE)
 
 ## Load packages specified in DESCRIPTION file
 tar_option_set(packages = desc::desc_get_deps()$package)
