@@ -61,7 +61,7 @@ dipr_create_targets_project <- function(...) {
   dir.create("./R", showWarnings = FALSE)
 
   if (file.exists(".gitignore")) usethis::use_git_ignore("_targets", directory = ".")
-
+  if (Sys.getenv("USERDOMAIN") == "POPDATA") usethis::use_template("Rprofile.R", ".Rprofile", package = "dipr")
 
 }
 
