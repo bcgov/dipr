@@ -29,6 +29,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -41,18 +43,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">dipr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -62,7 +58,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/bcgov/dipr/">
+  <a href="https://github.com/bcgov/dipr/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -79,65 +75,64 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="dipr-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#dipr-" class="anchor"></a>dipr <img src="reference/figures/logo.png" align="right" height="139">
+<div class="section level1">
+<div class="page-header"><h1 id="dipr-">dipr <img src="reference/figures/logo.png" align="right" height="139"><a class="anchor" aria-label="anchor" href="#dipr-"></a>
 </h1></div>
 <!-- badges: start -->
 
 <p>The <code>dipr</code> package is an R package that loads and provides means of caching of <code>.dat.gz</code> files. Functions are also provided to convert from <code>.dat.gz</code> files to Apache Arrow formats.</p>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>While this package is intended for us within the SRE you can install the package from GitHub:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"bcgov/dipr"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"bcgov/dipr"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="installation-inside-the-sre" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation-inside-the-sre" class="anchor"></a>Installation inside the SRE</h2>
+<div class="section level2">
+<h2 id="installation-inside-the-sre">Installation inside the SRE<a class="anchor" aria-label="anchor" href="#installation-inside-the-sre"></a>
+</h2>
 <p>Installation of <code>dipr</code> is slightly different than typical R package installation. To begin with you will need to clone the dipr repo. To do this you need access to the SRE instance of GitLab.</p>
-<p>Go to this website: <a href="https://projectsc.popdata.bc.ca/" class="uri">https://projectsc.popdata.bc.ca/</a></p>
+<p>Go to this website: <a href="https://projectsc.popdata.bc.ca/" class="external-link uri">https://projectsc.popdata.bc.ca/</a></p>
 <p>Scroll down and click on “Sign in with Pop Data Sso”</p>
 <p>You will need to do this step everytime you log into the SRE.</p>
-<p>Next go to this site: <a href="https://projectsc.popdata.bc.ca/profile/personal_access_tokens" class="uri">https://projectsc.popdata.bc.ca/profile/personal_access_tokens</a></p>
+<p>Next go to this site: <a href="https://projectsc.popdata.bc.ca/profile/personal_access_tokens" class="external-link uri">https://projectsc.popdata.bc.ca/profile/personal_access_tokens</a></p>
 <p>Create a new Personal Access Token enabling each scope and typing in your username. This should create a new personal access token. Those are your “git credentials”. Save those on your “U” drive along with your user name.</p>
-<div id="clone-from-rstudio" class="section level3">
-<h3 class="hasAnchor">
-<a href="#clone-from-rstudio" class="anchor"></a>Clone from RStudio</h3>
+<div class="section level3">
+<h3 id="clone-from-rstudio">Clone from RStudio<a class="anchor" aria-label="anchor" href="#clone-from-rstudio"></a>
+</h3>
 <p>Open RStudio and go to File -&gt; New Project -&gt; Version Control -&gt; Git</p>
-<p>In the field <code>Repository URL</code> section type: <a href="https://projectsc.popdata.bc.ca/shares/dipr" class="uri">https://projectsc.popdata.bc.ca/shares/dipr</a></p>
+<p>In the field <code>Repository URL</code> section type: <a href="https://projectsc.popdata.bc.ca/shares/dipr" class="external-link uri">https://projectsc.popdata.bc.ca/shares/dipr</a></p>
 <p>In the field <code>Create project as subdirectory of</code> browse to where you want to clone this repo. I’d recommend putting this in a personal but open to other team members folder.</p>
 </div>
-<div id="clone-from-bash" class="section level3">
-<h3 class="hasAnchor">
-<a href="#clone-from-bash" class="anchor"></a>Clone from bash</h3>
+<div class="section level3">
+<h3 id="clone-from-bash">Clone from bash<a class="anchor" aria-label="anchor" href="#clone-from-bash"></a>
+</h3>
 <p>Navigate to where you would like to clone the repo.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>git clone https<span class="op">:</span><span class="er">//</span>projectsc.popdata.bc.ca<span class="op">/</span>shares<span class="op">/</span>dipr</span></code></pre></div>
 </div>
-<div id="installation-using-devtools" class="section level3">
-<h3 class="hasAnchor">
-<a href="#installation-using-devtools" class="anchor"></a>Installation using devtools</h3>
+<div class="section level3">
+<h3 id="installation-using-devtools">Installation using devtools<a class="anchor" aria-label="anchor" href="#installation-using-devtools"></a>
+</h3>
 <p>This will clone the repo and you can install from there. Inside the repo will be an <code>dipr.Rproj</code>. Double clicking on that will open RStudio. Next run the following code:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/install.html">install</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>Once you have the package installed you can use <code><a href="reference/dipr_update.html">dipr::dipr_update</a></code> to update.</p>
 </div>
 </div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
 <p>The <code>dipr</code> package comes with some sample <em>fake</em> data to illustrate the usage of the package and facilitate unit tests. Specifically, the package provides a fake data dictionary and a compressed data file. Example fake data can be seen like this:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bcgov/dipr">dipr</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bcgov/dipr" class="external-link">dipr</a></span><span class="op">)</span>
 <span class="fu"><a href="reference/dipr_examples.html">dipr_examples</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; [1] "starwars-dict.nflt"   "starwars-dict.txt"    "starwars-fwf.dat"    </span>
 <span class="co">#&gt; [4] "starwars-fwf.dat.gz"  "starwars-fwf2.dat"    "starwars-fwf2.dat.gz"</span></code></pre></div>
 <p>Individual paths can be extracted like this:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">data_dict_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/dipr_examples.html">dipr_example</a></span><span class="op">(</span><span class="st">"starwars-dict.txt"</span><span class="op">)</span>
-<span class="va">dict</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.table</a></span><span class="op">(</span><span class="va">data_dict_path</span><span class="op">)</span>
+<span class="va">dict</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table</a></span><span class="op">(</span><span class="va">data_dict_path</span><span class="op">)</span>
 <span class="va">dict</span>
 <span class="co">#&gt;       name start stop col_type</span>
 <span class="co">#&gt; 1     name     1   21        c</span>
@@ -160,7 +155,7 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span>
 <span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">raw</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">raw</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 6 × 5</span>
 <span class="co">#&gt;   name           height  mass has_hair species</span>
 <span class="co">#&gt;   &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;    &lt;chr&gt;  </span>
@@ -174,7 +169,7 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dat_path2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/dipr_examples.html">dipr_example</a></span><span class="op">(</span><span class="st">"starwars-fwf2.dat.gz"</span><span class="op">)</span>
 <span class="va">raw_two_files</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_dat.html">read_dat</a></span><span class="op">(</span>
-    data_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">dat_path</span>, <span class="va">dat_path2</span><span class="op">)</span>,
+    data_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">dat_path</span>, <span class="va">dat_path2</span><span class="op">)</span>,
     data_dict <span class="op">=</span> <span class="va">dict</span>,
     id <span class="op">=</span> <span class="st">"file"</span>
   <span class="op">)</span>
@@ -204,9 +199,9 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span>
 <span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></code></pre></div>
-<div id="data-dictionary" class="section level3">
-<h3 class="hasAnchor">
-<a href="#data-dictionary" class="anchor"></a>Data Dictionary</h3>
+<div class="section level3">
+<h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
+</h3>
 <p>Data Dictionaries need to be in a data frame format that includes ‘name`, ’start’, ‘stop’, and ‘length’ columns (in any order):</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="op">&gt;</span><span class="st"> </span>dict</span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="co"># A tibble: 64 x 4</span></span>
@@ -214,14 +209,14 @@
 <span id="cb9-4"><a href="#cb9-4"></a>   <span class="op">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">  </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>chr<span class="op">&gt;</span><span class="st">   </span></span></code></pre></div>
 </div>
 </div>
-<div id="project-status" class="section level2">
-<h2 class="hasAnchor">
-<a href="#project-status" class="anchor"></a>Project Status</h2>
+<div class="section level2">
+<h2 id="project-status">Project Status<a class="anchor" aria-label="anchor" href="#project-status"></a>
+</h2>
 <p>Under development</p>
 </div>
-<div id="license" class="section level2">
-<h2 class="hasAnchor">
-<a href="#license" class="anchor"></a>License</h2>
+<div class="section level2">
+<h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
+</h2>
 <div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>Copyright <span class="dv">2019</span> Province of British Columbia</span>
 <span id="cb10-2"><a href="#cb10-2"></a></span>
 <span id="cb10-3"><a href="#cb10-3"></a>Licensed under the Apache License, Version <span class="fl">2.0</span> (the <span class="st">"License"</span>);</span>
@@ -241,53 +236,65 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/bcgov/dipr/">https://​github.com/​bcgov/​dipr/​</a>
-</li>
+<li><a href="https://github.com/bcgov/dipr/" class="external-link">Browse source code</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>Apache License (== 2.0) | file <a href="LICENSE-text.html">LICENSE</a>
 </li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
-<div class="developers">
-<h2>Developers</h2>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li>Sam Albers <br><small class="roles"> Author, maintainer </small>  </li>
-<li>Stephanie Hazlitt <br><small class="roles"> Author </small>  </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="authors.html#citation">Citing dipr</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li><a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a></li>
-<li><a href="https://github.com/bcgov/dipr"><img src="https://github.com/bcgov/dipr/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md"><img src="https://img.shields.io/badge/Lifecycle-Experimental-339999" alt="img"></a></li>
+<li>Sam Albers <br><small class="roles"> Author, maintainer </small>  </li>
+<li>Stephanie Hazlitt <br><small class="roles"> Author </small>  </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://opensource.org/licenses/Apache-2.0" class="external-link"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a></li>
+<li><a href="https://github.com/bcgov/dipr" class="external-link"><img src="https://github.com/bcgov/dipr/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md" class="external-link"><img src="https://img.shields.io/badge/Lifecycle-Experimental-339999" alt="img"></a></li>
+</ul>
 </div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Sam Albers, Stephanie Hazlitt.</p>
+  <p></p>
+<p>Developed by Sam Albers, Stephanie Hazlitt.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -295,6 +302,8 @@
 
   
 
+
+  
 
   </body>
 </html>
