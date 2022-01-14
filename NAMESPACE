@@ -2,6 +2,7 @@
 
 export("%>%")
 export(add_linked_status_col)
+export(clean_icd_codes)
 export(dat_to_arrow)
 export(dat_to_arrow_formats)
 export(dat_to_datasets)

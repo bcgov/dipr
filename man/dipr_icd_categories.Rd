@@ -4,6 +4,7 @@
 \alias{dipr_icd_categories}
 \alias{dipr_icd9_categories}
 \alias{dipr_icd10_categories}
+\alias{clean_icd_codes}
 \title{Assign a category to a vector of icd codes}
 \usage{
 dipr_icd_categories(
@@ -19,6 +20,8 @@ dipr_icd_categories(
 dipr_icd9_categories(...)
 
 dipr_icd10_categories(...)
+
+clean_icd_codes(icd_codes)
 }
 \arguments{
 \item{icd_codes}{vector of icd codes}
@@ -54,6 +57,8 @@ website: https://www2.gov.bc.ca/gov/content/health/practitioner-professional-res
 \item \code{dipr_icd9_categories}: Thin wrapper around dipr_icd_categories for only ICD-9 codes
 
 \item \code{dipr_icd10_categories}: Thin wrapper around dipr_icd_categories for only ICD-10 codes
+
+\item \code{clean_icd_codes}: Method to clean ICD-9 and ICD-10 codes
 }}
 
 \examples{

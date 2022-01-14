@@ -95,6 +95,10 @@ dipr_icd10_categories <- function(...) {
   dipr_icd_categories(icd_version = 10, ...)
 }
 
+#' @describeIn dipr_icd_categories Clean vectorized ICD-9 and ICD-10 codes
+#' @param icd_codes vector of icd codes
+
+#' @export
 
 clean_icd_codes <- function(icd_codes) {
   icd_codes <- stringr::str_remove_all(icd_codes, "\\.") #remove the periods if that hasn't happened already
