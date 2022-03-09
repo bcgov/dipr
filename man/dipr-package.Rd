@@ -6,15 +6,16 @@
 \alias{dipr-package}
 \title{dipr: Provide functions to efficiently import SRE data}
 \description{
-\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
-
-Provides functions that aid in working with SRE data. Caching is provided through several means and enables more efficient reading of data into memory. Functions are also provided to convert to Apache Arrow formats.
+Provides functions that aid in working with SRE data. Caching
+    is provided through several means and enables more efficient reading
+    of data into memory. Functions are also provided to convert to Apache
+    Arrow formats.
 }
 \seealso{
 Useful links:
 \itemize{
   \item \url{https://github.com/bcgov/dipr}
-  \item \url{https://projectsc.popdata.bc.ca/shares/dipr2}
+  \item \url{https://projectsc.popdata.bc.ca/shares/dipr}
 }
 
 }
@@ -23,13 +24,14 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Stephanie Hazlitt \email{stephanie.hazlitt@gov.bc.ca}
+  \item Andy Teucher \email{andy.teucher@gov.bc.ca} (\href{https://orcid.org/0000-0002-7840-692X}{ORCID})
+  \item Bonnie Robert \email{bonnie.robbie@gov.bc.ca}
 }
 
 Other contributors:
 \itemize{
   \item Craig Hutton \email{craig.hutton@gov.bc.ca} [contributor]
-  \item Andy Teucher \email{andy.teucher@gov.bc.ca} (\href{https://orcid.org/0000-0002-7840-692X}{ORCID}) [contributor]
+  \item Stephanie Hazlitt \email{stephanie.hazlitt@gov.bc.ca} [contributor]
   \item Province of British Columbia [copyright holder]
 }
 

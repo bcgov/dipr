@@ -4,10 +4,14 @@
 \alias{read_nflt}
 \title{Read data dictionaries in nflt format}
 \usage{
-read_nflt(path)
+read_nflt(path, comment = "/*", ...)
 }
 \arguments{
 \item{path}{Either a path to a file, a connection, or literal data (either a single string or a raw vector).}
+
+\item{comment}{A string used to identify comments. Any text after the comment characters will be silently ignored. Default \code{"/*"}, which is used in some nflt files.}
+
+\item{...}{arguments passed on to \code{\link[readr:read_delim]{readr::read_delim()}}}
 }
 \description{
 This function will be quite fragile to changes in the data format. It assumes four columns

@@ -30,7 +30,9 @@
 #' @param data_dict A data.frame with `start`, `stop` and `name` columns
 #' @param as.data.table Deprecated. See `read_dat_dt`
 #' @param col_select A vector of column names
-#' @param use_cache deprecated
+#' @param use_cache deprecated,
+#' @param data_format the format of the input data. Default is `"fwf"`, other choices
+#' are `"csv"`, `"csv2"`, `"tsv"`
 #' @inheritParams readr::read_fwf
 #' @inheritDotParams readr::read_fwf
 #'
@@ -49,11 +51,17 @@ read_dat <- function(data_path,
                      as.data.table = FALSE,
                      use_cache = FALSE,
                      col_select = NULL,
-                     col_types = NULL, ...) {
+                     col_types = NULL,
+                     data_format = c("fwf", "csv", "tsv", "csv2"),
+                     ...) {
 
+  data_format = match.arg(data_format)
 
-  ## Check if data dictionary is in a valid format
-  is_valid_data_dict(data_dict)
+  if (data_format == "fwf") {
+    ## Check if data dictionary is in a valid format
+    is_valid_data_dict(data_dict)
+  }
+
   data_name <- gsub(".dat.gz", "", basename(data_path))
 
   if(use_cache) stop("Caching directly in dipr is deprecated", call. = FALSE)
@@ -62,7 +70,7 @@ read_dat <- function(data_path,
   if(!is.null(col_select))  col_select <- col_selector(data_dict, col_select)
 
   cli::cli_alert_success("Reading {data_name}")
-  d <- dipr_reader(data_path, data_dict, col_types, col_select, ...)
+  d <- dipr_reader(data_path, data_dict, col_types, col_select, data_format, ...)
 
   if (as.data.table) return(message('read_dat now only returns tibbles. To return a data.table object see read_dat_dt'))
 

@@ -1,0 +1,17 @@
+name,height,mass,has_hair,species
+Jabba Desilijic Tiure,175,1358,TRUE,Hutt
+Wedge Antilles,170,77,FALSE,Human
+Jek Tono Porkins,180,110,FALSE,Human
+Yoda,66,17,FALSE,Yoda's species
+Palpatine,170,75,FALSE,Human
+Boba Fett,183,78.2,FALSE,Human
+IG-88,200,140,FALSE,Droid
+Bossk,190,113,FALSE,Trandoshan
+Lando Calrissian,177,79,FALSE,Human
+Lobot,175,79,FALSE,Human
+Ackbar,180,83,FALSE,Mon Calamari
+Wicket Systri Warrick,88,20,FALSE,Ewok
+Nien Nunb,160,68,FALSE,Sullustan
+Qui-Gon Jinn,193,89,FALSE,Human
+Nute Gunray,191,90,FALSE,Neimodian
+Jar Jar Binks,196,66,FALSE,Gungan

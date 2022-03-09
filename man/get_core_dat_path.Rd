@@ -6,7 +6,8 @@
 \usage{
 get_core_dat_path(
   core_version,
-  core_table_name,
+  core_table_name = NULL,
+  core_table_pattern = NULL,
   pattern = "\\\\.dat.gz$",
   base_path = "R:/DATA/core-snapshot"
 )
@@ -14,7 +15,9 @@ get_core_dat_path(
 \arguments{
 \item{core_version}{Core version of tables typically formatted as a YYYYMMDD string}
 
-\item{core_table_name}{a string of the data set name}
+\item{core_table_name}{an exact string of the data set name. Should match the folder inside the core-snapshot path. Leave as \code{NULL} if using \code{core_table_pattern} to match several folders.}
+
+\item{core_table_pattern}{a string (can be a regex) to match a table name - can be a subdataset of \code{core_table_name} or a pattern to match a dataset that may be split over multiple dataset folders in the core-snapshot path.}
 
 \item{pattern}{Defaults to dat.gz but can be extended for more extended using regex for more
 flexibility}

@@ -13,8 +13,15 @@
 ## limitations under the License.
 
 ## a function to handle the initial READ of data
-dipr_reader <- function(data_path, data_dict, col_types, col_select, ...) {
+dipr_reader <- function(data_path, data_dict, col_types, col_select, data_format = "fwf", ...) {
 
+  delim = switch(data_format,
+                 "fwf" = NULL,
+                 "csv" = ",",
+                 "tsv" = "\t",
+                 "csv2" = ";")
+
+  if (data_format == "fwf") {
     readr::read_fwf(
       data_path,
       col_positions =
@@ -27,6 +34,16 @@ dipr_reader <- function(data_path, data_dict, col_types, col_select, ...) {
       col_select = !!col_select,
       ...
     )
+  } else {
+    readr::read_delim(
+      data_path,
+      delim = delim,
+      col_types = col_types,
+      col_select = !!col_select,
+      ...
+    )
+  }
+
 
 }
 

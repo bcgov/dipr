@@ -34,20 +34,19 @@ dat_to_arrow_formats <- function(data_path,
                            col_types = NULL,
                            col_select = NULL,
                            overwrite = TRUE,
+                           data_format = c("fwf", "csv", "tsv", "csv2"),
                            ...) {
 
-  #browser()
-  ## Check if data dictionary is in a valid format
-  is_valid_data_dict(data_dict)
+  data_format = match.arg(data_format)
 
-  if(!dir.exists(output_dir)) dir.create(output_dir, recursive = TRUE)
+  #browser()
 
   data_name <- gsub(".dat.gz", "", basename(data_path))
 
   ## Columns
   if(!is.null(col_select))  col_select <- col_selector(data_dict, col_select)
 
-  d <- dipr_reader(data_path, data_dict, col_types, col_select)
+  d <- dipr_reader(data_path, data_dict, col_types, col_select, data_format = data_format)
 
   tf <- file.path(tempdir(), paste0(data_name, ".", arrow_format))
 
@@ -63,6 +62,8 @@ dat_to_arrow_formats <- function(data_path,
   if (arrow_format == "feather") {
     arrow::write_feather(d, sink = tf)
   }
+
+  if(!dir.exists(output_dir)) dir.create(output_dir, recursive = TRUE)
 
   ## copy over
   if(!file.copy(tf, output_dir, overwrite = overwrite)) {
@@ -117,7 +118,7 @@ dat_to_feather <- function(...) {
 #' @export
 #'
 #' @examples
-#'
+#' \dontrun{
 #' data_dict_path <- dipr_example("starwars-dict.txt")
 #' dict <- read.table(data_dict_path)
 #' dat_path <- dipr_example("starwars-fwf.dat.gz")
@@ -129,6 +130,7 @@ dat_to_feather <- function(...) {
 #'     path = "starwars_arrow",
 #'     partitioning = "species",
 #'     chunk_size = 2)
+#'     }
 #'
 dat_to_datasets <- function(data_path, data_dict, chunk_size = 1000000, path, partitioning, ...) {
   tdir <- file.path(tempdir(), gsub(".dat.gz", "", basename(data_path)), "arrow-tmp")

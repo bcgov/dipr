@@ -31,3 +31,6 @@ if (Sys.getenv("USERDOMAIN") == "POPDATA") {
 
   reassignInPackage("check_file", "digest", .custom_check_file)
 }
+
+## Silence a CRAN warning
+Sys.setenv('_R_CHECK_SYSTEM_CLOCK_' = 0)

@@ -13,7 +13,7 @@ get_core_dict_path(
 \arguments{
 \item{core_version}{Core version of tables typically formatted as a YYYYMMDD string}
 
-\item{core_dict_name}{a string of the dictionary name. Often this is different from the data name}
+\item{core_dict_name}{a string of the dataset name.}
 
 \item{base_path}{Defaults to "R:/DATA/core-snapshot"}
 }
