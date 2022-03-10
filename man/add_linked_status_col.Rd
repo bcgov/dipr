@@ -4,10 +4,12 @@
 \alias{add_linked_status_col}
 \title{Add a column defining linked status}
 \usage{
-add_linked_status_col(.data)
+add_linked_status_col(.data, studyid_col = "studyid")
 }
 \arguments{
-\item{.data}{a data frame (or tibble) with a studyid column}
+\item{.data}{a data frame (or tibble) or arrow Dataset with a studyid column}
+
+\item{studyid_col}{the name of the study id column. Defaults to "studyid"}
 }
 \value{
 the same data frame plus a \code{linked_status} column

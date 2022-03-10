@@ -1,24 +1,28 @@
 Package: dipr
 Title: Provide functions to efficiently import SRE data
-Version: 1.0.0.9000
+Version: 1.2.1
 Authors@R: 
     c(person(given = "Sam",
              family = "Albers",
              role = c("aut", "cre"),
              email = "sam.albers@gov.bc.ca"),
-      person(given = "Stephanie",
-             family = "Hazlitt",
-             role = "aut",
-             email = "stephanie.hazlitt@gov.bc.ca"),
+      person(given = "Andy", 
+             family = "Teucher",
+             email = "andy.teucher@gov.bc.ca",
+             role  = "aut",
+             comment = c(ORCID = "0000-0002-7840-692X")),
+      person(given = "Bonnie", 
+             family = "Robert",
+             email = "bonnie.robbie@gov.bc.ca",
+             role  = "aut"),
       person(given = "Craig", 
              family = "Hutton", 
              role = "ctb",
              email = "craig.hutton@gov.bc.ca"),
-      person(given = "Andy", 
-             family = "Teucher",
-             email = "andy.teucher@gov.bc.ca",
-             role  = "ctb",
-             comment = c(ORCID = "0000-0002-7840-692X")),
+      person(given = "Stephanie",
+             family = "Hazlitt",
+             role = "ctb",
+             email = "stephanie.hazlitt@gov.bc.ca"),
       person(given = "Province of British Columbia",
              role = "cph")
           )
@@ -27,17 +31,17 @@ Description: Provides functions that aid in working with SRE data. Caching
     of data into memory. Functions are also provided to convert to Apache
     Arrow formats.
 License: Apache License (== 2.0) | file LICENSE
-URL: https://github.com/bcgov/dipr, https://projectsc.popdata.bc.ca/shares/dipr2
+URL: https://github.com/bcgov/dipr, https://projectsc.popdata.bc.ca/shares/dipr
 Imports:
     arrow,
     credentials,
     cli,
     data.table,
-    devtools,
+    remotes,
     dplyr,
     fs,
-    fst,
     glue,
+    httr,
     janitor,
     lubridate,
     readr (>= 2.0.0),

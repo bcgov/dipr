@@ -45,35 +45,19 @@ your username. This should create a new personal access token. Those are
 your “git credentials”. Save those on your “U” drive along with your
 user name.
 
-### Clone from RStudio
-
-Open RStudio and go to File -> New Project -> Version Control -> Git
-
-In the field `Repository URL` section type:
-<https://projectsc.popdata.bc.ca/shares/dipr>
-
-In the field `Create project as subdirectory of` browse to where you
-want to clone this repo. I’d recommend putting this in a personal but
-open to other team members folder.
-
-### Clone from bash
-
-Navigate to where you would like to clone the repo.
-
-    git clone https://projectsc.popdata.bc.ca/shares/dipr
-
-### Installation using devtools
-
-This will clone the repo and you can install from there. Inside the repo
-will be an `dipr.Rproj`. Double clicking on that will open RStudio. Next
-run the following code:
+### Install from R
 
 ``` r
-devtools::install()
-```
+## First you need to store your credentials created in the step above. This is a one time only thing
+token <- credentials::git_credential_ask("https://projectsc.popdata.bc.ca")$password
 
-Once you have the package installed you can use `dipr::dipr_update` to
-update.
+## These next two lines download the package to a temporary folder and install it. 
+resp <- httr::GET("https://projectsc.popdata.bc.ca/api/v4/projects/90/repository/archive.tar.gz",
+                  query = list(sha = "v1.2.1"),
+                  httr::write_disk(tempfile(fileext = ".tar.gz")),
+                  config = httr::add_headers(`Private-token` = token))
+remotes::install_local(resp[["content"]])
+```
 
 ## Usage
 
@@ -85,8 +69,12 @@ Example fake data can be seen like this:
 ``` r
 library(dipr)
 dipr_examples()
-#> [1] "starwars-dict.nflt"   "starwars-dict.txt"    "starwars-fwf.dat"    
-#> [4] "starwars-fwf.dat.gz"  "starwars-fwf2.dat"    "starwars-fwf2.dat.gz"
+#>  [1] "starwars-csv.dat"                 "starwars-csv.dat.gz"             
+#>  [3] "starwars-csv2.dat"                "starwars-csv2.dat.gz"            
+#>  [5] "starwars-dict-with-comments.nflt" "starwars-dict.nflt"              
+#>  [7] "starwars-dict.txt"                "starwars-fwf.dat"                
+#>  [9] "starwars-fwf.dat.gz"              "starwars-fwf2.dat"               
+#> [11] "starwars-fwf2.dat.gz"
 ```
 
 Individual paths can be extracted like this:

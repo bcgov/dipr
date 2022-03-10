@@ -13,6 +13,13 @@ knitr::opts_chunk$set(
 )
 ```
 
+```{r make-sticker, include=FALSE}
+if (!file.exists("man/figures/logo.png") && 
+    !identical(Sys.getenv("USERDOMAIN"), "POPDATA")) {
+  source("inst/sticker/sticker.R")
+}
+```
+
 # dipr <img src='man/figures/logo.png' align="right" height="139" />
 
 <!-- badges: start -->
@@ -47,34 +54,21 @@ Next go to this site: https://projectsc.popdata.bc.ca/profile/personal_access_to
 
 Create a new Personal Access Token enabling each scope and typing in your username. This should create a new personal access token. Those are your "git credentials". Save those on your "U" drive along with your user name. 
 
-### Clone from RStudio
+### Install from R
 
-Open RStudio and go to 
-File -> New Project -> Version Control -> Git
+```{r eval=FALSE}
+## First you need to store your credentials created in the step above. This is a one time only thing
+token <- credentials::git_credential_ask("https://projectsc.popdata.bc.ca")$password
 
-In the field `Repository URL` section type:
-https://projectsc.popdata.bc.ca/shares/dipr
-
-In the field `Create project as subdirectory of` browse to where you want to clone this repo. I'd recommend putting this in a personal but open to other team members folder.
-
-
-### Clone from bash
-
-Navigate to where you would like to clone the repo.
-
-```
-git clone https://projectsc.popdata.bc.ca/shares/dipr
+## These next two lines download the package to a temporary folder and install it. 
+resp <- httr::GET("https://projectsc.popdata.bc.ca/api/v4/projects/90/repository/archive.tar.gz",
+                  query = list(sha = "v1.2.1"),
+                  httr::write_disk(tempfile(fileext = ".tar.gz")),
+                  config = httr::add_headers(`Private-token` = token))
+remotes::install_local(resp[["content"]])
 ```
 
-### Installation using devtools
-This will clone the repo and you can install from there. Inside the repo will be an `dipr.Rproj`. Double clicking on that will open RStudio. Next run the following code:
 
-```r
-devtools::install()
-
-```
-
-Once you have the package installed you can use `dipr::dipr_update` to update. 
 
 
 ## Usage

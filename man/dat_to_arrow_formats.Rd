@@ -15,6 +15,7 @@ dat_to_arrow_formats(
   col_types = NULL,
   col_select = NULL,
   overwrite = TRUE,
+  data_format = c("fwf", "csv", "tsv", "csv2"),
   ...
 )
 
@@ -69,6 +70,9 @@ set \code{show_col_types = FALSE} or set `options(readr.show_col_types = FALSE).
 \item{col_select}{A vector of column names}
 
 \item{overwrite}{logical; should existing destination files be overwritten?}
+
+\item{data_format}{the format of the input data. Default is \code{"fwf"}, other choices
+are \code{"csv"}, \code{"csv2"}, \code{"tsv"}}
 
 \item{...}{passed to one or arrows writing functions depending on the value of \code{arrow_format}}
 }

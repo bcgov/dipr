@@ -1,11 +1,37 @@
-# dipr (development version)
+# dipr 1.2.1
+* Add Bonnie Robert and Andy Teucher as authors
+* Document deprecated functions in one place
+
+# dipr 1.2.0
+
+## Breaking Changes
+* Deprecate `msp_unique` and re-export it in the hawkeye package
+* Deprecate `dipr_icd_categories`, `dipr_icd9_categories` and `dipr_icd10_categories` functions in favour of functionality added to hawkeye package
+
+## Improvements
+* Add new function `filter_across`
+* Changed the internal method to install and update `{dipr}`, with new instructions in the README. The new method uses the gitlab API and will enable using `{dipr}` to install other SRE gitlab R packages using `install_sre_gitlab`. (#24)
+* Add new function `get_gitlab_sre_repos` 
+* Add new function `filter_linked` and add `Dataset` methods for `add_linked_status_col` function so that it can be used in a arrow workflow. 
+* The template `DESCRIPTION` file now adds dependent packages to the `Depends` field rather than the `Imports` field.
+* Fixed a bug where the template `.Rprofile` file used in `dipr_create_targets_project()` was not included in the package.
+* Deprecate `msp_unique` and re-export it in the hawkeye package
+* New function `restore_rstudio_prefs()` to help setup RStudio in a new SRE machine (#31)
+
+# dipr 1.1.0
 
 * Added function `ocwa_branch_export()` (#26) to create a clean branch to prepare the repo for import into OCWA by:
   1. Creating a new branch
   2. Removing files that can't be imported - these are listed in the `_ocwaignore` file in the root of the repo
   3. Cleaning `README.md` to comment out references to images and links that won't be available in the SRE.
   4. Committing the changes from 2 and 3 to the new branch and pushing that to GitHub. This branch can then be used as the basis for an import into OCWA.
+
 * Added `dipr_create_targets_project` which will create a thin package-like targets folder structure. 
+* Adding `dipr_document_output_groups` as convenience to document datasets
+* Changes `get_core_dat_path()` and `get_core_dict_path()` to accomodate the new structure of provisioned data where the metadata are in the same directory as the data. (#17)
+* Adds a new `data_format` argument to `dat_to_arrow_formats()` and friends, as well as `read_dat()` and the internal `dipr_reader()` (#17)
+* Exposes `...` in `read_nflt()` to allow passing options to `readr::read_delim()` (#17)
+* Comments are now removed from nflt files in `read_nflt`. Comments are by default expected to be denoted by `/*`, but this is customizable with the `comment` argument. (#21)
 
 # dipr 1.0.0
 

@@ -152,7 +152,7 @@ and converts them into Arrow Datasets. All \code{...} argument are passed to \co
 which is where column types can be specified.
 }
 \examples{
-
+\dontrun{
 data_dict_path <- dipr_example("starwars-dict.txt")
 dict <- read.table(data_dict_path)
 dat_path <- dipr_example("starwars-fwf.dat.gz")
@@ -164,5 +164,6 @@ dat_to_datasets(
     path = "starwars_arrow",
     partitioning = "species",
     chunk_size = 2)
+    }
 
 }

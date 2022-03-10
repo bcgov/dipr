@@ -38,8 +38,11 @@ extract_path_name <- function(path) {
 #' This function will be quite fragile to changes in the data format. It assumes four columns
 #'
 #' @param path Either a path to a file, a connection, or literal data (either a single string or a raw vector).
+#' @param comment A string used to identify comments. Any text after the comment characters will be silently ignored. Default `"/*"`, which is used in some nflt files.
+#' @param ... arguments passed on to [readr::read_delim()]
+#'
 #' @export
-read_nflt <- function(path) {
+read_nflt <- function(path, comment = "/*", ...) {
 
   if (!tools::file_ext(path) == "nflt") {
     stop("Not an .nflt file")
@@ -48,11 +51,15 @@ read_nflt <- function(path) {
   d <- readr::read_delim(path,
                          delim = "\t",
                          skip = 1,
-                         col_names = c("start", "length", "type", "name"))
-  d <- dplyr::mutate(d, start = as.numeric(trimws(start)))
-  d <- dplyr::mutate(d, length = as.numeric(trimws(length)))
-  d <- dplyr::mutate(d, stop = start + length -1)
-  dplyr::mutate(d, name = janitor::make_clean_names(name))
+                         col_names = c("start", "length", "type", "name"),
+                         comment = comment,
+                         trim_ws = TRUE,
+                         ...)
+  d$start <- as.numeric(trimws(d$start))
+  d$length <-  as.numeric(trimws(d$length))
+  d$stop <-  d$start + d$length - 1
+  d$name <-  janitor::make_clean_names(d$name)
+  d
 }
 
 

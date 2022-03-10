@@ -1,0 +1,16 @@
+name,height,mass,has_hair,species
+Luke Skywalker,172,77,FALSE,Human
+C-3PO,167,75,TRUE,Droid
+R2-D2,96,32,TRUE,Droid
+Darth Vader,202,136,FALSE,Human
+Leia Organa,150,49,FALSE,Human
+Owen Lars,178,120,FALSE,Human
+Beru Whitesun lars,165,75,FALSE,Human
+R5-D4,97,32,TRUE,Droid
+Biggs Darklighter,183,84,FALSE,Human
+Obi-Wan Kenobi,182,77,FALSE,Human
+Anakin Skywalker,188,84,FALSE,Human
+Chewbacca,228,112,FALSE,Wookiee
+Han Solo,180,80,FALSE,Human
+Greedo,173,74,TRUE,Rodian
+Jabba Desilijic Tiure,175,1358,TRUE,Hutt

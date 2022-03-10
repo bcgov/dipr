@@ -4,15 +4,16 @@
 \alias{dipr_update}
 \title{Update the dipr package from gitlab}
 \usage{
-dipr_update(quiet = TRUE, ref = NULL)
+dipr_update(ref = NULL, ...)
 }
 \arguments{
-\item{quiet}{If \code{TRUE}, suppress output.}
+\item{ref}{A tag of specific commit hash. Default to NULL which is the most recent release. "dev" will
+install at the most recent commit.}
 
-\item{ref}{A tag of specific commit hash}
+\item{...}{passed to install_sre_gitlab}
 }
 \description{
-This function clones the dipr gitlab repo and install the package. This
-is a useful function update the package and saves the user from having to
-manually accomplish each step.
+This function is a thin wrapper around \code{install_sre_gitlab} and is specific to
+updating dipr. The default behaviour of this function is to only install if your
+current version needs updating.
 }

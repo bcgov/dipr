@@ -13,7 +13,7 @@ data-raw/
 
 ^\.github$
 ^\.github/workflows/R-CMD-check\.yaml$
-.Rprofile
+^\.Rprofile$
 
 
 ^_pkgdown\.yml$

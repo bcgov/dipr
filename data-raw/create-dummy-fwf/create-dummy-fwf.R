@@ -1,4 +1,5 @@
 library(dplyr)
+library(readr)
 library(gdata)
 library(R.utils)
 
@@ -15,6 +16,8 @@ small_sw <- starwars %>%
 ## character positions are the same across both files
 tmpfile <- tmpfile("temp.dat")
 write.fwf(small_sw, tmpfile, colnames = FALSE, sep = "")
+readr::write_csv(small_sw[1:15, ], "inst/extdata/starwars-csv.dat")
+readr::write_csv(small_sw[15:30, ], "inst/extdata/starwars-csv2.dat")
 
 ## Create .dat file
 writeLines(readLines(tmpfile)[1:15], con = "inst/extdata/starwars-fwf.dat")
@@ -31,6 +34,20 @@ gzip(
 gzip(
   filename = "inst/extdata/starwars-fwf2.dat",
   destname = "inst/extdata/starwars-fwf2.dat.gz",
+  remove = FALSE,
+  overwrite = TRUE
+)
+
+gzip(
+  filename = "inst/extdata/starwars-csv.dat",
+  destname = "inst/extdata/starwars-csv.dat.gz",
+  remove = FALSE,
+  overwrite = TRUE
+)
+
+gzip(
+  filename = "inst/extdata/starwars-csv2.dat",
+  destname = "inst/extdata/starwars-csv2.dat.gz",
   remove = FALSE,
   overwrite = TRUE
 )

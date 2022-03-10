@@ -12,6 +12,7 @@ read_dat(
   use_cache = FALSE,
   col_select = NULL,
   col_types = NULL,
+  data_format = c("fwf", "csv", "tsv", "csv2"),
   ...
 )
 
@@ -25,7 +26,7 @@ they must share a common data dictionary.}
 
 \item{as.data.table}{Deprecated. See \code{read_dat_dt}}
 
-\item{use_cache}{deprecated}
+\item{use_cache}{deprecated,}
 
 \item{col_select}{A vector of column names}
 
@@ -60,6 +61,9 @@ By default, reading a file without a column specification will print a
 message showing what \code{readr} guessed they were. To remove this message,
 set \code{show_col_types = FALSE} or set `options(readr.show_col_types = FALSE).
 }}
+
+\item{data_format}{the format of the input data. Default is \code{"fwf"}, other choices
+are \code{"csv"}, \code{"csv2"}, \code{"tsv"}}
 
 \item{...}{
   Arguments passed on to \code{\link[readr:read_fwf]{readr::read_fwf}}

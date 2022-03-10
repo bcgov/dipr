@@ -47,6 +47,33 @@ dipr_use_export_doc <- function(template = "export-doc.md", ...) {
   )
 }
 
+#' Convenience function to generate templates for documenting export datasets
+#'
+#' The usage of this function is to print templated documentation to the console
+#' and then copy and paste into the export document create with `dipr_use_export_doc`.
+#' This function works only on csv exports.
+#'
+#' @inheritParams base::list.files
+#' @inheritDotParams base::list.files
+#'
+#' @export
+#'
+dipr_document_output_groups <- function(path, ...) {
+  files <- list.files(path, pattern = ".csv", full.names = TRUE, ...)
+
+  invisible(lapply(files, function(x) {
+    d <- utils::read.csv(x)
+    cat(paste0(
+      "### ", basename(x), "\n",
+      nrow(d), " rows by ", ncol(d), " columns\n"
+    ))
+
+    cat(paste0("- ", names(d), ":"), sep = "\n")
+
+    invisible(TRUE)
+  }))
+}
+
 #' An opinionated template for package-like targets project
 #'
 #' This function will create a DESCRIPTION file, a `_targets.R` template and an `R`
@@ -72,6 +99,6 @@ dipr_use_description <- function(...) {
   )
 
   usethis::use_description(fields = bcgovr_desc, check_name = FALSE, ...)
-  usethis::use_package("desc")
-  usethis::use_package("dipr")
+  usethis::use_package("desc", type = "Depends")
+  usethis::use_package("dipr", type = "Depends")
 }
