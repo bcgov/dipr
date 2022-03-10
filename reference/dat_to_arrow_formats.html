@@ -19,7 +19,7 @@ Convenience wrappers are provided for each arrow format."><meta property="og:ima
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dipr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
       </span>
     </div>
 
@@ -65,6 +65,7 @@ Convenience wrappers are provided for each arrow format.</p>
   col_types <span class="op">=</span> <span class="cn">NULL</span>,
   col_select <span class="op">=</span> <span class="cn">NULL</span>,
   overwrite <span class="op">=</span> <span class="cn">TRUE</span>,
+  data_format <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fwf"</span>, <span class="st">"csv"</span>, <span class="st">"tsv"</span>, <span class="st">"csv2"</span><span class="op">)</span>,
   <span class="va">...</span>
 <span class="op">)</span>
 
@@ -116,6 +117,9 @@ set <code>show_col_types = FALSE</code> or set `options(readr.show_col_types = F
 <dd><p>A vector of column names</p></dd>
 <dt>overwrite</dt>
 <dd><p>logical; should existing destination files be overwritten?</p></dd>
+<dt>data_format</dt>
+<dd><p>the format of the input data. Default is <code>"fwf"</code>, other choices
+are <code>"csv"</code>, <code>"csv2"</code>, <code>"tsv"</code></p></dd>
 <dt>...</dt>
 <dd><p>passed to one or arrows writing functions depending on the value of <code>arrow_format</code></p></dd>
 </dl></div>
@@ -135,11 +139,11 @@ set <code>show_col_types = FALSE</code> or set `options(readr.show_col_types = F
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Sam Albers, Stephanie Hazlitt.</p>
+  <p></p><p>Developed by Sam Albers, Andy Teucher, Bonnie Robert.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>

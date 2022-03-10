@@ -43,6 +43,9 @@
     <loc>/reference/dipr_create_targets_project.html</loc>
   </url>
   <url>
+    <loc>/reference/dipr_document_output_groups.html</loc>
+  </url>
+  <url>
     <loc>/reference/dipr_examples.html</loc>
   </url>
   <url>
@@ -61,10 +64,19 @@
     <loc>/reference/extract_path_name.html</loc>
   </url>
   <url>
+    <loc>/reference/filter_across.html</loc>
+  </url>
+  <url>
+    <loc>/reference/filter_linked.html</loc>
+  </url>
+  <url>
     <loc>/reference/get_core_dat_path.html</loc>
   </url>
   <url>
     <loc>/reference/get_core_dict_path.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_gitlab_sre_repos.html</loc>
   </url>
   <url>
     <loc>/reference/group_ages.html</loc>
@@ -77,6 +89,9 @@
   </url>
   <url>
     <loc>/reference/insert_bcgov_cc_header.html</loc>
+  </url>
+  <url>
+    <loc>/reference/install_sre_gitlab.html</loc>
   </url>
   <url>
     <loc>/reference/msp_unique.html</loc>
@@ -95,6 +110,9 @@
   </url>
   <url>
     <loc>/reference/read_nflt.html</loc>
+  </url>
+  <url>
+    <loc>/reference/restore_rstudio_prefs.html</loc>
   </url>
   <url>
     <loc>/reference/set_gitlab_credentials.html</loc>

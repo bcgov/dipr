@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dipr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
       </span>
     </div>
 
@@ -75,6 +75,10 @@
         </td>
         <td><p>An opinionated template for package-like targets project</p></td>
       </tr><tr><td>
+          <p><code><a href="dipr_document_output_groups.html">dipr_document_output_groups()</a></code> </p>
+        </td>
+        <td><p>Convenience function to generate templates for documenting export datasets</p></td>
+      </tr><tr><td>
           <p><code><a href="dipr_examples.html">dipr_examples()</a></code> <code><a href="dipr_examples.html">dipr_example()</a></code> </p>
         </td>
         <td><p>Get path to dipr example files</p></td>
@@ -99,6 +103,14 @@
         </td>
         <td><p>A function to extract the data name from a path</p></td>
       </tr><tr><td>
+          <p><code><a href="filter_across.html">filter_across()</a></code> </p>
+        </td>
+        <td><p>Search across columns in a data.frame or an arrow .Dataset for rows matching a given pattern.</p></td>
+      </tr><tr><td>
+          <p><code><a href="filter_linked.html">filter_linked()</a></code> </p>
+        </td>
+        <td><p>Wrapper to filter out unlinked studyids from either a data.frame or a Dataset</p></td>
+      </tr><tr><td>
           <p><code><a href="get_core_dat_path.html">get_core_dat_path()</a></code> </p>
         </td>
         <td><p>Get the dat path of a particular dataset for a given core table name</p></td>
@@ -106,6 +118,10 @@
           <p><code><a href="get_core_dict_path.html">get_core_dict_path()</a></code> </p>
         </td>
         <td><p>Get paths of data dictionaries</p></td>
+      </tr><tr><td>
+          <p><code><a href="get_gitlab_sre_repos.html">get_gitlab_sre_repos()</a></code> </p>
+        </td>
+        <td><p>Return a data.frame of all repos available to the project you are currently in</p></td>
       </tr><tr><td>
           <p><code><a href="group_ages.html">group_ages()</a></code> </p>
         </td>
@@ -120,9 +136,13 @@
         <td><p>Add the boilerplate Creative Commons Attribution 4.0 (CC-BY) header to the
 top of a source code file</p></td>
       </tr><tr><td>
+          <p><code><a href="install_sre_gitlab.html">install_sre_gitlab()</a></code> </p>
+        </td>
+        <td><p>Install a package from the SRE gitlab.</p></td>
+      </tr><tr><td>
           <p><code><a href="msp_unique.html">msp_unique()</a></code> </p>
         </td>
-        <td><p>Process msp data and return unique visits</p></td>
+        <td><p>Function moved to the hawkeye package</p></td>
       </tr><tr><td>
           <p><code><a href="ocwa_branch_export.html">ocwa_branch_export()</a></code> </p>
         </td>
@@ -140,6 +160,11 @@ top of a source code file</p></td>
         </td>
         <td><p>Read data dictionaries in nflt format</p></td>
       </tr><tr><td>
+          <p><code><a href="restore_rstudio_prefs.html">restore_rstudio_prefs()</a></code> </p>
+        </td>
+        <td><p>Copy saved RStudio preferences from PopData Gitlab repo to you local SRE
+machine</p></td>
+      </tr><tr><td>
           <p><code><a href="set_gitlab_credentials.html">set_gitlab_credentials()</a></code> </p>
         </td>
         <td><p>Set gitlab credentials from R</p></td>
@@ -152,11 +177,11 @@ top of a source code file</p></td>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Sam Albers, Stephanie Hazlitt.</p>
+  <p></p><p>Developed by Sam Albers, Andy Teucher, Bonnie Robert.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>

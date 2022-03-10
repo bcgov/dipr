@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dipr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
       </span>
     </div>
 
@@ -48,7 +48,33 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="development version" id="dipr-development-version">dipr (development version)<a class="anchor" aria-label="anchor" href="#dipr-development-version"></a></h2>
+<h2 class="page-header" data-toc-text="1.2.1" id="dipr-121">dipr 1.2.1<a class="anchor" aria-label="anchor" href="#dipr-121"></a></h2>
+<ul><li>Add Bonnie Robert and Andy Teucher as authors</li>
+<li>Document deprecated functions in one place</li>
+</ul></div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.2.0" id="dipr-120">dipr 1.2.0<a class="anchor" aria-label="anchor" href="#dipr-120"></a></h2>
+<div class="section level3">
+<h3 id="breaking-changes-1-2-0">Breaking Changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-2-0"></a></h3>
+<ul><li>Deprecate <code>msp_unique</code> and re-export it in the hawkeye package</li>
+<li>Deprecate <code>dipr_icd_categories</code>, <code>dipr_icd9_categories</code> and <code>dipr_icd10_categories</code> functions in favour of functionality added to hawkeye package</li>
+</ul></div>
+<div class="section level3">
+<h3 id="improvements-1-2-0">Improvements<a class="anchor" aria-label="anchor" href="#improvements-1-2-0"></a></h3>
+<ul><li>Add new function <code>filter_across</code>
+</li>
+<li>Changed the internal method to install and update <a href="https://github.com/bcgov/dipr" class="external-link">dipr</a>, with new instructions in the README. The new method uses the gitlab API and will enable using <a href="https://github.com/bcgov/dipr" class="external-link">dipr</a> to install other SRE gitlab R packages using <code>install_sre_gitlab</code>. (<a href="https://github.com/bcgov/dipr/issues/24" class="external-link">#24</a>)</li>
+<li>Add new function <code>get_gitlab_sre_repos</code>
+</li>
+<li>Add new function <code>filter_linked</code> and add <code>Dataset</code> methods for <code>add_linked_status_col</code> function so that it can be used in a arrow workflow.</li>
+<li>The template <code>DESCRIPTION</code> file now adds dependent packages to the <code>Depends</code> field rather than the <code>Imports</code> field.</li>
+<li>Fixed a bug where the template <code>.Rprofile</code> file used in <code><a href="../reference/dipr_create_targets_project.html">dipr_create_targets_project()</a></code> was not included in the package.</li>
+<li>Deprecate <code>msp_unique</code> and re-export it in the hawkeye package</li>
+<li>New function <code><a href="../reference/restore_rstudio_prefs.html">restore_rstudio_prefs()</a></code> to help setup RStudio in a new SRE machine (<a href="https://github.com/bcgov/dipr/issues/31" class="external-link">#31</a>)</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.1.0" id="dipr-110">dipr 1.1.0<a class="anchor" aria-label="anchor" href="#dipr-110"></a></h2>
 <ul><li>Added function <code><a href="../reference/ocwa_branch_export.html">ocwa_branch_export()</a></code> (<a href="https://github.com/bcgov/dipr/issues/26" class="external-link">#26</a>) to create a clean branch to prepare the repo for import into OCWA by:
 <ol style="list-style-type: decimal"><li>Creating a new branch</li>
 <li>Removing files that can’t be imported - these are listed in the <code>_ocwaignore</code> file in the root of the repo</li>
@@ -56,6 +82,11 @@
 <li>Committing the changes from 2 and 3 to the new branch and pushing that to GitHub. This branch can then be used as the basis for an import into OCWA.</li>
 </ol></li>
 <li>Added <code>dipr_create_targets_project</code> which will create a thin package-like targets folder structure.</li>
+<li>Adding <code>dipr_document_output_groups</code> as convenience to document datasets</li>
+<li>Changes <code><a href="../reference/get_core_dat_path.html">get_core_dat_path()</a></code> and <code><a href="../reference/get_core_dict_path.html">get_core_dict_path()</a></code> to accomodate the new structure of provisioned data where the metadata are in the same directory as the data. (<a href="https://github.com/bcgov/dipr/issues/17" class="external-link">#17</a>)</li>
+<li>Adds a new <code>data_format</code> argument to <code><a href="../reference/dat_to_arrow_formats.html">dat_to_arrow_formats()</a></code> and friends, as well as <code><a href="../reference/read_dat.html">read_dat()</a></code> and the internal <code>dipr_reader()</code> (<a href="https://github.com/bcgov/dipr/issues/17" class="external-link">#17</a>)</li>
+<li>Exposes <code>...</code> in <code><a href="../reference/read_nflt.html">read_nflt()</a></code> to allow passing options to <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_delim()</a></code> (<a href="https://github.com/bcgov/dipr/issues/17" class="external-link">#17</a>)</li>
+<li>Comments are now removed from nflt files in <code>read_nflt</code>. Comments are by default expected to be denoted by <code>/*</code>, but this is customizable with the <code>comment</code> argument. (<a href="https://github.com/bcgov/dipr/issues/21" class="external-link">#21</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.0.0" id="dipr-100">dipr 1.0.0<a class="anchor" aria-label="anchor" href="#dipr-100"></a></h2>
@@ -117,11 +148,11 @@
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Sam Albers, Stephanie Hazlitt.</p>
+  <p></p><p>Developed by Sam Albers, Andy Teucher, Bonnie Robert.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>

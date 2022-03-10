@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">dipr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.1</span>
       </span>
     </div>
 
@@ -55,7 +55,8 @@
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_core_dat_path</span><span class="op">(</span>
   <span class="va">core_version</span>,
-  <span class="va">core_table_name</span>,
+  core_table_name <span class="op">=</span> <span class="cn">NULL</span>,
+  core_table_pattern <span class="op">=</span> <span class="cn">NULL</span>,
   pattern <span class="op">=</span> <span class="st">"\\.dat.gz$"</span>,
   base_path <span class="op">=</span> <span class="st">"R:/DATA/core-snapshot"</span>
 <span class="op">)</span></code></pre></div>
@@ -66,7 +67,9 @@
     <dl><dt>core_version</dt>
 <dd><p>Core version of tables typically formatted as a YYYYMMDD string</p></dd>
 <dt>core_table_name</dt>
-<dd><p>a string of the data set name</p></dd>
+<dd><p>an exact string of the data set name. Should match the folder inside the core-snapshot path. Leave as <code>NULL</code> if using <code>core_table_pattern</code> to match several folders.</p></dd>
+<dt>core_table_pattern</dt>
+<dd><p>a string (can be a regex) to match a table name - can be a subdataset of <code>core_table_name</code> or a pattern to match a dataset that may be split over multiple dataset folders in the core-snapshot path.</p></dd>
 <dt>pattern</dt>
 <dd><p>Defaults to dat.gz but can be extended for more extended using regex for more
 flexibility</p></dd>
@@ -82,11 +85,11 @@ flexibility</p></dd>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Sam Albers, Stephanie Hazlitt.</p>
+  <p></p><p>Developed by Sam Albers, Andy Teucher, Bonnie Robert.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer></div>
