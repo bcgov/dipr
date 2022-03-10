@@ -24,3 +24,7 @@ test_that("a custom sha is passed all the way to the return value",{
   )
 })
 
+test_that("set_gitlab_credentials fails outside the SRE", {
+  skip_if(Sys.getenv("USERDOMAIN") == "POPDATA")
+  expect_error(set_gitlab_credentials())
+})

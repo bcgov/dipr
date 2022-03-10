@@ -21,6 +21,12 @@
 #' @inheritDotParams credentials::git_credential_ask save verbose
 #' @export
 set_gitlab_credentials <- function(...) {
+
+  if(Sys.getenv("USERDOMAIN") != "POPDATA") {
+    stop("This function only works inside POPDATA's secure research environment.",
+       call. = FALSE)
+  }
+
   credentials::git_credential_ask(url = "https://projectsc.popdata.bc.ca", ...)
 }
 
