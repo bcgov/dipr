@@ -12,9 +12,9 @@ dipr_create_targets_project(...)
   \describe{
     \item{\code{fields}}{A named list of fields to add to \code{DESCRIPTION}, potentially
 overriding default values. See \code{\link[usethis:use_description]{use_description()}} for how you can set
-personalized defaults using package options}
+personalized defaults using package options.}
     \item{\code{check_name}}{Whether to check if the name is valid for CRAN and throw an
-error if not}
+error if not.}
     \item{\code{roxygen}}{If \code{TRUE}, sets \code{RoxygenNote} to current roxygen2 version}
   }}
 }
