@@ -157,7 +157,8 @@ ocwa_branch_export <- function(branch = "ocwa-import", ask = TRUE) {
 
   ocwa_ignored_files <- process_ocwaignore()
 
-  readme_changed <- prepare_readme_for_ocwa()
+  readme_md_changed <- prepare_readme_for_ocwa("README.md")
+  readme_rmd_changed <- prepare_readme_for_ocwa("README.Rmd")
 
   if (length(ocwa_ignored_files)) {
     gert::git_add(ocwa_ignored_files)
@@ -165,11 +166,18 @@ ocwa_branch_export <- function(branch = "ocwa-import", ask = TRUE) {
         paste(cli::col_green(cli::symbol$tick), ocwa_ignored_files, collapse = "\n  "),
         "\n")
   }
-  if (readme_changed) {
-    cat(cli::col_green(cli::symbol$tick), " Cleaned README\n")
+  if (readme_md_changed) {
+    cat(cli::col_green(cli::symbol$tick), " Cleaned README.md\n")
     gert::git_add("README.md")
   } else {
-    cat(cli::col_green(cli::symbol$tick), " No changes made to README\n")
+    cat(cli::col_green(cli::symbol$tick), " No changes made to README.md\n")
+  }
+
+  if (readme_rmd_changed) {
+    cat(cli::col_green(cli::symbol$tick), " Cleaned README.Rmd\n")
+    gert::git_add("README.Rmd")
+  } else {
+    cat(cli::col_green(cli::symbol$tick), " No changes made to README.Rmd\n")
   }
 
   if (!nrow(gert::git_status())) {
