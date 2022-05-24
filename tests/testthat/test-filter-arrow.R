@@ -62,3 +62,37 @@ test_that("test for simple regex pattern matching",{
   expect_equal(nrow(filter_across(d, "101[0-9]", cols = c("icd_1"), partial = TRUE)), 1)
 })
 
+test_that("flag_across works with arrow_dplyr_query and Dataset return type",{
+  #create Dataset object
+  d <- make_test_data(format = "Dataset" )
+  out <- flag_across(d, "1009", cols = c("icd_1", "icd_2"), flag_name = "new_col")
+  expect_s3_class(out, "arrow_dplyr_query")
+  expect_equal(names(out), c(names(d), "new_col"))
+
+  #create arrow_dplyr_query object
+  d <- d %>% dplyr::select(names(d))
+  out <- flag_across(d, "1009", cols = c("icd_1"), flag_name = "new_col")
+  expect_s3_class(out, "arrow_dplyr_query")
+  expect_equal(names(out), c(names(d), "new_col"))
+  out <- dplyr::collect(out)
+  expect_type(out$new_col, "logical")
+})
+
+test_that("flag_across works with data.frame return type",{
+  #create Dataset object
+  d <- make_test_data(format = "data.frame" )
+  out <- flag_across(d, "1019", cols = c("icd_1"), flag_name = "new_col")
+  expect_equal(names(out), c(names(d), "new_col"))
+  expect_type(out$new_col, "logical")
+  expect_s3_class(out, "data.frame")
+})
+
+test_that("flag_across fails correctly", {
+  d <- make_test_data(format = "data.frame" )
+  expect_error(flag_across(d, "1019", cols = c("icd_1"), flag_name = "id"),
+               "already a column")
+  expect_error(flag_across(d, "1019", cols = c("icd_1"), flag_name = 9),
+               "character")
+  expect_error(flag_across(d, "1019", cols = c("icd_1"), flag_name = c("a", "b")),
+               "length")
+})

@@ -13,13 +13,15 @@
 ## limitations under the License.
 
 ## a function to handle the initial READ of data
-dipr_reader <- function(data_path, data_dict, col_types, col_select, data_format = "fwf", ...) {
+dipr_reader <- function(data_path, data_dict, col_types, col_select, data_format = "fwf", tz, date_format, time_format, ...) {
 
   delim = switch(data_format,
                  "fwf" = NULL,
                  "csv" = ",",
                  "tsv" = "\t",
                  "csv2" = ";")
+
+  locale <- dipr_locale(tz = tz, date_format = date_format, time_format = time_format)
 
   if (data_format == "fwf") {
     readr::read_fwf(
@@ -32,6 +34,7 @@ dipr_reader <- function(data_path, data_dict, col_types, col_select, data_format
         ),
       col_types = col_types,
       col_select = !!col_select,
+      locale = locale,
       ...
     )
   } else {
@@ -40,14 +43,13 @@ dipr_reader <- function(data_path, data_dict, col_types, col_select, data_format
       delim = delim,
       col_types = col_types,
       col_select = !!col_select,
+      locale = locale,
       ...
     )
   }
 
 
 }
-
-
 
 col_selector <- function(dict, col_select) {
   df <- data.frame(matrix(ncol = length(dict$name), nrow = 0))

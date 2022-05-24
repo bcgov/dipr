@@ -94,16 +94,30 @@ update_needed <- function(repo, ref = NULL, token) {
 
     gitlab_version <- read.dcf(textConnection(httr::content(resp, as = "parsed")), fields = "Version")
 
-    local_desc <- file.path(.libPaths()[1], repo, "DESCRIPTION")
+    installed_version <- get_installed_version(pkg = repo)
 
-    installed_version <- read.dcf(local_desc, fields = "Version")
-    should_install <- package_version(gitlab_version) > package_version(installed_version)
+    should_install <- package_version(gitlab_version) > installed_version
 
     if (!should_install) stop(glue::glue("{repo} update not needed. You are using the most recently released version {installed_version}."), call. = FALSE)
 
     releases_content[[idx_most_recent_release]]$commit$id
   }
 
+}
+
+get_installed_version <- function(pkg) {
+  # find lib pkg is in:
+  libs <- .libPaths()
+  pkg_paths <- vapply(libs, function(x) file.path(x, pkg), FUN.VALUE = "")
+  lib <- libs[dir.exists(pkg_paths)]
+
+  # return version 0.0 if not installed
+  if (!length(lib)) return(package_version("0.0"))
+
+  # in case > 1 path, pick the first one
+  local_desc <- file.path(lib[1], pkg, "DESCRIPTION")
+
+  package_version(read.dcf(local_desc, fields = "Version"))
 }
 
 #' Return a data.frame of all repos available to the project you are currently in

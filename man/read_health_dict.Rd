@@ -2,9 +2,12 @@
 % Please edit documentation in R/read-dict.R
 \name{read_health_dict}
 \alias{read_health_dict}
+\alias{health_dict_to_spec}
 \title{Read Health Data Dictionaries}
 \usage{
 read_health_dict(path, sheet, ...)
+
+health_dict_to_spec(health_dict, special = NULL)
 }
 \arguments{
 \item{path}{Path to the xls/xlsx file.}
@@ -15,9 +18,35 @@ integer (the position of the sheet). Ignored if the sheet is specified via
 sheet.}
 
 \item{...}{arguments passed to \code{readxl::read_excel}}
+
+\item{health_dict}{a data.frame, output of \code{\link[=read_health_dict]{read_health_dict()}}}
+
+\item{special}{a named list of readr column specifications for columns where
+you want to override the format in the dictionary file}
+}
+\value{
+\code{read_health_dict}: A clean data.frame of health data dictionary
+
+\code{health_dict_to_spec}: a named list of readr column specifications
+that can be passed on to the \code{col_types} argument of any of the readr
+functions, or \code{\link[=dat_to_parquet]{dat_to_parquet()}} and friends.
 }
 \description{
-Read into R pre-formatted popdata data dictionaries. These files are in .xlsx format and therefore
-require both a path and sheet argument. The rest of the function is a thin wrapper around reaxl::read_excel
+\strong{\code{read_health_dict}} reads into R pre-formatted popdata data dictionaries,
+while \strong{\code{health_dict_to_spec}} converts a health dict to a readr spec.
+}
+\details{
+\strong{\code{read_health_dict}}: Files are in .xlsx format and therefore require both a path and sheet
+argument. The rest of the function is a thin wrapper around reaxl::read_excel
 with some formatting taking place.
+
+\strong{\code{health_dict_to_spec}} converts a
+health dict created by \code{read_health_dict} to a readr spec. This will use the
+dictionary to create specifications even for date and datetime columns, and allows
+overriding the default column specs by using the \code{special} parameter.
+}
+\examples{
+dict <- read_health_dict(dipr_example("sample_hlth_dict.csv"))
+dict
+health_dict_to_spec(dict, special = list(code1 = readr::col_integer()))
 }

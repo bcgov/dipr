@@ -1,16 +1,16 @@
-name,height,mass,has_hair,species
-Luke Skywalker,172,77,FALSE,Human
-C-3PO,167,75,TRUE,Droid
-R2-D2,96,32,TRUE,Droid
-Darth Vader,202,136,FALSE,Human
-Leia Organa,150,49,FALSE,Human
-Owen Lars,178,120,FALSE,Human
-Beru Whitesun lars,165,75,FALSE,Human
-R5-D4,97,32,TRUE,Droid
-Biggs Darklighter,183,84,FALSE,Human
-Obi-Wan Kenobi,182,77,FALSE,Human
-Anakin Skywalker,188,84,FALSE,Human
-Chewbacca,228,112,FALSE,Wookiee
-Han Solo,180,80,FALSE,Human
-Greedo,173,74,TRUE,Rodian
-Jabba Desilijic Tiure,175,1358,TRUE,Hutt
+name,height,mass,has_hair,species,date
+Luke Skywalker,172,77,FALSE,Human,19871219
+C-3PO,167,75,TRUE,Droid,19020105
+R2-D2,96,32,TRUE,Droid,19631118
+Darth Vader,202,136,FALSE,Human,20000414
+Leia Organa,150,49,FALSE,Human,19730828
+Owen Lars,178,120,FALSE,Human,19760713
+Beru Whitesun lars,165,75,FALSE,Human,19050516
+R5-D4,97,32,TRUE,Droid,19470301
+Biggs Darklighter,183,84,FALSE,Human,19210308
+Obi-Wan Kenobi,182,77,FALSE,Human,19030509
+Anakin Skywalker,188,84,FALSE,Human,19630401
+Chewbacca,228,112,FALSE,Wookiee,19920222
+Han Solo,180,80,FALSE,Human,20230123
+Greedo,173,74,TRUE,Rodian,20190301
+Jabba Desilijic Tiure,175,1358,TRUE,Hutt,20140823

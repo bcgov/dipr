@@ -3,6 +3,7 @@ library(readr)
 library(gdata)
 library(R.utils)
 
+set.seed(13) # set seed so dates don't chagne each time we run this
 
 ## trim data set
 small_sw <- starwars %>%
@@ -10,6 +11,9 @@ small_sw <- starwars %>%
   mutate(has_hair = is.na(hair_color)) %>%
   select(name:mass, has_hair, species) %>%
   head(30) %>%
+  mutate(date = paste0(sample(1900:2025, 30, replace = TRUE),
+                       formatC(sample(1:12, 30, replace = TRUE), width = 2, flag = "0"),
+                       formatC(sample(1:28, 30, replace = TRUE), width = 2, flag = "0"))) %>%
   as.data.frame()
 
 ## Write all data to one fwf file then split it to ensure
@@ -59,7 +63,8 @@ data_dict <- tribble(
   "height", 22, 24, "i",
   "mass", 25, 30, "d",
   "has_hair", 31, 35, "l",
-  "species", 36, 50, "c"
+  "species", 36, 49, "c",
+  "date", 50, 57,"c"
 )
 
 write.table(data_dict, "inst/extdata/starwars-dict.txt")
@@ -75,9 +80,16 @@ write.table(
   sep = "\t",
   quote = FALSE,
   col.names = FALSE,
+  row.names = FALSE,
   file = "inst/extdata/starwars-dict.nflt"
 )
 
+# create nflt with comments
+dict <- readLines("inst/extdata/starwars-dict.nflt")
+
+dict[3] <- paste0(dict[3], "  /* height in kg */")
+
+writeLines(dict, "inst/extdata/starwars-dict-with-comments.nflt")
 
 
 

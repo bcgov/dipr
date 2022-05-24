@@ -6,9 +6,10 @@
 \alias{dipr-package}
 \title{dipr: Provide functions to efficiently import SRE data}
 \description{
-\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
-
-Provides functions that aid in working with SRE data. Caching is provided through several means and enables more efficient reading of data into memory. Functions are also provided to convert to Apache Arrow formats.
+Provides functions that aid in working with SRE data. Caching
+    is provided through several means and enables more efficient reading
+    of data into memory. Functions are also provided to convert to Apache
+    Arrow formats.
 }
 \seealso{
 Useful links:

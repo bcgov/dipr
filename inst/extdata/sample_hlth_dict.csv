@@ -1,0 +1,13 @@
+Start,Stop,Length,Name Abbrev,Name,Data Type,Data Format
+1,1,1,code,A code,CHAR,N/A
+2,9,8,date,date,DATE,ccyymmdd
+10,14,5,anum*,a number *,NUMBER,N/A
+15,16,2,spec,specialty code,NUMBER,N/A
+17,22,6,expl_cd,Explanatory code,CHAR,Three 2-digit codes
+31,43,13,amt1,Amount one,NA,NA
+44,56,13,code1,Code One,NUM,N/A
+57,61,5,code2,code two,CHAR,N/A
+62,63,2,type,type,VARCHAR,
+64,73,10,date2,date two,DATETIME,YYYY-MM-DD HH:MM:SS
+74,83,10,STUDYID,Study ID,NA,NA
+84,84,1,Linefeed,Line Feed,NA,NA

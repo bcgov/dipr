@@ -1,5 +1,5 @@
 context("test add_* functions")
-
+library(arrow)
 
 test_that("add_linked_column works on a data.frame",{
   d_out <- add_linked_status_col(d_in)
