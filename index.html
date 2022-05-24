@@ -6,6 +6,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Provide functions to efficiently import SRE data • dipr</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -16,6 +22,7 @@
     is provided through several means and enables more efficient reading
     of data into memory. Functions are also provided to convert to Apache
     Arrow formats.">
+<meta property="og:image" content="/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -69,10 +76,10 @@
       </header><div class="row">
   <div class="contents col-md-9">
 <div class="section level1">
-<div class="page-header"><h1 id="dipr-">dipr <!-- <img src='man/figures/logo.png' align="right" height="139" /> -->
-<a class="anchor" aria-label="anchor" href="#dipr-"></a>
+<div class="page-header"><h1 id="dipr-">dipr <img src="reference/figures/logo.png" align="right" height="139"><a class="anchor" aria-label="anchor" href="#dipr-"></a>
 </h1></div>
-<!-- badges: start --><!-- [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) --><!-- [![R build status](https://github.com/bcgov/dipr/workflows/R-CMD-check/badge.svg)](https://github.com/bcgov/dipr) --><!-- [![img](https://img.shields.io/badge/Lifecycle-Experimental-339999)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md) --><!-- badges: end --><p>The <code>dipr</code> package is an R package that loads and provides means of caching of <code>.dat.gz</code> files. Functions are also provided to convert from <code>.dat.gz</code> files to Apache Arrow formats.</p>
+<!-- badges: start -->
+<p>The <code>dipr</code> package is an R package that loads and provides means of caching of <code>.dat.gz</code> files. Functions are also provided to convert from <code>.dat.gz</code> files to Apache Arrow formats.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -135,18 +142,18 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_dat.html">read_dat</a></span><span class="op">(</span>data_path <span class="op">=</span> <span class="va">dat_path</span>,
                 data_dict <span class="op">=</span> <span class="va">dict</span><span class="op">)</span>
-<span class="co">#&gt; v Reading starwars-fwf</span>
+<span class="co">#&gt; ✔ Reading starwars-fwf</span>
 <span class="co">#&gt; Rows: 15 Columns: 6</span>
-<span class="co">#&gt; -- Column specification --------------------------------------------------------</span>
+<span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; chr (2): name, species</span>
 <span class="co">#&gt; dbl (3): height, mass, date</span>
 <span class="co">#&gt; lgl (1): has_hair</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; i Use `spec()` to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; i Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
+<span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">raw</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 x 6</span>
+<span class="co">#&gt; # A tibble: 6 × 6</span>
 <span class="co">#&gt;   name           height  mass has_hair species     date</span>
 <span class="co">#&gt;   &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt; &lt;lgl&gt;    &lt;chr&gt;      &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 Luke Skywalker    172    77 FALSE    Human   19871219</span>
@@ -163,32 +170,32 @@
     data_dict <span class="op">=</span> <span class="va">dict</span>,
     id <span class="op">=</span> <span class="st">"file"</span>
   <span class="op">)</span>
-<span class="co">#&gt; v Reading starwars-fwf and starwars-fwf2</span>
+<span class="co">#&gt; ✔ Reading starwars-fwf and starwars-fwf2</span>
 <span class="co">#&gt; Rows: 30 Columns: 7</span>
-<span class="co">#&gt; -- Column specification --------------------------------------------------------</span>
+<span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; chr (2): name, species</span>
 <span class="co">#&gt; dbl (3): height, mass, date</span>
 <span class="co">#&gt; lgl (1): has_hair</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; i Use `spec()` to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; i Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></code></pre></div>
+<span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></code></pre></div>
 <p>Working with the data.table package for data manipulation is also possible in dipr using the <code>read_dat_dt</code> function:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">raw_dt</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/read_dat.html">read_dat_dt</a></span><span class="op">(</span>
     data_path <span class="op">=</span> <span class="va">dat_path</span>,
     data_dict <span class="op">=</span> <span class="va">dict</span>
   <span class="op">)</span>
-<span class="co">#&gt; v Reading starwars-fwf</span>
+<span class="co">#&gt; ✔ Reading starwars-fwf</span>
 <span class="co">#&gt; Rows: 15 Columns: 6</span>
-<span class="co">#&gt; -- Column specification --------------------------------------------------------</span>
+<span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; chr (2): name, species</span>
 <span class="co">#&gt; dbl (3): height, mass, date</span>
 <span class="co">#&gt; lgl (1): has_hair</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; i Use `spec()` to retrieve the full column specification for this data.</span>
-<span class="co">#&gt; i Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></code></pre></div>
+<span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></code></pre></div>
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
@@ -265,7 +272,14 @@
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://opensource.org/licenses/Apache-2.0" class="external-link"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License"></a></li>
+<li><a href="https://github.com/bcgov/dipr" class="external-link"><img src="https://github.com/bcgov/dipr/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md" class="external-link"><img src="https://img.shields.io/badge/Lifecycle-Experimental-339999" alt="img"></a></li>
+</ul>
+</div>
 
   </div>
 </div>
