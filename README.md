@@ -1,16 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# dipr <!-- <img src='man/figures/logo.png' align="right" height="139" /> -->
+# dipr <img src='man/figures/logo.png' align="right" height="139" />
 
 <!-- badges: start -->
 
-<!-- [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) -->
-
-<!-- [![R build status](https://github.com/bcgov/dipr/workflows/R-CMD-check/badge.svg)](https://github.com/bcgov/dipr) -->
-
-<!-- [![img](https://img.shields.io/badge/Lifecycle-Experimental-339999)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md) -->
-
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![R build
+status](https://github.com/bcgov/dipr/workflows/R-CMD-check/badge.svg)](https://github.com/bcgov/dipr)
+[![img](https://img.shields.io/badge/Lifecycle-Experimental-339999)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md)
 <!-- badges: end -->
 
 The `dipr` package is an R package that loads and provides means of
@@ -101,18 +99,18 @@ directly read \`.dat.gz files:
 ``` r
 raw <- read_dat(data_path = dat_path,
                 data_dict = dict)
-#> v Reading starwars-fwf
+#> ✔ Reading starwars-fwf
 #> Rows: 15 Columns: 6
-#> -- Column specification --------------------------------------------------------
+#> ── Column specification ────────────────────────────────────────────────────────
 #> 
 #> chr (2): name, species
 #> dbl (3): height, mass, date
 #> lgl (1): has_hair
 #> 
-#> i Use `spec()` to retrieve the full column specification for this data.
-#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+#> ℹ Use `spec()` to retrieve the full column specification for this data.
+#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 head(raw)
-#> # A tibble: 6 x 6
+#> # A tibble: 6 × 6
 #>   name           height  mass has_hair species     date
 #>   <chr>           <dbl> <dbl> <lgl>    <chr>      <dbl>
 #> 1 Luke Skywalker    172    77 FALSE    Human   19871219
@@ -134,16 +132,16 @@ raw_two_files <- read_dat(
     data_dict = dict,
     id = "file"
   )
-#> v Reading starwars-fwf and starwars-fwf2
+#> ✔ Reading starwars-fwf and starwars-fwf2
 #> Rows: 30 Columns: 7
-#> -- Column specification --------------------------------------------------------
+#> ── Column specification ────────────────────────────────────────────────────────
 #> 
 #> chr (2): name, species
 #> dbl (3): height, mass, date
 #> lgl (1): has_hair
 #> 
-#> i Use `spec()` to retrieve the full column specification for this data.
-#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+#> ℹ Use `spec()` to retrieve the full column specification for this data.
+#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
 
 Working with the data.table package for data manipulation is also
@@ -154,16 +152,16 @@ raw_dt <- read_dat_dt(
     data_path = dat_path,
     data_dict = dict
   )
-#> v Reading starwars-fwf
+#> ✔ Reading starwars-fwf
 #> Rows: 15 Columns: 6
-#> -- Column specification --------------------------------------------------------
+#> ── Column specification ────────────────────────────────────────────────────────
 #> 
 #> chr (2): name, species
 #> dbl (3): height, mass, date
 #> lgl (1): has_hair
 #> 
-#> i Use `spec()` to retrieve the full column specification for this data.
-#> i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+#> ℹ Use `spec()` to retrieve the full column specification for this data.
+#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 ```
 
 ### Data Dictionary
@@ -185,13 +183,13 @@ Under development
 ## License
 
     Copyright 2019 Province of British Columbia
-    
+
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
     You may obtain a copy of the License at 
-    
+
        http://www.apache.org/licenses/LICENSE-2.0
-    
+
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
