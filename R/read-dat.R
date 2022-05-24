@@ -33,6 +33,11 @@
 #' @param use_cache deprecated,
 #' @param data_format the format of the input data. Default is `"fwf"`, other choices
 #' are `"csv"`, `"csv2"`, `"tsv"`
+#' @param tz what timezone should datetime fields use? Default UTC. This is recommended
+#' to avoid timezone pain, but remember that the data is in UTC when doing analysis. See
+#' OlsonNames() for list of available timezones.
+#' @param date_format date format for columns where date format is not specified in `col_types`
+#' @param time_format time format for columns where time format is not specified in `col_types`
 #' @inheritParams readr::read_fwf
 #' @inheritDotParams readr::read_fwf
 #'
@@ -43,7 +48,9 @@
 #' dict <- read.table(data_dict_path)
 #' dat_path <- dipr_example("starwars-fwf.dat.gz")
 #' read_dat(data_path = dat_path,
-#'          data_dict = dict)
+#'          data_dict = dict,
+#'          col_types = "cddlcD",
+#'          date_format = "%Y%m%d")
 
 
 read_dat <- function(data_path,
@@ -53,6 +60,9 @@ read_dat <- function(data_path,
                      col_select = NULL,
                      col_types = NULL,
                      data_format = c("fwf", "csv", "tsv", "csv2"),
+                     tz = "UTC",
+                     date_format = "%AD",
+                     time_format = "%AT",
                      ...) {
 
   data_format = match.arg(data_format)
@@ -64,13 +74,13 @@ read_dat <- function(data_path,
 
   data_name <- gsub(".dat.gz", "", basename(data_path))
 
-  if(use_cache) stop("Caching directly in dipr is deprecated", call. = FALSE)
+  if (use_cache) stop("Caching directly in dipr is deprecated", call. = FALSE)
 
   ## Columns
-  if(!is.null(col_select))  col_select <- col_selector(data_dict, col_select)
+  if (!is.null(col_select))  col_select <- col_selector(data_dict, col_select)
 
   cli::cli_alert_success("Reading {data_name}")
-  d <- dipr_reader(data_path, data_dict, col_types, col_select, data_format, ...)
+  d <- dipr_reader(data_path, data_dict, col_types, col_select, data_format, tz = tz, date_format = date_format, time_format = time_format, ...)
 
   if (as.data.table) return(message('read_dat now only returns tibbles. To return a data.table object see read_dat_dt'))
 

@@ -35,6 +35,9 @@ dat_to_arrow_formats <- function(data_path,
                            col_select = NULL,
                            overwrite = TRUE,
                            data_format = c("fwf", "csv", "tsv", "csv2"),
+                           tz = "UTC",
+                           date_format = "%AD",
+                           time_format = "%AT",
                            ...) {
 
   data_format = match.arg(data_format)
@@ -44,9 +47,9 @@ dat_to_arrow_formats <- function(data_path,
   data_name <- gsub(".dat.gz", "", basename(data_path))
 
   ## Columns
-  if(!is.null(col_select))  col_select <- col_selector(data_dict, col_select)
+  if (!is.null(col_select))  col_select <- col_selector(data_dict, col_select)
 
-  d <- dipr_reader(data_path, data_dict, col_types, col_select, data_format = data_format)
+  d <- dipr_reader(data_path, data_dict, col_types, col_select, data_format, tz = tz, date_format = date_format, time_format = time_format, ...)
 
   tf <- file.path(tempdir(), paste0(data_name, ".", arrow_format))
 
@@ -132,7 +135,8 @@ dat_to_feather <- function(...) {
 #'     chunk_size = 2)
 #'     }
 #'
-dat_to_datasets <- function(data_path, data_dict, chunk_size = 1000000, path, partitioning, ...) {
+dat_to_datasets <- function(data_path, data_dict, chunk_size = 1000000, path, partitioning,
+                            tz = "UTC", date_format = "%AD", time_format = "%AT", ...) {
   tdir <- file.path(tempdir(), gsub(".dat.gz", "", basename(data_path)), "arrow-tmp")
   dir.create(tdir, showWarnings = FALSE, recursive = TRUE)
   f <- function(x, pos) {
@@ -146,7 +150,7 @@ dat_to_datasets <- function(data_path, data_dict, chunk_size = 1000000, path, pa
         ),
       progress = TRUE,
       lazy = FALSE,
-      locale = readr::locale(encoding = "latin1"), ...
+      locale = dipr_locale(tz = tz, date_format = date_format, time_format = time_format), ...
     )
 
     num_files <- length(list.files(tdir, pattern = ".parquet"))

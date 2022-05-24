@@ -13,6 +13,9 @@ read_dat(
   col_select = NULL,
   col_types = NULL,
   data_format = c("fwf", "csv", "tsv", "csv2"),
+  tz = "UTC",
+  date_format = "\%AD",
+  time_format = "\%AT",
   ...
 )
 
@@ -64,6 +67,14 @@ set \code{show_col_types = FALSE} or set `options(readr.show_col_types = FALSE).
 
 \item{data_format}{the format of the input data. Default is \code{"fwf"}, other choices
 are \code{"csv"}, \code{"csv2"}, \code{"tsv"}}
+
+\item{tz}{what timezone should datetime fields use? Default UTC. This is recommended
+to avoid timezone pain, but remember that the data is in UTC when doing analysis. See
+OlsonNames() for list of available timezones.}
+
+\item{date_format}{date format for columns where date format is not specified in \code{col_types}}
+
+\item{time_format}{time format for columns where time format is not specified in \code{col_types}}
 
 \item{...}{
   Arguments passed on to \code{\link[readr:read_fwf]{readr::read_fwf}}
@@ -168,5 +179,7 @@ data_dict_path <- dipr_example("starwars-dict.txt")
 dict <- read.table(data_dict_path)
 dat_path <- dipr_example("starwars-fwf.dat.gz")
 read_dat(data_path = dat_path,
-         data_dict = dict)
+         data_dict = dict,
+         col_types = "cddlcD",
+         date_format = "\%Y\%m\%d")
 }

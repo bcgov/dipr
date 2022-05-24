@@ -1,3 +1,24 @@
+# dipr 1.3.1
+
+* Fixed bug in `install_sre_gitlab()` where it would fail if the desired package didn't have a previous version installed.
+
+# dipr 1.3.0
+
+* Added new arguments `date_format` and `time_format` to `read_dat()`, `dat_to_arrow_formats()` 
+etc, to allow overriding the global 
+formats when reading in a dataset. Defaults are the same as in `readr` functions.
+
+# dipr 1.2.3
+
+* New function `health_dict_to_spec()` to create a `readr` column specification from a health dictionary. This allows parsing of most date formats used in the health datasets (#37)
+* New function `flag_across`, similar to `filter_across`, but rather than filtering the dataset it adds a logical column indicating the result of the pattern search across the selected columns (#38)
+
+# dipr 1.2.2
+
+## Improvements
+* Modify credential tests to only run in SRE
+* Have `ocwa_branch_export` modified Rmd as well as md
+
 # dipr 1.2.1
 * Add Bonnie Robert and Andy Teucher as authors
 * Document deprecated functions in one place

@@ -10,6 +10,9 @@ dat_to_datasets(
   chunk_size = 1e+06,
   path,
   partitioning,
+  tz = "UTC",
+  date_format = "\%AD",
+  time_format = "\%AT",
   ...
 )
 }
@@ -30,6 +33,14 @@ to write to (directory will be created if it does not exist)}
 \item{partitioning}{\code{Partitioning} or a character vector of columns to
 use as partition keys (to be written as path segments). Default is to
 use the current \code{group_by()} columns.}
+
+\item{tz}{what timezone should datetime fields use? Default UTC. This is recommended
+to avoid timezone pain, but remember that the data is in UTC when doing analysis. See
+OlsonNames() for list of available timezones.}
+
+\item{date_format}{date format for columns where date format is not specified in \code{col_types}}
+
+\item{time_format}{time format for columns where time format is not specified in \code{col_types}}
 
 \item{...}{
   Arguments passed on to \code{\link[readr:read_fwf]{readr::read_fwf}}
