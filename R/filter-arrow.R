@@ -40,6 +40,14 @@ filter_across.default <- function(.data, code, cols, partial = FALSE){
 }
 
 #' @export
+filter_across.tbl_dbi <- function(.data, code = NULL, cols = NULL, partial = FALSE){
+
+  cond_str <- make_condition_string(.data, code = code, cols = cols, partial = partial)
+
+  dplyr::filter(.data, local(str2lang(cond_str)))
+}
+
+#' @export
 filter_across.Dataset <- function(.data, code = NULL, cols = NULL, partial = FALSE){
 
   cond_str <- make_condition_string(.data, code = code, cols = cols, partial = partial)
@@ -53,6 +61,7 @@ filter_across.data.frame <- filter_across.Dataset
 
 #' @export
 filter_across.arrow_dplyr_query <- filter_across.Dataset
+
 
 
 ## add to filter_icd() documentation (details)
@@ -73,19 +82,27 @@ filter_across.arrow_dplyr_query <- filter_across.Dataset
 #' @seealso [filter_across()]
 #' @export
 flag_across <- function(.data, code = NULL, cols = NULL, partial = FALSE, flag_name = NULL) {
-  UseMethod("flag_across")
-}
-
-#' @export
-flag_across.Dataset <- function(.data, code = NULL, cols = NULL, partial = FALSE, flag_name = NULL) {
-
   if (!is.character(flag_name) || !length(flag_name) == 1L) {
     stop("flag_name must be a length one character vector")
   }
 
-  if (flag_name %in% names(.data)) {
+  if (flag_name %in% colnames(.data)) {
     stop(flag_name, " is already a column in data")
   }
+
+  UseMethod("flag_across")
+}
+
+#' @export
+flag_across.tbl_dbi <- function(.data, code = NULL, cols = NULL, partial = FALSE, flag_name = NULL) {
+
+  cond_str <- make_condition_string(.data, code = code, cols = cols, partial = partial)
+
+  dplyr::mutate(.data, {{flag_name}} := local(str2lang(cond_str)))
+}
+
+#' @export
+flag_across.Dataset <- function(.data, code = NULL, cols = NULL, partial = FALSE, flag_name = NULL) {
 
   cond_str <- make_condition_string(.data, code = code, cols = cols, partial = partial)
 
@@ -108,16 +125,17 @@ make_condition_string <- function(.data, code, cols, partial) {
   if(!length(code))
     stop("No code pattern provided to filter_across.", call. = FALSE)
 
-  #check code is a string
-  if(!nrow(.data))
+  #check dataset - first check it's not an arrow_dplyr_query (which nrow doesn't
+  # currently operate on reliably)
+  if (!inherits(.data, c("arrow_dplyr_query", "tbl_dbi")) && !isTRUE(as.logical(nrow(.data))))
     stop("No dataset provided to filter_across.", call. = FALSE)
 
   #coerce numeric codes to character
-  if(is.numeric(code)){
+  if (is.numeric(code)){
     warning("Integer codes coerced to character type in filter_across.", call. = FALSE)
   }
 
-  cols <- intersect(names(.data), cols)
+  cols <- intersect(colnames(.data), cols)
   if(!length(cols))
     stop("No dataset columns match those provided to filter_across.", call. = FALSE)
 
@@ -125,3 +143,6 @@ make_condition_string <- function(.data, code, cols, partial) {
 
   paste0(sprintf(grepl_call, paste0(code, collapse = ")|("), cols), collapse = " | ")
 }
+
+#' @export
+dimnames.arrow_dplyr_query <- function(x) list(NULL, names(x))

@@ -1,0 +1,8 @@
+## Start env vars added by dipr ----------------
+
+R_LIBCURL_SSL_REVOKE_BEST_EFFORT=TRUE
+_R_CHECK_SYSTEM_CLOCK_=0
+R_LIBS=""
+R_LIBS_USER="{{local_appdata_path}}/RLIBS"
+
+## End env vars added by dipr ------------------

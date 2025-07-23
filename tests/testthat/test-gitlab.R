@@ -1,5 +1,3 @@
-context("Test install tools")
-
 test_that("get_gitlab_sre_repos returns a data.frame",{
   skip_if_not(Sys.getenv("USERDOMAIN") == "POPDATA")
   expect_s3_class(get_gitlab_sre_repos(set_gitlab_credentials()$password), "data.frame")

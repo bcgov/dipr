@@ -41,14 +41,14 @@ they must share a common data dictionary.}
 \item{col_types}{One of \code{NULL}, a \code{\link[readr:cols]{cols()}} specification, or
 a string. See \code{vignette("readr")} for more details.
 
-If \code{NULL}, all column types will be imputed from \code{guess_max} rows
-on the input interspersed throughout the file. This is convenient (and
-fast), but not robust. If the imputation fails, you'll need to increase
-the \code{guess_max} or supply the correct types yourself.
+If \code{NULL}, all column types will be inferred from \code{guess_max} rows of the
+input, interspersed throughout the file. This is convenient (and fast),
+but not robust. If the guessed types are wrong, you'll need to increase
+\code{guess_max} or supply the correct types yourself.
 
 Column specifications created by \code{\link[=list]{list()}} or \code{\link[readr:cols]{cols()}} must contain
 one column specification for each column. If you only want to read a
-subset of the columns, use \code{\link[readr:cols]{cols_only()}}.
+subset of the columns, use \code{\link[readr:cols_only]{cols_only()}}.
 
 Alternatively, you can use a compact string representation where each
 character represents one column:
@@ -64,11 +64,11 @@ character represents one column:
 \item t = time
 \item ? = guess
 \item _ or - = skip
+}
 
 By default, reading a file without a column specification will print a
 message showing what \code{readr} guessed they were. To remove this message,
-set \code{show_col_types = FALSE} or set `options(readr.show_col_types = FALSE).
-}}
+set \code{show_col_types = FALSE} or set \code{options(readr.show_col_types = FALSE)}.}
 
 \item{col_select}{A vector of column names}
 
@@ -94,10 +94,10 @@ Convenience wrappers are provided for each arrow format.
 }
 \section{Functions}{
 \itemize{
-\item \code{dat_to_parquet}: Convert to parquet
+\item \code{dat_to_parquet()}: Convert to parquet
 
-\item \code{dat_to_arrow}: Convert to arrow
+\item \code{dat_to_arrow()}: Convert to arrow
 
-\item \code{dat_to_feather}: Convert to feather
+\item \code{dat_to_feather()}: Convert to feather
+
 }}
-

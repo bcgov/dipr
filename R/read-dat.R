@@ -39,7 +39,7 @@
 #' @param date_format date format for columns where date format is not specified in `col_types`
 #' @param time_format time format for columns where time format is not specified in `col_types`
 #' @inheritParams readr::read_fwf
-#' @inheritDotParams readr::read_fwf
+#' @inheritDotParams readr::read_fwf -locale -col_positions
 #'
 #' @export
 #'

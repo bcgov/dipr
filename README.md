@@ -1,14 +1,12 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# dipr <img src='man/figures/logo.png' align="right" height="139" />
+# dipr <!-- <img src='man/figures/logo.png' align="right" height="139" /> -->
 
 <!-- badges: start -->
-
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![R build
-status](https://github.com/bcgov/dipr/workflows/R-CMD-check/badge.svg)](https://github.com/bcgov/dipr)
-[![img](https://img.shields.io/badge/Lifecycle-Experimental-339999)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md)
+<!-- [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) -->
+<!-- [![R build status](https://github.com/bcgov/dipr/workflows/R-CMD-check/badge.svg)](https://github.com/bcgov/dipr) -->
+<!-- [![img](https://img.shields.io/badge/Lifecycle-Experimental-339999)](https://github.com/bcgov/repomountie/blob/master/doc/lifecycle-badges.md) -->
 <!-- badges: end -->
 
 The `dipr` package is an R package that loads and provides means of
@@ -51,12 +49,26 @@ user name.
 ## First you need to store your credentials created in the step above. This is a one time only thing
 token <- credentials::git_credential_ask("https://projectsc.popdata.bc.ca")$password
 
-## These next two lines download the package to a temporary folder and install it. 
-resp <- httr::GET("https://projectsc.popdata.bc.ca/api/v4/projects/90/repository/archive.tar.gz",
-                  query = list(sha = "1.3.1"),
-                  httr::write_disk(tempfile(fileext = ".tar.gz")),
-                  config = httr::add_headers(`Private-token` = token))
-remotes::install_local(resp[["content"]])
+    # Get most recent release
+    releases <- httr::GET(glue::glue("https://projectsc.popdata.bc.ca/api/v4/projects/90/releases/"),
+                      config = httr::add_headers(`Private-token` = token))
+    rel <- httr::content(releases)[[1]]$tag_name
+
+    ## These next two lines download the package to a temporary folder and install it.
+    resp <- httr::GET("https://projectsc.popdata.bc.ca/api/v4/projects/90/repository/archive.tar.gz",
+                      query = list(sha = rel),
+                      httr::write_disk(tempfile(fileext = ".tar.gz")),
+                      config = httr::add_headers(`Private-token` = token))
+    remotes::install_local(resp[["content"]])
+```
+
+### Updating dipr
+
+If you have dipr installed, and need to update - in a fresh R session
+(i.e., without loading dipr), run:
+
+``` r
+dipr::dipr_update()
 ```
 
 ## Usage

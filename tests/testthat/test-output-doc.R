@@ -1,6 +1,3 @@
-context('test_output_doc')
-
-
 test_that("dipr_document_output_groups works", {
   tcsv <- file.path(tempdir(), "temp.csv")
   write.csv(iris, file = tcsv, row.names = FALSE)

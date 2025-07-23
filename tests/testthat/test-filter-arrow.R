@@ -1,17 +1,3 @@
-make_test_data <- function(format = "Dataset"){
-  #make some data
-  d <- data.frame(id = 1:10,
-                  icd_1 = as.character(1001:1010),
-                  icd_2 = as.character(1011:1020))
-
-  if (format == "Dataset"){
-    tf <- tempfile()
-    arrow::write_dataset(d, tf, format =  "arrow")
-    d = arrow::open_dataset(tf, format = "arrow")
-  }
-  return(d)
-}
-
 test_that("test a non-dataset object",{
   expect_error(filter_across("blah", code = "9999", cols = c("icd_1", "icd_2"), partial = FALSE))
 })
@@ -44,7 +30,7 @@ test_that("test for arrow_dplyr_query return type",{
   expect_s3_class(filter_across(d, "1009", cols = c("icd_1", "icd_2")), "arrow_dplyr_query")
 
   #create arrow_dplyr_query object
-  d <- d %>% dplyr::select(names(d))
+  d <- d %>% dplyr::select(colnames(d))
   expect_s3_class(filter_across(d, "1009", cols = c("icd_1")), "arrow_dplyr_query")
 })
 

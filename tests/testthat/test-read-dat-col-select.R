@@ -1,9 +1,7 @@
-context('read_dat col_select mechanisms')
-
 test_that('read_dat works when you dont specify a column', {
   s_no_col <- read_dat(data_path = dat_path,
                     data_dict = dict)
-  expect_is(s_no_col, "tbl_df")
+  expect_s3_class(s_no_col, "tbl_df")
 })
 
 ## fst

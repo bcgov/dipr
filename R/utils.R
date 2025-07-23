@@ -54,7 +54,7 @@ dipr_reader <- function(data_path, data_dict, col_types, col_select, data_format
 col_selector <- function(dict, col_select) {
   df <- data.frame(matrix(ncol = length(dict$name), nrow = 0))
   names(df) <- dict$name
-  col_select <- names(dplyr::select(df, col_select))
+  col_select <- names(dplyr::select(df, dplyr::all_of(col_select)))
 }
 
 

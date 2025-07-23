@@ -72,10 +72,10 @@ get_core_dict_path <- function(core_version, core_dict_name, base_path = "R:/DAT
 
   if (length(core_doc) > 1) core_doc <- core_doc[grepl("dictionary|\\.nflt$", core_doc)]
 
-  if(grepl("\\.xlsx$", core_doc) & length(core_doc) == 1) {
+  if (grepl("\\.xlsx$", core_doc) && length(core_doc) == 1) {
     sheets <- readxl::excel_sheets(core_doc)
 
-    if(length(sheets) > 1) {
+    if (length(sheets) > 1) {
       message(basename(core_doc), " contains the following sheets:")
       message(paste(sheets, "\n"))
     }

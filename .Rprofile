@@ -34,3 +34,5 @@ if (Sys.getenv("USERDOMAIN") == "POPDATA") {
 
 ## Silence a CRAN warning
 Sys.setenv('_R_CHECK_SYSTEM_CLOCK_' = 0)
+
+if (file.exists("~/.Rprofile")) source("~/.Rprofile")
