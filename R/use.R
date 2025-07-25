@@ -88,7 +88,7 @@ dipr_create_targets_project <- function(...) {
   dir.create("./R", showWarnings = FALSE)
 
   if (file.exists(".gitignore")) usethis::use_git_ignore("_targets", directory = ".")
-  if (Sys.getenv("USERDOMAIN") == "POPDATA") usethis::use_template("Rprofile.R", ".Rprofile", package = "dipr")
+  if (is_sre()) usethis::use_template("project.Rprofile", ".Rprofile", package = "dipr")
 
 }
 
@@ -101,4 +101,8 @@ dipr_use_description <- function(...) {
   usethis::use_description(fields = bcgovr_desc, check_name = FALSE, ...)
   usethis::use_package("desc", type = "Depends")
   usethis::use_package("dipr", type = "Depends")
+}
+
+is_sre <- function() {
+  Sys.getenv("USERDOMAIN") == "POPDATA"
 }

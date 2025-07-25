@@ -1,5 +1,3 @@
-context('test conversion to Apache Arrow formats')
-
 test_that("dat_to_arrow_format works",{
   dat_to_arrow_formats(
     data_path = dat_path,
@@ -45,6 +43,6 @@ test_that('dat_to_datasets creates a partioned dataset',{
     path = outd,
     partitioning = "species",
     chunk_size = 2)
-  expect_is(arrow::open_dataset(outd), "FileSystemDataset")
+  expect_s3_class(arrow::open_dataset(outd), "FileSystemDataset")
   expect_equal(nrow(in_mem), nrow(arrow::open_dataset(outd)))
 })

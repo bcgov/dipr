@@ -1,3 +1,103 @@
+# dipr 1.8.4
+
+* `csv_to_duckdb_query()` can now take a vector of datetime formats for a column 
+  in the `dt_override` argument, accomodating columnds with more than one format
+
+# dipr 1.8.3
+
+* `save_rstudio_prefs()` now also backs up `.Renviron` and `.Rprofile` files
+
+# dipr 1.8.2
+
+* Add ability to define NULL/NA values in `csv_to_duckdb_query` (passed on to
+  `nullstr` argument in `duckdb`'s internal `read_csv()` function)
+* Add `opts` argument to `csv_to_duckdb_query` (passed on to arguments in 
+  `duckdb`'s internal `read_csv()` function)
+   
+# dipr 1.8.1
+
+* Minor tweak to `csv_to_duckdb_query()` formatting
+
+# dipr 1.8.0
+
+* `restage()` now works better with duckdb backends.
+* `restage()` gains new arguments `count_changed_ids` and `count_changed_rows`, 
+  which when set to `FALSE` will skip the sometimes lengthy step of counting the
+  number of unique IDs that were restaged and rows that were added/removed.
+* Added `csv_to_duckdb_query()` to generate a sql query for loading data from 
+  csv files to duckdb, with flexibility in schema and other formatting.
+* Added `sniff_csv_duckdb()` to get the default configuration that duckdb 
+  detects from a csv. This is useful as a starting point for a schema to use
+  in `csv_to_duckdb_query()`
+* Update to testthat edition 3
+
+# dipr 1.7.0
+
+* `restage()`:
+  * Now works with duckdb tables
+  * allow `copy = TRUE`
+  * use `colnames()` instead of `names()` for broader compatibility with different backends
+
+* `filter_across()` and `flag_across()`:
+  * now works with duckdb tables
+
+* Other:
+  * export `n_row()` with broader compatibility with different backends
+  * exported `dimnames()` method for `arrow_dplyr_query` objects
+
+# dipr 1.6.3
+
+* Fixes for template `.Rprofile` files: more robust to failures, and `.install_dipr_manual()`
+  installs the _latest_ dipr version, not a fixed version
+
+# dipr 1.6.2
+
+* fixed `save_rstudio_prefs()` to only save pertinent preference files instead
+  of the entire RStudio config folder, to avoid copy errors when RStudio is
+  running.
+* `use_sre_startup_files()` now sets `RLIBS_USER` to your C:/ drive in your
+  .Renviron file. This means you need to install packages on each new machine, but
+  it means fewer version conflicts and much faster installing and loading of
+  packages
+* `use_sre_startup_files()` adds two new functions to your .Rprofile to help you
+  get set up more quickly on a new machine: `.install_core_packages()` and 
+  `.install_dipr_manual()`. You will be prompted to run these on a fresh machine
+  (prompt is initiated if devtools is not installed).
+
+# dipr 1.6.1
+
+* Added `save_renviron()` and `restore_renviron()`
+* Added `use_sre_startup_files()`
+* Exported `restore_rprofile()`
+
+# dipr 1.6.0
+
+* Add a pair of functions for reading in metadata from metadata curator json files:
+
+  - `read_mc_dict()` reads the `resources.schema.fields` property of the json 
+    file and creates a data.frame. 
+  - `df_to_readr_cols()` takes that data.frame and makes a readr col spec.
+
+# dipr 1.5.1
+
+* Bugfix release to ensure that `restage()` returns distinct data
+
+# dipr 1.5.0
+
+* Added two new functions: `make_dup_id_table()` and `restage()` (#45)
+
+    * `make_dup_id_table()` takes a dataset that has a `studyid` column and a domain-specific ID column (`clientid` or `individualid` etc), and a secondary table that contains `clientid` and a second `studyid` and creates a crosswalk table of one `studyid` to the other. This is usually necessary when PopData has detected a large number of individuals in the dataset that are strongly associated with a second `studyid`. Creating this duplicate id table allows one to "restage" the data, replacing all instances of the second studyid with the "primary" studyid. As the selection of which studyid is primary and which is the duplicate is arbitrary, if you are working with more than one dataset that has a duplicate id table associated, there is a chance that the primary and duplicate studyids are reversed in the other dataset. This can be overcome by "sorting" the primary and secondary IDs so that the lower studyid (alphanumerically) becomes the primary and the higher becomes the "duplicate". This "sorted" lookup table is created using the `sorted` parameter in `make_dup_id_table()`
+    * `restage()` takes a domain dataset and a lookup table (created with `make_dup_id_table()`) and "restages" the studyids, replacing any instances of the duplicate studyid with the primary studyid.
+
+# dipr 1.4.0
+
+* Removed superfluous `readr::read_fwf` arguments from the `...` section of `read_dat()` and `dat_to_datasets()`, as `col_positions` and `locale` are set internally and so can't be overridden via `...`.
+* Fix bug in `filter_across` and `flag_across` where complex `arrow_dplyr_query` datasets
+would be erroneously identified as invalid datasets.
+* Added `janitor::clean_names()` method for Arrow objects (#42).
+* Added new functions `save_rprofile()`, `save_rsudio_prefs()`, and `setup_rstudio()` to save settings in your U:/ drive and restore settings on new machines. (#43)
+* Updated `add_linked_status_col()` to work properly with new `researchID` format (#44).
+
 # dipr 1.3.1
 
 * Fixed bug in `install_sre_gitlab()` where it would fail if the desired package didn't have a previous version installed.

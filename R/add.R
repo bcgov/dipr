@@ -38,7 +38,7 @@ add_linked_status_col.default <- function(.data, studyid_col = "studyid"){
 add_linked_status_col.data.frame <- function(.data, studyid_col = "studyid") {
   dplyr::mutate(
     .data, linked_status = ifelse(
-      grepl("^s", !!rlang::sym(studyid_col)), "linked", "unlinked"
+      grepl("^u", !!rlang::sym(studyid_col)), "unlinked", "linked"
       )
     )
 }

@@ -24,3 +24,16 @@ temp_file <- function(cache_dir, file_name) {
 
 }
 
+make_test_data <- function(format = "Dataset"){
+  #make some data
+  d <- data.frame(id = 1:10,
+                  icd_1 = as.character(1001:1010),
+                  icd_2 = as.character(1011:1020))
+
+  if (format == "Dataset"){
+    tf <- tempfile()
+    arrow::write_dataset(d, tf, format =  "arrow")
+    d = arrow::open_dataset(tf, format = "arrow")
+  }
+  return(d)
+}

@@ -59,7 +59,7 @@ dat_to_arrow_formats <- function(data_path,
   }
 
   if (arrow_format == "arrow") {
-    arrow::write_arrow(d, sink = tf, ...)
+    arrow::write_ipc_file(d, sink = tf, ...)
   }
 
   if (arrow_format == "feather") {
@@ -117,7 +117,7 @@ dat_to_feather <- function(...) {
 #'
 #' @inheritParams read_dat
 #' @inheritParams arrow::write_dataset
-#' @inheritDotParams readr::read_fwf
+#' @inheritDotParams readr::read_fwf -col_positions -locale
 #' @export
 #'
 #' @examples

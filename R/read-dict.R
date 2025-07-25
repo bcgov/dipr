@@ -48,6 +48,10 @@ extract_path_name <- function(path) {
 #' @export
 read_nflt <- function(path, comment = "/*", ...) {
 
+  if (length(path) > 1) {
+    stop("More than 1 nflt file provided")
+  }
+
   if (!tools::file_ext(path) == "nflt") {
     stop("Not an .nflt file")
   }
@@ -112,7 +116,7 @@ read_health_dict <- function(path, sheet, ...) {
 
   janitor::clean_names(dict) %>%
     dplyr::mutate(name = janitor::make_clean_names(.data$name_abbrev)) %>%
-    dplyr::select(.data$start:.data$name, .data$data_type, .data$data_format, -.data$name_abbrev) %>%
+    dplyr::select("start":"name", "data_type", "data_format", -"name_abbrev") %>%
     dplyr::mutate(data_type = tolower(.data$data_type)) %>% ## makes conditional safer
     dplyr::mutate(
       col_type = dplyr::case_when(
@@ -197,4 +201,64 @@ delete_rtmp_dirs <- function(are_you_sure = FALSE){
   files_to_delete <- list.files(rtmpdirs, recursive = TRUE, full.names = TRUE)
 
   unlink(files_to_delete)
+}
+
+#' Read data dictionary from a Metadata Curator json file
+#'
+#' @param file path to the json file
+#'
+#' @return a data.frame of the data dictionary
+#' @export
+read_mc_dict <- function(file) {
+  dict <- jsonlite::read_json(file)
+
+  lapply(dict$resources[[1]]$schema$fields, dplyr::as_tibble) %>% purrr::list_rbind()
+}
+
+#' Convert output of [read_mc_dict()] to a readr col spec
+#'
+#' This makes the following assumptions as to the readr column parsers:
+#'
+#' - "number" = readr::col_double(),
+#' - "integer" = readr::col_integer(),
+#' - "string" = readr::col_character(),
+#' - "date" = readr::col_datetime(format = datetime_format)
+#'
+#' You can override these by replacing list elements directly. See examples
+#'
+#' @param dict_df a data.frame, output of [read_mc_dict()]
+#' @param datetime_format what is the format of (most of) the
+#'   date/datetime columns in the data
+#'
+#' @return a list that can be modified and used in the `col_types` argument
+#'   of `readr::read_*()` functions
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' my_spec <- df_to_readr_cols(dict_df)
+#'
+#' # DOB is usually just year month so you probably want to override it:
+#' my_spec$DOB <- readr::col_date(format = "%Y%m")
+#'
+#' readr::read_csv(filepath, col_types = my_spec)
+#' }
+df_to_readr_cols <- function(dict_df, datetime_format = "") {
+  if (!"type" %in% names(dict_df)) {
+    stop("No 'type' column in dict_df", call. = FALSE)
+  }
+
+  dict_list <- purrr::map(dict_df$type, function(x) {
+    switch(
+      x,
+      "number" = readr::col_double(),
+      "integer" = readr::col_integer(),
+      "string" = readr::col_character(),
+      "date" = readr::col_datetime(format = datetime_format),
+      readr::col_guess()
+    )}
+  ) %>%
+    purrr::set_names(dict_df$name)
+
+  dict_list
 }

@@ -60,21 +60,17 @@ containing at least one new line, or be a vector containing at least one
 string with a new line.
 
 Using a value of \code{\link[readr:clipboard]{clipboard()}} will read from the system clipboard.}
-    \item{\code{col_positions}}{Column positions, as created by \code{\link[readr:read_fwf]{fwf_empty()}},
-\code{\link[readr:read_fwf]{fwf_widths()}} or \code{\link[readr:read_fwf]{fwf_positions()}}. To read in only selected fields,
-use \code{\link[readr:read_fwf]{fwf_positions()}}. If the width of the last column is variable (a
-ragged fwf file), supply the last end position as NA.}
     \item{\code{col_types}}{One of \code{NULL}, a \code{\link[readr:cols]{cols()}} specification, or
 a string. See \code{vignette("readr")} for more details.
 
-If \code{NULL}, all column types will be imputed from \code{guess_max} rows
-on the input interspersed throughout the file. This is convenient (and
-fast), but not robust. If the imputation fails, you'll need to increase
-the \code{guess_max} or supply the correct types yourself.
+If \code{NULL}, all column types will be inferred from \code{guess_max} rows of the
+input, interspersed throughout the file. This is convenient (and fast),
+but not robust. If the guessed types are wrong, you'll need to increase
+\code{guess_max} or supply the correct types yourself.
 
 Column specifications created by \code{\link[=list]{list()}} or \code{\link[readr:cols]{cols()}} must contain
 one column specification for each column. If you only want to read a
-subset of the columns, use \code{\link[readr:cols]{cols_only()}}.
+subset of the columns, use \code{\link[readr:cols_only]{cols_only()}}.
 
 Alternatively, you can use a compact string representation where each
 character represents one column:
@@ -90,14 +86,14 @@ character represents one column:
 \item t = time
 \item ? = guess
 \item _ or - = skip
+}
 
 By default, reading a file without a column specification will print a
 message showing what \code{readr} guessed they were. To remove this message,
-set \code{show_col_types = FALSE} or set `options(readr.show_col_types = FALSE).
-}}
+set \code{show_col_types = FALSE} or set \code{options(readr.show_col_types = FALSE)}.}
     \item{\code{col_select}}{Columns to include in the results. You can use the same
 mini-language as \code{dplyr::select()} to refer to the columns by name. Use
-\code{c()} or \code{list()} to use more than one selection expression. Although this
+\code{c()} to use more than one selection expression. Although this
 usage is less common, \code{col_select} also accepts a numeric column index. See
 \code{\link[tidyselect:language]{?tidyselect::language}} for full details on the
 selection language.}
@@ -105,11 +101,6 @@ selection language.}
 useful when reading multiple input files and there is data in the file
 paths, such as the data collection date. If \code{NULL} (the default) no extra
 column is created.}
-    \item{\code{locale}}{The locale controls defaults that vary from place to place.
-The default locale is US-centric (like R), but you can use
-\code{\link[readr:locale]{locale()}} to create your own locale that controls things like
-the default time zone, encoding, decimal mark, big mark, and day/month
-names.}
     \item{\code{na}}{Character vector of strings to interpret as missing values. Set this
 option to \code{character()} to indicate no missing values.}
     \item{\code{comment}}{A string used to identify comments. Any text after the
@@ -119,6 +110,7 @@ each field before parsing it?}
     \item{\code{skip}}{Number of lines to skip before reading data.}
     \item{\code{n_max}}{Maximum number of lines to read.}
     \item{\code{guess_max}}{Maximum number of lines to use for guessing column types.
+Will never use more than the number of lines read.
 See \code{vignette("column-types", package = "readr")} for more details.}
     \item{\code{progress}}{Display a progress bar? By default it will only display
 in an interactive session and not while knitting a document. The automatic
@@ -130,9 +122,11 @@ supported:
 \itemize{
 \item \code{"minimal"}: No name repair or checks, beyond basic existence of names.
 \item \code{"unique"} (default value): Make sure names are unique and not empty.
-\item \code{"check_unique"}: no name repair, but check they are \code{unique}.
+\item \code{"check_unique"}: No name repair, but check they are \code{unique}.
+\item \code{"unique_quiet"}: Repair with the \code{unique} strategy, quietly.
 \item \code{"universal"}: Make the names \code{unique} and syntactic.
-\item A function: apply custom name repair (e.g., \code{name_repair = make.names}
+\item \code{"universal_quiet"}: Repair with the \code{universal} strategy, quietly.
+\item A function: Apply custom name repair (e.g., \code{name_repair = make.names}
 for names in the style of base R).
 \item A purrr-style anonymous function, see \code{\link[rlang:as_function]{rlang::as_function()}}.
 }
@@ -149,12 +143,15 @@ fields it is safest to set \code{num_threads = 1} explicitly.}
 \code{TRUE} always show the column types, even if they are supplied. If \code{NULL}
 (the default) only show the column types if they are not explicitly supplied
 by the \code{col_types} argument.}
-    \item{\code{lazy}}{Read values lazily? By default the file is initially only
-indexed and the values are read lazily when accessed. Lazy reading is
-useful interactively, particularly if you are only interested in a subset
-of the full dataset. \emph{Note}, if you later write to the same file you read
-from you need to set \code{lazy = FALSE}. On Windows the file will be locked
-and on other systems the memory map will become invalid.}
+    \item{\code{lazy}}{Read values lazily? By default, this is \code{FALSE}, because there
+are special considerations when reading a file lazily that have tripped up
+some users. Specifically, things get tricky when reading and then writing
+back into the same file. But, in general, lazy reading (\code{lazy = TRUE}) has
+many benefits, especially for interactive use and when your downstream work
+only involves a subset of the rows or columns.
+
+Learn more in \code{\link[readr:should_read_lazy]{should_read_lazy()}} and in the documentation for the
+\code{altrep} argument of \code{\link[vroom:vroom]{vroom::vroom()}}.}
     \item{\code{skip_empty_rows}}{Should blank rows be ignored altogether? i.e. If this
 option is \code{TRUE} then blank rows will not be represented at all.  If it is
 \code{FALSE} then they will be represented by \code{NA} values in all the columns.}

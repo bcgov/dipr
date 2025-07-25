@@ -1,5 +1,3 @@
-context('read-dat preserves column types')
-
 test_that("reads in every variable as character vector",{
   raw <- read_dat(data_path = dat_path,
                   data_dict = dict,
@@ -7,7 +5,7 @@ test_that("reads in every variable as character vector",{
                   use_cache = FALSE)
 
   ## Everything is a vector
-  expect_is(unique(unlist(lapply(raw, class))), "character")
+  lapply(raw, expect_type, "character")
 })
 
 
@@ -20,5 +18,8 @@ test_that("reads in variables as specified",{
                   date_format = "%Y%m%d")
 
   ## Everything is a vector
-  expect_is(unlist(lapply(raw, class)), c("character", "numeric", "numeric", "logical", "Date"))
+  types <- c("character", "numeric", "numeric", "logical", "character", "Date")
+  for (i in seq_along(raw)) {
+    expect_true(inherits(raw[[i]], types[i]))
+  }
 })

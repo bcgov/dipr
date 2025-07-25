@@ -1,15 +1,13 @@
-context('read-dat')
-
 test_that("reads in file",{
   raw <- read_dat(data_path = dat_path,
                       data_dict = dict)
 
-  expect_is(raw, "data.frame")
+  expect_s3_class(raw, "data.frame")
 
   raw2 <- read_dat(dat_path_csv, data_format = "csv")
-  expect_is(raw2, "data.frame")
+  expect_s3_class(raw2, "data.frame")
 
-  expect_equivalent(raw, raw2)
+  expect_equal(raw, raw2, ignore_attr = TRUE)
 })
 
 
@@ -20,7 +18,7 @@ test_that("reads in two files via vector", {
     data_dict = dict,
     id = "file"
   )
-  expect_is(two_files, "tbl_df")
+  expect_s3_class(two_files, "tbl_df")
   expect_identical(files_vec, unique(two_files$file))
 })
 
@@ -31,7 +29,7 @@ test_that("reads in two csv files via vector", {
     data_format = "csv",
     id = "file"
   )
-  expect_is(two_files, "tbl_df")
+  expect_s3_class(two_files, "tbl_df")
   expect_identical(files_vec, unique(two_files$file))
 })
 
@@ -40,7 +38,7 @@ test_that("returns a tibble when as.data.table=FALSE",{
   raw <- read_dat(data_path = dat_path,
                   data_dict = dict,
                   as.data.table = FALSE)
-  expect_is(raw, "tbl_df")
+  expect_s3_class(raw, "tbl_df")
 })
 
 
@@ -56,7 +54,7 @@ test_that('read_dat_dt returns a data.table',{
   dt <- read_dat_dt(data_path = dat_path,
                     data_dict = dict,
                     use_cache = FALSE)
-  expect_is(dt, "data.table")
+  expect_s3_class(dt, "data.table")
 })
 
 test_that("one can specify which values are NA.",{
